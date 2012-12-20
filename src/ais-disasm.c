@@ -257,13 +257,35 @@ size_t filesize(int fd)
 
 typedef int (*tic6x_print_region_ftype) (bfd_vma addr, struct disassemble_info *info);
 
+struct disassemble_info tic6x_space_at_0x11800000;
+struct disassemble_info tic6x_space_at_0xc0000000;
 void tic6x_init_section(struct disassemble_info *pinfo, void *buffer, bfd_vma vma, size_t size)
+
 {
     pinfo->mach = bfd_arch_tic6x;
     pinfo->endian = BFD_ENDIAN_LITTLE;
     pinfo->buffer = buffer;
     pinfo->buffer_vma = vma;
     pinfo->buffer_length = size ;
+}
+
+struct disassemble_info *tic6x_get_di(ais_vma vma)
+{
+	if (vma >= 0x11800000 && vma <= 0xbfffffff)
+		return &tic6x_space_at_0x11800000;
+	if (vma >= 0xc0000000 && vma <= 0xffffffff)
+		return &tic6x_space_at_0xc0000000;
+	return 0;
+}
+
+void tic6x_section_load_callback(ais_opcode_info *info)
+{
+	ais_vma vma = info->section_load.vma;
+        struct disassemble_info *di = tic6x_get_di(vma);
+        uint32_t offset = vma - di->buffer_vma;
+	void *dst = di->buffer + offset;
+	void *src = info->section_load.buffer;
+	memcpy(dst, src, info->section_load.size);
 }
 
 int tic6x_section_print_word(bfd_vma addr, struct disassemble_info *info)
@@ -295,10 +317,10 @@ int tic6x_section_print_string(bfd_vma addr, struct disassemble_info *info)
      return count;
 }
 
-void tic6x_print_region(struct disassemble_info *pinfo, off_t section_offset, size_t section_size, tic6x_print_region_ftype tic6x_print)
+void tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype tic6x_print)
 {
     static SFILE sfile = {NULL, 0, 0};
-    ais_vma vma = pinfo->buffer_vma + section_offset;
+    struct disassemble_info *pinfo = tic6x_get_di(vma);
     ais_vma vmamax = pinfo->buffer_vma + pinfo->buffer_length;
     ais_vma vmaend = vma + section_size;
     printf("vma = %08X, vmamax = %08X, vmaend = %08X size = %x\n", vma, vmamax, vmaend, (unsigned int)section_size);
@@ -331,15 +353,6 @@ void tic6x_print_region(struct disassemble_info *pinfo, off_t section_offset, si
     }
 }
 
-struct disassemble_info tic6x_space;
-
-void tic6x_section_load_callback(ais_opcode_info *info)
-{
-	void *dst = tic6x_space.buffer + info->section_load.vma;
-	void *src = info->section_load.buffer;
-	memcpy(dst, src, info->section_load.size);
-}
-
 int main(int argc, char **argv)
 {
     int fd;
@@ -366,48 +379,59 @@ int main(int argc, char **argv)
     }
     printf("file mapped @ %p\n", buffer);
 
-    void *tic6x_mem = mmap(0, 0xFFFFFFFF, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
-    if (tic6x_mem == MAP_FAILED) {
+    void *tic6x_mem_0x11800000 = mmap(0, 0x00200000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
+    if (tic6x_mem_0x11800000 == MAP_FAILED) {
 	perror("Error mmapping dsp adress space");
 	exit(EXIT_FAILURE);
     }
-    printf("tic6x space mapped @ %p\n", tic6x_mem);
+    printf("tic6x space 0x11800000 mapped @ %p\n", tic6x_mem_0x11800000);
 
-    init_disassemble_info (&tic6x_space, NULL, (fprintf_ftype)disasm_sprintf);
-    tic6x_init_section (&tic6x_space, tic6x_mem, 0, 0xFFFFFFFF);
+    void *tic6x_mem_0xc0000000 = mmap(0, 0x00200000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
+    if (tic6x_mem_0xc0000000 == MAP_FAILED) {
+	perror("Error mmapping dsp adress space");
+	exit(EXIT_FAILURE);
+    }
+    printf("tic6x space 0xc0000000 mapped @ %p\n", tic6x_mem_0xc0000000);
+
+
+    init_disassemble_info (&tic6x_space_at_0x11800000, NULL, (fprintf_ftype)disasm_sprintf);
+    init_disassemble_info (&tic6x_space_at_0xc0000000, NULL, (fprintf_ftype)disasm_sprintf);
+    tic6x_init_section (&tic6x_space_at_0x11800000, tic6x_mem_0x11800000, 0x11800000, 0x00200000);
+    tic6x_init_section (&tic6x_space_at_0xc0000000, tic6x_mem_0xc0000000, 0xc0000000, 0x00200000);
+
     aisread(buffer, size, tic6x_section_load_callback);
 
-    tic6x_print_region(&tic6x_space, 0x1180b000,  0xeac0, (tic6x_print_region_ftype)print_insn_tic6x);
-    tic6x_print_region(&tic6x_space, 0xc0000000, 0x64e20, (tic6x_print_region_ftype)print_insn_tic6x);
-    tic6x_print_region(&tic6x_space, 0xc0064e20,  0x4570, (tic6x_print_region_ftype)tic6x_section_print_word);
-    tic6x_print_region(&tic6x_space, 0xc0069390,  0x16e0, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc006aa70, 0x23174, (tic6x_print_region_ftype)tic6x_section_print_word);
-    tic6x_print_region(&tic6x_space, 0xc008dbe4,  0x012c, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc008dd20,  0x12b8, (tic6x_print_region_ftype)tic6x_section_print_word);
-    tic6x_print_region(&tic6x_space, 0xc008efd8,  0x0130, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc008f108,  0x038C, (tic6x_print_region_ftype)tic6x_section_print_word);
-    tic6x_print_region(&tic6x_space, 0xc008f494,  0x0121, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc008f5b4,  0x3a74, (tic6x_print_region_ftype)tic6x_section_print_word);
-    tic6x_print_region(&tic6x_space, 0xc0093028,  0x00ea, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc0093e04,  0x00c6, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc0095ac0,  0x00b0, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc0096208,  0x0098, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc00974f0,  0x0074, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc0097bf0,  0x0056, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc0098010,  0x0056, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc0098274,  0x0050, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc0098e0d,  0x002c, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc009968c,  0x0027, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc009a3c0,  0x0047, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc009a560,  0x0010, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc009a5b0,  0x0018, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc009a5c8,  0x0144, (tic6x_print_region_ftype)tic6x_section_print_word);
-    tic6x_print_region(&tic6x_space, 0xc009a70c,  0x0031, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc009a740,  0x013c, (tic6x_print_region_ftype)tic6x_section_print_word);
-    tic6x_print_region(&tic6x_space, 0xc00c9470,  0xc318, (tic6x_print_region_ftype)tic6x_section_print_word);
-    tic6x_print_region(&tic6x_space, 0xc00d5788,  0x0068, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(&tic6x_space, 0xc00d57f0,  0x2a48, (tic6x_print_region_ftype)tic6x_section_print_word);
-    tic6x_print_region(&tic6x_space, 0xc0110000, 0x1603c, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0x1180b000,  0xeac0, (tic6x_print_region_ftype)print_insn_tic6x);
+    tic6x_print_region(0xc0000000, 0x64e20, (tic6x_print_region_ftype)print_insn_tic6x);
+    tic6x_print_region(0xc0064e20,  0x4570, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc0069390,  0x16e0, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc006aa70, 0x23174, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc008dbe4,  0x012c, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc008dd20,  0x12b8, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc008efd8,  0x0130, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc008f108,  0x038C, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc008f494,  0x0121, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc008f5b4,  0x3a74, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc0093028,  0x00ea, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc0093e04,  0x00c6, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc0095ac0,  0x00b0, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc0096208,  0x0098, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc00974f0,  0x0074, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc0097bf0,  0x0056, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc0098010,  0x0056, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc0098274,  0x0050, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc0098e0d,  0x002c, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc009968c,  0x0027, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc009a3c0,  0x0047, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc009a560,  0x0010, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc009a5b0,  0x0018, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc009a5c8,  0x0144, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc009a70c,  0x0031, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc009a740,  0x013c, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc00c9470,  0xc318, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc00d5788,  0x0068, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc00d57f0,  0x2a48, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc0110000, 0x1603c, (tic6x_print_region_ftype)tic6x_section_print_word);
 
     if (munmap(buffer, size) == -1) {
 	perror("Error un-mmapping the file");
