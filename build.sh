@@ -4,6 +4,7 @@ set -ex
 BINUTILS_TIC6X_DIR=$HOME/binutils-tic6x
 
 #
+# wget 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD'
 # tar xjvpf binutils-2.23.1.tar.bz2
 # mkdir binutils-build
 # cd binutils-build
