@@ -19,7 +19,7 @@
 #include "dis-asm.h"
 #include "libiberty.h"
 
-typedef uint32_t tic6x_vma;
+typedef uint32_t ais_vma;
 
 typedef enum {
 	ais_function_config_pll,
@@ -40,7 +40,7 @@ typedef struct {
 } ais_function;
 
 typedef struct {
-	tic6x_vma vma;
+	ais_vma vma;
 	void *buffer;
 	unsigned int size;
 } ais_section_load_info;
@@ -83,7 +83,7 @@ void ais_section_load(unsigned int **p, ais_opcode_callback_ftype callback)
 
 void ais_section_fill(unsigned int **p, ais_opcode_callback_ftype callback)
 {
-    tic6x_vma address = *(*p)++;
+    ais_vma address = *(*p)++;
     unsigned int size = *(*p)++;
     unsigned int type = *(*p)++;
     unsigned int pattern = *(*p)++;
@@ -93,7 +93,7 @@ void ais_section_fill(unsigned int **p, ais_opcode_callback_ftype callback)
 void ais_boot_table(unsigned int **p, ais_opcode_callback_ftype callback)
 {
     unsigned int type = *(*p)++;
-    tic6x_vma address = *(*p)++;
+    ais_vma address = *(*p)++;
     unsigned int data = *(*p)++;
     unsigned int sleep = *(*p)++;
     printf("section boot table %d *%08x = %0x, sleep %d\n", type, address, data, sleep);
@@ -124,14 +124,14 @@ void ais_function_execute(unsigned int **p, ais_opcode_callback_ftype callback)
 
 void ais_jump_and_close(unsigned int **p, ais_opcode_callback_ftype callback)
 {
-    tic6x_vma address = *(*p)++;
+    ais_vma address = *(*p)++;
     printf("// Close and jump to 0x%x\n", address);
 }
 
 
 void ais_jump(unsigned int **p, ais_opcode_callback_ftype callback)
 {
-    tic6x_vma address = *(*p)++;
+    ais_vma address = *(*p)++;
     printf("// Jump to 0x%x\n", address);
 }
 
@@ -298,9 +298,9 @@ int tic6x_section_print_string(bfd_vma addr, struct disassemble_info *info)
 void tic6x_print_region(struct disassemble_info *pinfo, off_t section_offset, size_t section_size, tic6x_print_region_ftype tic6x_print)
 {
     static SFILE sfile = {NULL, 0, 0};
-    tic6x_vma vma = pinfo->buffer_vma + section_offset;
-    tic6x_vma vmamax = pinfo->buffer_vma + pinfo->buffer_length;
-    tic6x_vma vmaend = vma + section_size;
+    ais_vma vma = pinfo->buffer_vma + section_offset;
+    ais_vma vmamax = pinfo->buffer_vma + pinfo->buffer_length;
+    ais_vma vmaend = vma + section_size;
     printf("vma = %08X, vmamax = %08X, vmaend = %08X size = %x\n", vma, vmamax, vmaend, (unsigned int)section_size);
     if (vmaend > vmamax)
 	return;
