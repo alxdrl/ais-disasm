@@ -17,7 +17,7 @@
 #define PACKAGE_VERSION "0.0.0"
 
 #include "dis-asm.h"
-#include "libiberty.h"
+#include "libiberty/libiberty.h"
 
 typedef uint32_t ais_vma;
 
