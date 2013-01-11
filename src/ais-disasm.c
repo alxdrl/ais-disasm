@@ -344,10 +344,10 @@ void tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_fty
 	}
         if (bytes_used <= 4) {
 	        buffer_read_memory (vma, (bfd_byte *)&word, bytes_used, pinfo);
-	        snprintf(format, 31, "%%08x %%0%1dx%s%%s\n", bytes_used * 2, &("         "[bytes_used * 2])); 
+	        snprintf(format, 31, "0x%%08x %%0%1dx%s%%s\n", bytes_used * 2, &("         "[bytes_used * 2])); 
         	printf(format, vma, word, sfile.buffer);
         } else {
-		printf("%08x          %s\n", (unsigned int)vma, (char *)sfile.buffer);
+		printf("0x%08x          %s\n", (unsigned int)vma, (char *)sfile.buffer);
         }
         vma += bytes_used;
     }
@@ -405,7 +405,10 @@ int main(int argc, char **argv)
     tic6x_print_region(0xc0000000, 0x64e20, (tic6x_print_region_ftype)print_insn_tic6x);
     tic6x_print_region(0xc0064e20,  0x4570, (tic6x_print_region_ftype)tic6x_section_print_word);
     tic6x_print_region(0xc0069390,  0x16e0, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(0xc006aa70, 0x23174, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc006aa70,  0xc588, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc0076ff8,  0x0390, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc0077388,  0x0408, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc0077790, 0x16454, (tic6x_print_region_ftype)tic6x_section_print_word);
     tic6x_print_region(0xc008dbe4,  0x013c, (tic6x_print_region_ftype)tic6x_section_print_string);
     tic6x_print_region(0xc008dd20,  0x12b8, (tic6x_print_region_ftype)tic6x_section_print_word);
     tic6x_print_region(0xc008efd8,  0x0130, (tic6x_print_region_ftype)tic6x_section_print_string);
@@ -431,7 +434,13 @@ int main(int argc, char **argv)
     tic6x_print_region(0xc0098e0c,  0x0030, (tic6x_print_region_ftype)tic6x_section_print_string);
     tic6x_print_region(0xc0098e3c,  0x0850, (tic6x_print_region_ftype)tic6x_section_print_word);
     tic6x_print_region(0xc009968c,  0x002c, (tic6x_print_region_ftype)tic6x_section_print_string);
-    tic6x_print_region(0xc00996b8,  0x0d08, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc00996b8,  0x050c, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc0099bc4,  0x0024, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc0099be8,  0x0574, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc009a15c,  0x0018, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc009a174,  0x0124, (tic6x_print_region_ftype)tic6x_section_print_word);
+    tic6x_print_region(0xc009a298,  0x003c, (tic6x_print_region_ftype)tic6x_section_print_string);
+    tic6x_print_region(0xc009a2d4,  0x00ec, (tic6x_print_region_ftype)tic6x_section_print_word);
     tic6x_print_region(0xc009a3c0,  0x0048, (tic6x_print_region_ftype)tic6x_section_print_string);
     tic6x_print_region(0xc009a408,  0x0158, (tic6x_print_region_ftype)tic6x_section_print_word);
     tic6x_print_region(0xc009a560,  0x0010, (tic6x_print_region_ftype)tic6x_section_print_string);
