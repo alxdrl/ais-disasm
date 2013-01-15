@@ -1,6 +1,6 @@
 #include <ncurses.h>
 
-void wdisasm(WINDOW *w, ais_vma address)
+/*void wdisasm(WINDOW *w, ais_vma address)
 {
 	int l = 0;
 	while ( l < = getmaxy(w) - 1) {
@@ -10,7 +10,7 @@ void wdisasm(WINDOW *w, ais_vma address)
 		address += count
 		
 	}	
-}
+}*/
 
 int main(int argc, char **argv)
 {

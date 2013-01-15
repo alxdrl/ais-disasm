@@ -13,6 +13,7 @@ BINUTILS_TIC6X_DIR=$HOME/binutils-tic6x
 # make install
 
 SRCDIR=./src
+INCLUDEDIR=./include
 BUILD_ARCH=`./config.guess`
 TARGET_ARCH=tic6x-none-elf
 TARGET_SUBDIR=
@@ -22,8 +23,13 @@ BINUTILS_TIC6X_LIBRARY_DIR=${BINUTILS_TIC6X_TARGET_DIR}/lib
 
 LDFLAGS="-lbfd -lopcodes -L${BINUTILS_TIC6X_LIBRARY_DIR}"
 LDFLAGS="$LDFLAGS -liberty -L${BINUTILS_TIC6X_DIR}/lib/${TARGET_SUBDIR}"
+LDFLAGS_TUI="-lncurses"
 
-CFLAGS="-I${BINUTILS_TIC6X_INCLUDE_DIR} -I${BINUTILS_TIC6X_DIR}/include -Werror"
+CFLAGS="-Wall -Werror -I${INCLUDEDIR} -I${BINUTILS_TIC6X_INCLUDE_DIR} -I${BINUTILS_TIC6X_DIR}/include"
 
-gcc ${CFLAGS} -c ${SRCDIR}/ais-disasm.c ${CFLAGS}
-gcc -o ais-disasm ais-disasm.o ${LDFLAGS}
+gcc -c ${SRCDIR}/ais-load.c ${CFLAGS}
+gcc -c ${SRCDIR}/ais-space.c ${CFLAGS}
+gcc -c ${SRCDIR}/ais-disasm.c ${CFLAGS}
+gcc -c ${SRCDIR}/ais-disasm-tui.c ${CFLAGS}
+gcc -o ais-disasm ais-disasm.o ais-load.o ${LDFLAGS}
+gcc -o ais-disasm-tui ais-disasm-tui.o ${LDFLAGS_TUI}

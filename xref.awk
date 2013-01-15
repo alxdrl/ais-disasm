@@ -6,11 +6,16 @@ function xref_mvk(reg)
 		xref = "0x" msb[reg] lsb[reg];
 		msb[reg] = "";
 		lsb[reg] = "";
-	}	
+	}
 }
 { xref = "" ; }
 { ret = 0 ; }
-/mvk .[^ ]+ 0x..../ {
+! /mvk/ && /,[ab][0-9][^,]/  || ! /mvk/ && /,[ab][0-3][0-9][^,]/ {
+	areg = gensub(/.* 0x[a-f0-9]+,([ab][0-9]+).*/, "\\1", "g", $0)
+	lsb[areg] = "";
+	msb[areg] = "";
+}
+/mvk .[^ ]+ 0x[0-9a-f]+/ {
 	areg = gensub(/.* 0x[a-f0-9]+,([ab][0-9]+).*/, "\\1", "g", $0)
 	word = gensub(/.* 0x([a-f0-9]+),.*/, "\\1", "g", $0);
 	word = gensub(/^ffff(....)$/, "\\1", "g", word);
@@ -18,9 +23,9 @@ function xref_mvk(reg)
 	lsb[areg] = sprintf("%04s", word);
 	xref_mvk(areg);
 }
-/mvkh .[^ ]+ 0x........,/ {
-	areg = gensub(/.* 0x........,([ab][0-9]+).*/, "\\1", "g", $0)
-	msb[areg] = gensub(/.* 0x(....)....,[ab][0-9]+.*/, "\\1", "g", $0)
+/mvkh .[^ ]+ 0x[0-9a-f]+,/ {
+	areg = gensub(/.* 0x[0-9a-f]+,([ab][0-9]+).*/, "\\1", "g", $0)
+	msb[areg] = sprintf("%04s", gensub(/.* 0x([0-9a-f]+)....,[ab][0-9]+.*/, "\\1", "g", $0));
 	xref_mvk(areg);
 }
 
