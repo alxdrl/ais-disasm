@@ -182,12 +182,8 @@ void tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_fty
 int main(int argc, char **argv)
 {
 	int fd;
-	int length;
 	void *buffer;
 	size_t size;
-	off_t offset;
-	bfd_vma org;
-	bfd_vma vma;
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1) {

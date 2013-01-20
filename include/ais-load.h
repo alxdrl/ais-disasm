@@ -16,4 +16,6 @@ typedef struct {
 	ais_opcode_handler_ftype handler;
 } ais_opcode;
 
+void aisread(void *buffer, size_t size, ais_opcode_callback_ftype callback);
+
 #endif
