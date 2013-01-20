@@ -22,6 +22,9 @@
 #include "ais.h"
 #include "ais-load.h"
 
+#define TIC6X_VMA_FMT "l"
+#define tic6x_sprintf_vma(s,x) sprintf (s, "%08" TIC6X_VMA_FMT "x", x)
+
 /* Pseudo FILE object for strings.  */
 typedef struct
 {
@@ -56,6 +59,16 @@ disasm_sprintf (SFILE *f, const char *format, ...)
   return n;
 }
 
+void
+tic6x_print_address (bfd_vma addr, struct disassemble_info *info)
+{
+  char buf[30];
+
+  tic6x_sprintf_vma (buf, addr);
+  (*info->fprintf_func) (info->stream, "0x%s", buf);
+}
+
+
 size_t filesize(int fd)
 {
 	struct stat st;
@@ -78,7 +91,8 @@ void tic6x_init_section(struct disassemble_info *pinfo, void *buffer, bfd_vma vm
 	pinfo->endian = BFD_ENDIAN_LITTLE;
 	pinfo->buffer = buffer;
 	pinfo->buffer_vma = vma;
-	pinfo->buffer_length = size ;
+	pinfo->buffer_length = size;
+	pinfo->print_address_func = tic6x_print_address;
 }
 
 struct disassemble_info *tic6x_get_di(ais_vma vma)
