@@ -149,7 +149,6 @@ void tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_fty
 	struct disassemble_info *pinfo = tic6x_get_di(vma);
 	ais_vma vmamax = pinfo->buffer_vma + pinfo->buffer_length;
 	ais_vma vmaend = vma + section_size;
-	printf("vma = %08X, vmamax = %08X, vmaend = %08X size = %x\n", vma, vmamax, vmaend, (unsigned int)section_size);
 	if (vmaend > vmamax)
 	return;
 	if (sfile.buffer == NULL) {
@@ -157,7 +156,7 @@ void tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_fty
 		sfile.buffer = (void *)xmalloc (sfile.alloc);
 	}
 	pinfo->stream = &sfile;
-	printf(";\n; section @0x%08x\n;\n", (unsigned int)vma);
+	printf(";\n; section @0x%08x, size = %x\n;\n", (unsigned int)vma, (unsigned int)section_size);
 	while (vma < vmaend && vma >= pinfo->buffer_vma) {
         unsigned int bytes_used;
         char format[32];
@@ -170,10 +169,10 @@ void tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_fty
 		}
         if (bytes_used <= 4) {
 	        buffer_read_memory (vma, (bfd_byte *)&word, bytes_used, pinfo);
-	        snprintf(format, 31, "0x%%08x %%0%1dx%s%%s\n", bytes_used * 2, &("         "[bytes_used * 2])); 
-        	printf(format, vma, word, sfile.buffer);
+	        snprintf(format, 32, "0x%%08x %%0%1dx%s%%s%%s\n", bytes_used * 2, &("         "[bytes_used * 2])); 
+        	printf(format, vma, word, "                    " , sfile.buffer);
         } else {
-			printf("0x%08x          %s\n", (unsigned int)vma, (char *)sfile.buffer);
+			printf("0x%08x          %s%s\n", (unsigned int)vma, "                    ", (char *)sfile.buffer);
 	    }
         vma += bytes_used;
 	}
@@ -199,21 +198,21 @@ int main(int argc, char **argv)
 		perror("Error mmapping the file");
 		exit(EXIT_FAILURE);
 	}
-	printf("file mapped @ %p\n", buffer);
+	fprintf(stderr, "file mapped @ %p\n", buffer);
 
 	void *tic6x_mem_0x11800000 = mmap(0, 0x00200000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
 	if (tic6x_mem_0x11800000 == MAP_FAILED) {
 		perror("Error mmapping dsp adress space");
 		exit(EXIT_FAILURE);
 	}
-	printf("tic6x space 0x11800000 mapped @ %p\n", tic6x_mem_0x11800000);
+	fprintf(stderr, "tic6x space 0x11800000 mapped @ %p\n", tic6x_mem_0x11800000);
 
 	void *tic6x_mem_0xc0000000 = mmap(0, 0x00200000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
 	if (tic6x_mem_0xc0000000 == MAP_FAILED) {
 		perror("Error mmapping dsp adress space");
 		exit(EXIT_FAILURE);
 	}
-	printf("tic6x space 0xc0000000 mapped @ %p\n", tic6x_mem_0xc0000000);
+	fprintf(stderr, "tic6x space 0xc0000000 mapped @ %p\n", tic6x_mem_0xc0000000);
 
 	init_disassemble_info (&tic6x_space_at_0x11800000, NULL, (fprintf_ftype)disasm_sprintf);
 	init_disassemble_info (&tic6x_space_at_0xc0000000, NULL, (fprintf_ftype)disasm_sprintf);
