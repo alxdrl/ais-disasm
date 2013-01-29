@@ -13,6 +13,41 @@ function format_word()
 	word = gensub(/.* ([a-fx0-9-]+),[ab]([0-9]|[1-3][0-9]).*/, "\\1", "g", $0); 
 	word = sprintf("%04x", word);
 }
+/ nop [0-9]+/ { if (seen_ret) { ep += gensub(/.*nop ([0-9]+).*/, "\\1", "g", $0); } }
+! / nop /  && ! $3 ~ /||/ { if (seen_ret) { ep++ } }
+{
+	if (seen_ret && pushed == popped && (ep >= 6) ) {
+		seen_ret = 0
+		pushed = 0
+		print ";"
+		print "; Function end (" popped ")";
+	        print ";=========================================="
+		popped = 0
+		ep = 0
+	}
+}
+
+/b3,\*b15--\([0-9]+\)/  {
+	if (pushed) {
+		popped = 0;
+		seen_ret = 0;
+	}
+	pushed = gensub(/.*b15--\(([0-9]+)\).*/, "\\1", "g", $0);
+	print ";------------------------------------------"
+	print "; Function with " pushed " bytes on stack"
+	print ";"
+}
+
+/*\+\+b15\([0-9]+\),b3/ {
+	if (pushed)
+		popped = gensub(/.*b15\(([0-9]+)\).*/, "\\1", "g", $0);
+}
+/bnop .S2 b3,/ {
+	if (pushed) {
+		seen_ret = 1;
+		ep = gensub(/.*b3,([0-9]+).*/, "\\1", "g", $0);
+	}
+}
 { xref = "" ; printf "%s", $0 }
 { areg = gensub(/.*,([ab][0-9]+)([^0-9].*|$)/, "\\1", "g", $0) ; }
 ! /mvk/ && ( /,[ab]([1-3][0-9]|[0-9])[^,]/ || /,[ab]([1-3][0-9]|[0-9])$/ ) {
