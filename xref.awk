@@ -13,42 +13,75 @@ function format_word()
 	word = gensub(/.* ([a-fx0-9-]+),[ab]([0-9]|[1-3][0-9]).*/, "\\1", "g", $0); 
 	word = sprintf("%04x", word);
 }
-/ nop [0-9]+/ { if (seen_ret) { ep += gensub(/.*nop ([0-9]+).*/, "\\1", "g", $0); } }
-! / nop /  && ! $3 ~ /||/ { if (seen_ret) { ep++ } }
 {
-	if (seen_ret && pushed == popped && (ep >= 6) ) {
-		seen_ret = 0
-		pushed = 0
-		print ";"
-		print "; Function end (" popped ")";
-	        print ";=========================================="
-		popped = 0
-		ep = 0
-	}
-}
 
-/b3,\*b15--\([0-9]+\)/  {
-	if (pushed) {
-		popped = 0;
+	if (seen_ret && ep >= 5 ) {
 		seen_ret = 0;
+		print ";";
+		print "; Function or Fragment boundary";
+	        print ";==========================================";
+		ep = 0;
+		in_func = 0;
+		in_fragment = 0;
+		pushed = 0
 	}
-	pushed = gensub(/.*b15--\(([0-9]+)\).*/, "\\1", "g", $0);
-	print ";------------------------------------------"
-	print "; Function with " pushed " bytes on stack"
-	print ";"
+}
+/ nop [0-9]+/ { if (seen_ret) { ep += gensub(/.*nop ([0-9]+).*/, "\\1", "g", $0); } }
+! /^;/ && ! / nop [0-9]+/  && $3 ~ /^[^\|]/ && ! /<fetch/ { if (seen_ret) ep++ ; }
+
+! /^;/ && ! /<fetch/ && ! /,\*b15--\([0-9]+\)/ && ! /*\+\+b15\([0-9]+\),/ && ! /nop [0-9]+/ {
+	if (!in_func && !in_fragment) {
+		in_fragment = 1; 
+		print ";------------------------------------------";
+		print "; Fragment start";
+		print ";";
+	}
 }
 
-/*\+\+b15\([0-9]+\),b3/ {
-	if (pushed)
-		popped = gensub(/.*b15\(([0-9]+)\).*/, "\\1", "g", $0);
+/,\*b15--\([0-9]+\)/  {
+	if (in_func && pushed <= 0) {
+		seen_ret = 0;
+		if (!in_fragment) {
+			print ";";
+			print "; Function or Fragment boundary";
+	       		print ";==========================================";
+		}
+		ep = 0;
+		pushed = 0;
+		in_func = 0;
+		in_fragment = 0;
+	}
+	was_in_func = in_func;
+	in_func = 1;
+	if (in_fragment && !in_func ) {
+		print ";";
+		print "; Fragment boundary";
+	        print ";==========================================";
+		in_fragment = 0;
+	}
+	if (!was_in_func && !in_fragment) {
+		print ";------------------------------------------";
+		print "; Function start";
+		print ";";
+	}
+	in_fragment = 0;
+	pushed += gensub(/.*b15--\(([0-9]+)\).*/, "\\1", "g", $0);
+}
+
+/*\+\+b15\([0-9]+\),/ {
+	pushed -= gensub(/.*b15\(([0-9]+)\).*/, "\\1", "g", $0);
+}
+/ b .S2 b3/ {
+	in_func = 1
+	seen_ret = 1;
+	ep = 0;
 }
 /bnop .S2 b3,/ {
-	if (pushed) {
-		seen_ret = 1;
-		ep = gensub(/.*b3,([0-9]+).*/, "\\1", "g", $0);
-	}
+	in_func = 1
+	seen_ret = 1;
+	ep = gensub(/.*b3,([0-9]+).*/, "\\1", "g", $0);
 }
-{ xref = "" ; printf "%s", $0 }
+{ xref = "" ; }
 { areg = gensub(/.*,([ab][0-9]+)([^0-9].*|$)/, "\\1", "g", $0) ; }
 ! /mvk/ && ( /,[ab]([1-3][0-9]|[0-9])[^,]/ || /,[ab]([1-3][0-9]|[0-9])$/ ) {
 #	printf "\t\t\t; touch %s", areg
@@ -82,6 +115,9 @@ function format_word()
 }
 
 {
+  printf "%s", $0
   if (xref != "") { printf "\t\t\t; xref [%s] @%s", areg, xref ; }
+#  if (pushed) { printf "\t(stack:%s)", pushed ; }
+#  if (seen_ret) { printf "\t(ep:%s)", ep ; }
   printf "\n";
 }
