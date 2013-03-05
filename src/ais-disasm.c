@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <getopt.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -24,6 +25,14 @@
 
 #define TIC6X_VMA_FMT "l"
 #define tic6x_sprintf_vma(s,x) sprintf (s, "%08" TIC6X_VMA_FMT "x", x)
+
+static struct config_t {
+    int ais_fd;
+    FILE *cmd_file;
+    FILE *out_file;
+	size_t bufsize;
+	void *buffer;
+} config_data;
 
 /* Pseudo FILE object for strings.  */
 typedef struct
@@ -59,6 +68,73 @@ disasm_sprintf (SFILE *f, const char *format, ...)
   return n;
 }
 
+FILE *
+do_open(const char *filename, const char *mode)
+{
+	FILE *f = fopen(filename, mode);
+	if (f == NULL) {
+		perror("unable to open specified file");
+		exit(EXIT_FAILURE);
+	}
+	return f;
+}
+
+void
+do_config(int argc, char **argv)
+{
+   int c;
+
+   config_data.ais_fd = -1;
+   config_data.cmd_file = stdin;
+   config_data.out_file = stdout;
+
+   while (1) {
+       int option_index = 0;
+       static struct option long_options[] = {
+           {"ais-data", required_argument, 0,  'a' },
+           {"input",    required_argument, 0,  'i' },
+           {"output",   required_argument, 0,  'o' },
+           {0,          0,                 0,  0 }
+       };
+
+       c = getopt_long(argc, argv, "a:i:o:",
+                 long_options, &option_index);
+       if (c == -1)
+            break;
+
+       switch (c) {
+       case 'a':
+            fprintf(stderr, "option a with value '%s'\n", optarg);
+			config_data.ais_fd = open(optarg, O_RDONLY);
+			if (config_data.ais_fd == -1) {
+				perror("unable to open file for reading");
+				exit(EXIT_FAILURE);
+			}
+            break;
+
+       case 'i':
+            fprintf(stderr, "option i with value '%s'\n", optarg);
+			config_data.out_file = do_open(optarg, "r");
+            break;
+
+       case 'o':
+            fprintf(stderr, "option o with value '%s'\n", optarg);
+			config_data.out_file = do_open(optarg, "w");
+            break;
+
+       default:
+            fprintf(stderr, "?? getopt returned character code 0%o ??\n", c);
+        }
+    }
+
+   if (optind < argc) {
+        printf("non-option ARGV-elements: ");
+        while (optind < argc)
+            printf("%s ", argv[optind++]);
+        printf("\n");
+    }
+}
+
 void
 tic6x_print_address (bfd_vma addr, struct disassemble_info *info)
 {
@@ -68,10 +144,11 @@ tic6x_print_address (bfd_vma addr, struct disassemble_info *info)
   (*info->fprintf_func) (info->stream, "0x%s", buf);
 }
 
-
-size_t filesize(int fd)
+size_t
+filesize(int fd)
 {
 	struct stat st;
+	fprintf(stderr, "getting file size on descriptor %d", fd);
 	if (fstat(fd, &st) < 0) {
 		perror("unable to get file size");
 		exit(errno);
@@ -84,7 +161,8 @@ typedef int (*tic6x_print_region_ftype) (bfd_vma addr, struct disassemble_info *
 struct disassemble_info tic6x_space_at_0x11800000;
 struct disassemble_info tic6x_space_at_0xc0000000;
 
-void tic6x_init_section(struct disassemble_info *pinfo, void *buffer, bfd_vma vma, size_t size)
+void
+tic6x_init_section(struct disassemble_info *pinfo, void *buffer, bfd_vma vma, size_t size)
 
 {
 	pinfo->mach = bfd_arch_tic6x;
@@ -95,7 +173,8 @@ void tic6x_init_section(struct disassemble_info *pinfo, void *buffer, bfd_vma vm
 	pinfo->print_address_func = tic6x_print_address;
 }
 
-struct disassemble_info *tic6x_get_di(ais_vma vma)
+struct disassemble_info *
+tic6x_get_di(ais_vma vma)
 {
 	if (vma >= 0x11800000 && vma <= 0xbfffffff)
 		return &tic6x_space_at_0x11800000;
@@ -104,7 +183,8 @@ struct disassemble_info *tic6x_get_di(ais_vma vma)
 	return 0;
 }
 
-void tic6x_section_load_callback(ais_opcode_info *info)
+void
+tic6x_section_load_callback(ais_opcode_info *info)
 {
 	ais_vma vma = info->section_load.vma;
 	struct disassemble_info *di = tic6x_get_di(vma);
@@ -114,7 +194,8 @@ void tic6x_section_load_callback(ais_opcode_info *info)
 	memcpy(dst, src, info->section_load.size);
 }
 
-int tic6x_section_print_word(bfd_vma addr, struct disassemble_info *info)
+int
+tic6x_section_print_word(bfd_vma addr, struct disassemble_info *info)
 {
      unsigned int word;
      buffer_read_memory (addr, (bfd_byte *)&word, 4, info);
@@ -122,7 +203,8 @@ int tic6x_section_print_word(bfd_vma addr, struct disassemble_info *info)
      return 4;
 }
 
-int tic6x_section_print_string(bfd_vma addr, struct disassemble_info *info)
+int
+tic6x_section_print_string(bfd_vma addr, struct disassemble_info *info)
 {
 	int count = 0;
 	bfd_byte c;
@@ -143,7 +225,8 @@ int tic6x_section_print_string(bfd_vma addr, struct disassemble_info *info)
 	return count;
 }
 
-void tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype tic6x_print)
+void
+tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype tic6x_print)
 {
 	static SFILE sfile = {NULL, 0, 0};
 	struct disassemble_info *pinfo = tic6x_get_di(vma);
@@ -178,28 +261,9 @@ void tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_fty
 	}
 }
 
-int main(int argc, char **argv)
+void
+do_dump()
 {
-	int fd;
-	void *buffer;
-	size_t size;
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1) {
-		perror("Error opening file for reading");
-		exit(EXIT_FAILURE);
-	}
-
-	size = filesize(fd);
-
-	buffer = mmap(0, size, PROT_READ, MAP_SHARED, fd, 0);
-	if (buffer == MAP_FAILED) {
-		close(fd);
-		perror("Error mmapping the file");
-		exit(EXIT_FAILURE);
-	}
-	fprintf(stderr, "file mapped @ %p\n", buffer);
-
 	void *tic6x_mem_0x11800000 = mmap(0, 0x00200000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
 	if (tic6x_mem_0x11800000 == MAP_FAILED) {
 		perror("Error mmapping dsp adress space");
@@ -219,65 +283,85 @@ int main(int argc, char **argv)
 	tic6x_init_section (&tic6x_space_at_0x11800000, tic6x_mem_0x11800000, 0x11800000, 0x00200000);
 	tic6x_init_section (&tic6x_space_at_0xc0000000, tic6x_mem_0xc0000000, 0xc0000000, 0x00200000);
 
-	aisread(buffer, size, tic6x_section_load_callback);
+	char line[LINE_MAX];
+	int nl = 0;
 
-	tic6x_print_region(0x1180b000,  0xeac0, (tic6x_print_region_ftype)print_insn_tic6x);
-	tic6x_print_region(0xc0000000, 0x64e20, (tic6x_print_region_ftype)print_insn_tic6x);
-	tic6x_print_region(0xc0064e20,  0x4570, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0069390,  0x16e0, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc006aa70,  0xc588, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0076ff8,  0x0390, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc0077388,  0x0408, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0077790, 0x16454, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc008dbe4,  0x013c, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc008dd20,  0x12b8, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc008efd8,  0x0130, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc008f108,  0x038C, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc008f494,  0x0124, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc008f5b8,  0x3a70, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0093028,  0x00ec, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc0093114,  0x0cf0, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0093e04,  0x00c6, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc0093eca,  0x1bf6, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0095ac0,  0x00b0, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc0095b70,  0x0698, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0096208,  0x0098, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc00962a0,  0x1250, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc00974f0,  0x0074, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc0097564,  0x068c, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0097bf0,  0x0058, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc0097c48,  0x03c8, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0098010,  0x0058, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc0098068,  0x020c, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0098274,  0x0050, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc00982c4,  0x0b48, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0098e0c,  0x0030, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc0098e3c,  0x0850, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc009968c,  0x002c, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc00996b8,  0x050c, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0099bc4,  0x0024, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc0099be8,  0x0574, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc009a15c,  0x0018, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc009a174,  0x0124, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc009a298,  0x003c, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc009a2d4,  0x00ec, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc009a3c0,  0x0048, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc009a408,  0x0158, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc009a560,  0x0010, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc009a570,  0x0040, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc009a5b0,  0x0018, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc009a5c8,  0x0144, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc009a70c,  0x0034, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc009a740,  0x013c, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc00c9470,  0xc318, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc00d5788,  0x0068, (tic6x_print_region_ftype)tic6x_section_print_string);
-	tic6x_print_region(0xc00d57f0,  0x2a48, (tic6x_print_region_ftype)tic6x_section_print_word);
-	tic6x_print_region(0xc0110000, 0x1603c, (tic6x_print_region_ftype)tic6x_section_print_word);
+	aisread(config_data.buffer, config_data.bufsize, tic6x_section_load_callback);
 
-	if (munmap(buffer, size) == -1) {
-		perror("Error un-mmapping the file");
+	while (fgets(line, LINE_MAX, config_data.cmd_file)) {
+		char *command = NULL;
+		int n = 0;
+		nl++;
+		n = sscanf(line, "%as ", &command);
+		if (n == 0 || n == EOF)
+			continue;
+		if (strcmp("print", command) == 0) {
+			char *what = NULL;
+			n = sscanf(line, "print %as", &what);
+			if (n == 0 || n == EOF) {
+				fprintf(stderr, "line %d: invalid print command\n\t\t>>>>> %s\n", nl, line);
+				continue;
+			}
+			if (strcmp("region", what) == 0) {
+				uintmax_t addr = 0;
+				size_t len = 0;
+				char *format = NULL;
+				tic6x_print_region_ftype print_func = NULL;
+				n = sscanf(line, "print region %ji,%zi as %as", &addr, &len, &format);
+				fprintf(stderr, "addr = 0x%ju, len = 0x%zu\n", addr, len);
+				if (n < 2 || n == EOF) {
+					fprintf(stderr, "line %d: invalid region specification (%d) \n\t\t>>>>> %s\n", nl, n, line);
+					continue;
+				}
+				print_func = print_insn_tic6x;
+				if (n == 3) {
+					if (strcmp("string", format) == 0) {
+						print_func = tic6x_section_print_string;
+					} else if (strcmp("word", format) == 0) {
+						print_func = tic6x_section_print_word;
+					} else if (strcmp("code", format) == 0) {
+						print_func = print_insn_tic6x;
+					} else {
+						fprintf(stderr, "line %d: unknown format \'%s\'\n\t\t>>>>> %s\n", nl, format, line);
+						continue;
+					}
+				}
+				if (format != NULL) 
+					free(format);
+				tic6x_print_region(addr, len, print_func);
+			}
+			if (what != NULL)
+				free(what);
+		} else {
+			fprintf(stderr, "line %d: unknown command %s\n\t\t>>>>> %s\n", nl, command, line);
+			continue;
+		}
+		if (command != NULL)
+			free(command);
 	}
-	close(fd);
+}
+
+int
+main(int argc, char **argv)
+{
+	do_config(argc, argv);
+
+	config_data.bufsize = filesize(config_data.ais_fd);
+	config_data.buffer = mmap(0, config_data.bufsize, PROT_READ, MAP_SHARED, config_data.ais_fd, 0);
+
+	if (config_data.buffer == MAP_FAILED) {
+		close(config_data.ais_fd);
+		perror("unable to map file");
+		exit(EXIT_FAILURE);
+	}
+	fprintf(stderr, "file mapped @ %p\n", config_data.buffer);
+
+	do_dump();
+
+	if (munmap(config_data.buffer, config_data.bufsize) == -1) {
+		perror("unable to unmap file");
+	}
+	close(config_data.ais_fd);
 	return EXIT_SUCCESS;
 }
 
