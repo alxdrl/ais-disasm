@@ -56,11 +56,11 @@ do_config(int argc, char **argv)
        switch (c) {
        case 'a':
             fprintf(stderr, "option a with value '%s'\n", optarg);
-			config_data.ais_fd = open(optarg, O_RDONLY);
-			if (config_data.ais_fd == -1) {
-				perror("unable to open file for reading");
-				exit(EXIT_FAILURE);
-			}
+	    config_data.ais_fd = open(optarg, O_RDONLY);
+	    if (config_data.ais_fd == -1) {
+		perror("unable to open file for reading");
+		exit(EXIT_FAILURE);
+	    }
             break;
 
        case 'i':
@@ -72,20 +72,30 @@ do_config(int argc, char **argv)
             fprintf(stderr, "option o with value '%s'\n", optarg);
             config_data.out_file = do_open(optarg, "w");
             break;
+
+       case ':':
+            fprintf(stderr, "option -%c requires an argument\n", optopt);
+	    break;
+
        case '?':
             fprintf(stderr, "unrecognized option: -%c\n", optopt);
 	    break;
 
        default:
-            fprintf(stderr, "?? getopt returned character code 0%x(%c) ??\n", c, c);
+            fprintf(stderr, "getopt returned character code 0%x(%c)\n", c, c);
+	    exit(EXIT_FAILURE);
         }
     }
 
-   if (optind < argc) {
-        printf("non-option ARGV-elements: ");
+    if (optind < argc) {
+        fprintf(stderr, "non-option ARGV-elements: ");
         while (optind < argc)
             printf("%s ", argv[optind++]);
         printf("\n");
+    }
+    if (config_data.ais_fd < 0) {
+	fprintf(stderr, "no ais file specified\n");
+	exit(EXIT_FAILURE);
     }
 }
 
