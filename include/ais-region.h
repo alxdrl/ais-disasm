@@ -1,6 +1,7 @@
 #ifndef __AIS_REGION_H
 #	define __AIS_REGION_H
 
+#include <stddef.h>
 #include <stdint.h>
 #include "list.h"
 #include "ais.h"

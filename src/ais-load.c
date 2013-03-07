@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "ais-load.h"
+#include "ais.h"
 
 #define AIS_FUNC(name, label, ac) { ais_function_config_##name, label, ac },
 ais_function ais_function_table[ais_function_max] = {

@@ -1,7 +1,8 @@
-#include <stdint.h>
-
 #ifndef __AIS_H
 #	define __AIS_H
+
+#include <stdint.h>
+#include <stddef.h>
 
 #define AIS_MAGIC                   0x41504954
 #define AIS_OPCODE_SECTION_LOAD     0x58535901
@@ -40,5 +41,19 @@ typedef struct {
 	const char *name;
 	unsigned int ac;
 } ais_function;
+
+typedef union {
+    ais_section_load_info section_load;
+} ais_opcode_info;
+
+typedef void (*ais_opcode_callback_ftype) (ais_opcode_info *);
+typedef void (*ais_opcode_handler_ftype) (unsigned int **, ais_opcode_callback_ftype);
+
+typedef struct {
+    unsigned int opcode;
+    ais_opcode_handler_ftype handler;
+} ais_opcode;
+
+void aisread(void *buffer, size_t size, ais_opcode_callback_ftype callback);
 
 #endif

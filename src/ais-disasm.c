@@ -1,30 +1,15 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <stdarg.h>
-#include <stdint.h>
-#include <unistd.h>
 #include <string.h>
-#include <ctype.h>
 #include <limits.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <getopt.h>
 #include <sys/mman.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-
-#define PACKAGE "ais-disasm"
-#define PACKAGE_VERSION "0.0.0"
-
-#include "dis-asm.h"
-#include "libiberty/libiberty.h"
 
 #include "ais.h"
-#include "ais-load.h"
-
-#define TIC6X_VMA_FMT "l"
-#define tic6x_sprintf_vma(s,x) sprintf (s, "%08" TIC6X_VMA_FMT "x", x)
+#include "ais-helper.h"
+#include "ais-print.h"
 
 static struct config_t {
     int ais_fd;
@@ -33,40 +18,6 @@ static struct config_t {
 	size_t bufsize;
 	void *buffer;
 } config_data;
-
-/* Pseudo FILE object for strings.  */
-typedef struct
-{
-  char *buffer;
-  size_t pos;
-  size_t alloc;
-} SFILE;
-
-/* sprintf to a "stream".  */
-static int ATTRIBUTE_PRINTF_2
-disasm_sprintf (SFILE *f, const char *format, ...)
-{
-  size_t n;
-  va_list args;
-
-  while (1)
-	{
-      size_t space = f->alloc - f->pos;
-
-      va_start (args, format);
-      n = vsnprintf (f->buffer + f->pos, space, format, args);
-      va_end (args);
-
-      if (space > n)
-        break;
-
-      f->alloc = (f->alloc + n) * 2;
-      f->buffer = (void *) xrealloc (f->buffer, f->alloc);
-	}
-  f->pos += n;
-
-  return n;
-}
 
 FILE *
 do_open(const char *filename, const char *mode)
@@ -135,15 +86,6 @@ do_config(int argc, char **argv)
     }
 }
 
-void
-tic6x_print_address (bfd_vma addr, struct disassemble_info *info)
-{
-  char buf[30];
-
-  tic6x_sprintf_vma (buf, addr);
-  (*info->fprintf_func) (info->stream, "0x%s", buf);
-}
-
 size_t
 filesize(int fd)
 {
@@ -155,8 +97,6 @@ filesize(int fd)
 	}
 	return st.st_size;
 }
-
-typedef int (*tic6x_print_region_ftype) (bfd_vma addr, struct disassemble_info *info);
 
 struct disassemble_info tic6x_space_at_0x11800000;
 struct disassemble_info tic6x_space_at_0xc0000000;
@@ -194,37 +134,6 @@ tic6x_section_load_callback(ais_opcode_info *info)
 	memcpy(dst, src, info->section_load.size);
 }
 
-int
-tic6x_section_print_word(bfd_vma addr, struct disassemble_info *info)
-{
-     unsigned int word;
-     buffer_read_memory (addr, (bfd_byte *)&word, 4, info);
-     info->fprintf_func(info->stream, ".word 0x%08x", word);
-     return 4;
-}
-
-int
-tic6x_section_print_string(bfd_vma addr, struct disassemble_info *info)
-{
-	int count = 0;
-	bfd_byte c;
-	info->fprintf_func(info->stream, ".string '");
-	buffer_read_memory (addr++, &c, 1, info);
-	count++;
-	while (c != 0) {
-		if (c == '\n')
-			info->fprintf_func(info->stream, "\\n");
-		else if (c == '\r')
-			info->fprintf_func(info->stream, "\\r");
-		else
-			info->fprintf_func(info->stream, "%c", c);
-		buffer_read_memory (addr++, &c, 1, info);
-		count++;
-	}
-	info->fprintf_func(info->stream, "',0");
-	return count;
-}
-
 void
 tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype tic6x_print)
 {
@@ -233,11 +142,8 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 	ais_vma vmamax = pinfo->buffer_vma + pinfo->buffer_length;
 	ais_vma vmaend = vma + section_size;
 	if (vmaend > vmamax)
-	return;
-	if (sfile.buffer == NULL) {
-		sfile.alloc = 120;
-		sfile.buffer = (void *)xmalloc (sfile.alloc);
-	}
+		return;
+	alloc_buffer(&sfile);
 	pinfo->stream = &sfile;
 	printf(";\n; section @0x%08x, size = %x\n;\n", (unsigned int)vma, (unsigned int)section_size);
 	while (vma < vmaend && vma >= pinfo->buffer_vma) {
