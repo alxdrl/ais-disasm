@@ -65,16 +65,19 @@ do_config(int argc, char **argv)
 
        case 'i':
             fprintf(stderr, "option i with value '%s'\n", optarg);
-			config_data.out_file = do_open(optarg, "r");
+            config_data.out_file = do_open(optarg, "r");
             break;
 
        case 'o':
             fprintf(stderr, "option o with value '%s'\n", optarg);
-			config_data.out_file = do_open(optarg, "w");
+            config_data.out_file = do_open(optarg, "w");
             break;
+       case '?':
+            fprintf(stderr, "unrecognized option: -%c\n", optopt);
+	    break;
 
        default:
-            fprintf(stderr, "?? getopt returned character code 0%o ??\n", c);
+            fprintf(stderr, "?? getopt returned character code 0%x(%c) ??\n", c, c);
         }
     }
 
@@ -90,7 +93,6 @@ size_t
 filesize(int fd)
 {
 	struct stat st;
-	fprintf(stderr, "getting file size on descriptor %d", fd);
 	if (fstat(fd, &st) < 0) {
 		perror("unable to get file size");
 		exit(errno);
@@ -190,30 +192,28 @@ do_dump()
 	tic6x_init_section (&tic6x_space_at_0xc0000000, tic6x_mem_0xc0000000, 0xc0000000, 0x00200000);
 
 	char line[LINE_MAX];
+	char token[10];
 	int nl = 0;
 
 	aisread(config_data.buffer, config_data.bufsize, tic6x_section_load_callback);
-
 	while (fgets(line, LINE_MAX, config_data.cmd_file)) {
-		char *command = NULL;
 		int n = 0;
 		nl++;
-		n = sscanf(line, "%as ", &command);
+		n = sscanf(line, "%9s ", token);
+		fprintf(stderr, "reading line %d(%d)\n\t\t>>>> %s\n", nl, n, line);
 		if (n == 0 || n == EOF)
 			continue;
-		if (strcmp("print", command) == 0) {
-			char *what = NULL;
-			n = sscanf(line, "print %as", &what);
+		if (strcmp("print", token) == 0) {
+			n = sscanf(line, "print %9s", token);
 			if (n == 0 || n == EOF) {
 				fprintf(stderr, "line %d: invalid print command\n\t\t>>>>> %s\n", nl, line);
 				continue;
 			}
-			if (strcmp("region", what) == 0) {
+			if (strcmp("region", token) == 0) {
 				uintmax_t addr = 0;
 				size_t len = 0;
-				char *format = NULL;
 				tic6x_print_region_ftype print_func = NULL;
-				n = sscanf(line, "print region %ji,%zi as %as", &addr, &len, &format);
+				n = sscanf(line, "print region %ji,%zi as %9s", &addr, &len, token);
 				fprintf(stderr, "addr = 0x%ju, len = 0x%zu\n", addr, len);
 				if (n < 2 || n == EOF) {
 					fprintf(stderr, "line %d: invalid region specification (%d) \n\t\t>>>>> %s\n", nl, n, line);
@@ -221,29 +221,23 @@ do_dump()
 				}
 				print_func = print_insn_tic6x;
 				if (n == 3) {
-					if (strcmp("string", format) == 0) {
+					if (strcmp("string", token) == 0) {
 						print_func = tic6x_section_print_string;
-					} else if (strcmp("word", format) == 0) {
+					} else if (strcmp("word", token) == 0) {
 						print_func = tic6x_section_print_word;
-					} else if (strcmp("code", format) == 0) {
+					} else if (strcmp("code", token) == 0) {
 						print_func = print_insn_tic6x;
 					} else {
-						fprintf(stderr, "line %d: unknown format \'%s\'\n\t\t>>>>> %s\n", nl, format, line);
+						fprintf(stderr, "line %d: unknown format \'%s\'\n\t\t>>>>> %s\n", nl, token, line);
 						continue;
 					}
 				}
-				if (format != NULL) 
-					free(format);
 				tic6x_print_region(addr, len, print_func);
 			}
-			if (what != NULL)
-				free(what);
 		} else {
-			fprintf(stderr, "line %d: unknown command %s\n\t\t>>>>> %s\n", nl, command, line);
+			fprintf(stderr, "line %d: unknown command %s\n\t\t>>>>> %s\n", nl, token, line);
 			continue;
 		}
-		if (command != NULL)
-			free(command);
 	}
 }
 
