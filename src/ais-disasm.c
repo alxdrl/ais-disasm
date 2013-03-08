@@ -19,7 +19,7 @@ static struct config_t {
 	void *buffer;
 } config_data;
 
-FILE *
+static FILE *
 do_open(const char *filename, const char *mode)
 {
 	FILE *f = fopen(filename, mode);
@@ -30,7 +30,7 @@ do_open(const char *filename, const char *mode)
 	return f;
 }
 
-void
+static void
 do_config(int argc, char **argv)
 {
    int c;
@@ -75,15 +75,15 @@ do_config(int argc, char **argv)
 
        case ':':
             fprintf(stderr, "option -%c requires an argument\n", optopt);
-	    break;
+			break;
 
        case '?':
             fprintf(stderr, "unrecognized option: -%c\n", optopt);
-	    break;
+			break;
 
        default:
-            fprintf(stderr, "getopt returned character code 0%x(%c)\n", c, c);
-	    exit(EXIT_FAILURE);
+            fprintf(stderr, "getopt returned character code 0x%x\n", (unsigned int)c);
+			exit(EXIT_FAILURE);
         }
     }
 
@@ -99,7 +99,7 @@ do_config(int argc, char **argv)
     }
 }
 
-size_t
+static off_t
 filesize(int fd)
 {
 	struct stat st;
@@ -110,13 +110,14 @@ filesize(int fd)
 	return st.st_size;
 }
 
-struct disassemble_info tic6x_space_at_0x11800000;
-struct disassemble_info tic6x_space_at_0xc0000000;
+static struct disassemble_info tic6x_space_at_0x11800000;
+static struct disassemble_info tic6x_space_at_0xc0000000;
 
-void
-tic6x_init_section(struct disassemble_info *pinfo, void *buffer, bfd_vma vma, size_t size)
+static void
+tic6x_init_section(struct disassemble_info *pinfo, void *buffer, bfd_vma vma, unsigned int size)
 
 {
+	init_disassemble_info (pinfo, NULL, (fprintf_ftype)disasm_sprintf);
 	pinfo->mach = bfd_arch_tic6x;
 	pinfo->endian = BFD_ENDIAN_LITTLE;
 	pinfo->buffer = buffer;
@@ -125,17 +126,17 @@ tic6x_init_section(struct disassemble_info *pinfo, void *buffer, bfd_vma vma, si
 	pinfo->print_address_func = tic6x_print_address;
 }
 
-struct disassemble_info *
+static struct disassemble_info *
 tic6x_get_di(ais_vma vma)
 {
-	if (vma >= 0x11800000 && vma <= 0xbfffffff)
+	if (vma >= 0x11800000u && vma <= 0xbfffffffu)
 		return &tic6x_space_at_0x11800000;
-	if (vma >= 0xc0000000 && vma <= 0xffffffff)
+	if (vma >= 0xc0000000u && vma <= 0xffffffffu)
 		return &tic6x_space_at_0xc0000000;
 	return 0;
 }
 
-void
+static void
 tic6x_section_load_callback(ais_opcode_info *info)
 {
 	ais_vma vma = info->section_load.vma;
@@ -146,8 +147,8 @@ tic6x_section_load_callback(ais_opcode_info *info)
 	memcpy(dst, src, info->section_load.size);
 }
 
-void
-tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype tic6x_print)
+static void
+tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype tic6x_print_func)
 {
 	static SFILE sfile = {NULL, 0, 0};
 	struct disassemble_info *pinfo = tic6x_get_di(vma);
@@ -157,19 +158,19 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 		return;
 	alloc_buffer(&sfile);
 	pinfo->stream = &sfile;
-	printf(";\n; section @0x%08x, size = %x\n;\n", (unsigned int)vma, (unsigned int)section_size);
+	printf(";\n; section @0x%08x, size = %zx\n;\n", vma, section_size);
 	while (vma < vmaend && vma >= pinfo->buffer_vma) {
-        unsigned int bytes_used;
+        int bytes_used;
         char format[32];
         unsigned int word = 0;
         sfile.pos = 0;
-        bytes_used = tic6x_print(vma, pinfo);
+        bytes_used = (tic6x_print_func)(vma, pinfo);
 		if (bytes_used <= 0) {
         	printf("read %d bytes, broke down at 0x%08x\n", bytes_used, vma);
 			break;
 		}
         if (bytes_used <= 4) {
-	        buffer_read_memory (vma, (bfd_byte *)&word, bytes_used, pinfo);
+	        buffer_read_memory (vma, (bfd_byte *)&word, (unsigned int)bytes_used, pinfo);
 	        snprintf(format, 32, "0x%%08x %%0%1dx%s%%s%%s\n", bytes_used * 2, &("         "[bytes_used * 2])); 
         	printf(format, vma, word, "                    " , sfile.buffer);
         } else {
@@ -179,31 +180,30 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 	}
 }
 
-void
+static void
 do_dump()
 {
-	void *tic6x_mem_0x11800000 = mmap(0, 0x00200000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
+	int nl = 0;
+	void *tic6x_mem_0x11800000, *tic6x_mem_0xc0000000;
+	char line[LINE_MAX];
+	char token[10];
+
+	tic6x_mem_0x11800000 = mmap(0, 0x00200000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
 	if (tic6x_mem_0x11800000 == MAP_FAILED) {
 		perror("Error mmapping dsp adress space");
 		exit(EXIT_FAILURE);
 	}
 	fprintf(stderr, "tic6x space 0x11800000 mapped @ %p\n", tic6x_mem_0x11800000);
 
-	void *tic6x_mem_0xc0000000 = mmap(0, 0x00200000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
+	tic6x_mem_0xc0000000 = mmap(0, 0x00200000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
 	if (tic6x_mem_0xc0000000 == MAP_FAILED) {
 		perror("Error mmapping dsp adress space");
 		exit(EXIT_FAILURE);
 	}
 	fprintf(stderr, "tic6x space 0xc0000000 mapped @ %p\n", tic6x_mem_0xc0000000);
 
-	init_disassemble_info (&tic6x_space_at_0x11800000, NULL, (fprintf_ftype)disasm_sprintf);
-	init_disassemble_info (&tic6x_space_at_0xc0000000, NULL, (fprintf_ftype)disasm_sprintf);
-	tic6x_init_section (&tic6x_space_at_0x11800000, tic6x_mem_0x11800000, 0x11800000, 0x00200000);
+	tic6x_init_section (&tic6x_space_at_0x11800000, tic6x_mem_0x11800000, 0x11800000, 0x00040000);
 	tic6x_init_section (&tic6x_space_at_0xc0000000, tic6x_mem_0xc0000000, 0xc0000000, 0x00200000);
-
-	char line[LINE_MAX];
-	char token[10];
-	int nl = 0;
 
 	aisread(config_data.buffer, config_data.bufsize, tic6x_section_load_callback);
 	while (fgets(line, LINE_MAX, config_data.cmd_file)) {
