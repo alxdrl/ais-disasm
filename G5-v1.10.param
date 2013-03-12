@@ -1,3 +1,5 @@
+define 0x1180d238 TOTO
+define 0x01c00000 EDMA3
 print region 0x1180bc00, 0xdb00 as code
 print region 0x1180c060, 0x440 as code
 print region 0x1181c600, 0x340 as code

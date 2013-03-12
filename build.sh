@@ -34,13 +34,15 @@ gcc -c ${INCDIR}/ais.h -o /dev/null ${CFLAGS}
 gcc -c ${INCDIR}/ais-helper.h -o /dev/null ${CFLAGS}
 gcc -c ${INCDIR}/ais-print.h -o /dev/null ${CFLAGS}
 gcc -c ${INCDIR}/ais-region.h -o /dev/null ${CFLAGS}
+gcc -c ${INCDIR}/ais-device.h -o /dev/null ${CFLAGS}
 gcc -c ${INCDIR}/ais-function-table.h -o /dev/null ${CFLAGS}
 
+gcc -c ${SRCDIR}/hashtab.c ${CFLAGS}
 gcc -c ${SRCDIR}/ais-helper.c ${CFLAGS}
 gcc -c ${SRCDIR}/ais-print.c ${CFLAGS}
 gcc -c ${SRCDIR}/ais-load.c ${CFLAGS}
 #gcc -c ${SRCDIR}/ais-space.c ${CFLAGS}
 gcc -c ${SRCDIR}/ais-disasm.c ${CFLAGS}
 gcc -c ${SRCDIR}/ais-disasm-tui.c ${CFLAGS}
-gcc -o ais-disasm ais-disasm.o ais-load.o ais-print.o ais-helper.o ${LDFLAGS}
+gcc -o ais-disasm ais-disasm.o ais-load.o ais-print.o ais-helper.o hashtab.o ${LDFLAGS}
 gcc -o ais-disasm-tui ais-disasm-tui.o ${LDFLAGS_TUI}

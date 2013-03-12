@@ -8,8 +8,9 @@
 #include <sys/mman.h>
 
 #include "ais.h"
-#include "ais-helper.h"
 #include "ais-print.h"
+#include "ais-helper.h"
+#include "hashtab.h"
 
 static struct config_t {
     int ais_fd;
@@ -18,6 +19,8 @@ static struct config_t {
 	size_t bufsize;
 	void *buffer;
 } config_data;
+
+hashtab_t *s_table;
 
 static FILE *
 do_open(const char *filename, const char *mode)
@@ -171,7 +174,7 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 		}
         if (bytes_used <= 4) {
 	        buffer_read_memory (vma, (bfd_byte *)&word, (unsigned int)bytes_used, pinfo);
-	        snprintf(format, 32, "0x%%08x %%0%1dx%s%%s%%s\n", bytes_used * 2, &("         "[bytes_used * 2])); 
+	        snprintf(format, 32, "%%08x %%0%1dx%s%%s%%s\n", bytes_used * 2, &("         "[bytes_used * 2])); 
         	printf(format, vma, word, "                    " , sfile.buffer);
         } else {
 			printf("0x%08x          %s%s\n", (unsigned int)vma, "                    ", (char *)sfile.buffer);
@@ -180,13 +183,20 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 	}
 }
 
+#define SYMBOL_MAX 64
+#define TOKEN_MAX 10
+#define XSTR(s) STR(s)
+#define STR(s) #s
+#define FMTNS(s) "%" XSTR(s##_MAX) "s"
+
 static void
 do_dump()
 {
 	int nl = 0;
 	void *tic6x_mem_0x11800000, *tic6x_mem_0xc0000000;
 	char line[LINE_MAX];
-	char token[10];
+	char symbol[SYMBOL_MAX + 1];
+	char token[TOKEN_MAX + 1];
 
 	tic6x_mem_0x11800000 = mmap(0, 0x00040000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
 	if (tic6x_mem_0x11800000 == MAP_FAILED) {
@@ -209,12 +219,12 @@ do_dump()
 	while (fgets(line, LINE_MAX, config_data.cmd_file)) {
 		int n = 0;
 		nl++;
-		n = sscanf(line, "%9s ", token);
+		n = sscanf(line, FMTNS(TOKEN)" ", token);
 		fprintf(stderr, "reading line %d(%d)\n\t\t>>>> %s\n", nl, n, line);
 		if (n == 0 || n == EOF)
 			continue;
 		if (strcmp("print", token) == 0) {
-			n = sscanf(line, "print %9s", token);
+			n = sscanf(line, "print " FMTNS(TOKEN), token);
 			if (n == 0 || n == EOF) {
 				fprintf(stderr, "line %d: invalid print command\n\t\t>>>>> %s\n", nl, line);
 				continue;
@@ -223,8 +233,7 @@ do_dump()
 				uintmax_t addr = 0;
 				size_t len = 0;
 				tic6x_print_region_ftype print_func = NULL;
-				n = sscanf(line, "print region %ji,%zi as %9s", &addr, &len, token);
-				fprintf(stderr, "addr = 0x%ju, len = 0x%zu\n", addr, len);
+				n = sscanf(line, "print region %ji,%zi as " FMTNS(TOKEN), &addr, &len, token);
 				if (n < 2 || n == EOF) {
 					fprintf(stderr, "line %d: invalid region specification (%d) \n\t\t>>>>> %s\n", nl, n, line);
 					continue;
@@ -244,6 +253,20 @@ do_dump()
 				}
 				tic6x_print_region(addr, len, print_func);
 			}
+		} else if (strcmp("define", token) == 0) {
+			ais_vma addr = 0;
+			n = sscanf(line, "define %i " FMTNS(SYMBOL), &addr, symbol);
+			if (n < 2 || n == EOF) {
+				fprintf(stderr, "line %d: invalid define command\n\t\t>>>>> %s\n", nl, line);
+				continue;
+			}
+			size_t slen = strlen(symbol);
+			void *ret = ht_insert(s_table, &addr, sizeof(addr), symbol, slen + 1);
+			if (ret == NULL) {
+				perror("unable to insert symbol into table");
+				exit(EXIT_FAILURE);
+			}
+			fprintf(stderr, "line %d: %s=%08x\n", nl, symbol, addr);
 		} else {
 			fprintf(stderr, "line %d: unknown command %s\n\t\t>>>>> %s\n", nl, token, line);
 			continue;
@@ -251,9 +274,27 @@ do_dump()
 	}
 }
 
+void
+do_init_sym_table()
+{
+#define HASH_INIT_SIZE 1024
+	s_table = ht_init(HASH_INIT_SIZE, NULL);
+	if (s_table == NULL) {
+		fprintf(stderr, "unable to initialize symbol table\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+void
+do_init()
+{
+	do_init_sym_table();
+}
+
 int
 main(int argc, char **argv)
 {
+	do_init();
 	do_config(argc, argv);
 
 	config_data.bufsize = filesize(config_data.ais_fd);
