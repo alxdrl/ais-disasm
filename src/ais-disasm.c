@@ -188,7 +188,7 @@ do_dump()
 	char line[LINE_MAX];
 	char token[10];
 
-	tic6x_mem_0x11800000 = mmap(0, 0x00200000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
+	tic6x_mem_0x11800000 = mmap(0, 0x00040000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
 	if (tic6x_mem_0x11800000 == MAP_FAILED) {
 		perror("Error mmapping dsp adress space");
 		exit(EXIT_FAILURE);
@@ -274,4 +274,3 @@ main(int argc, char **argv)
 	close(config_data.ais_fd);
 	return EXIT_SUCCESS;
 }
-
