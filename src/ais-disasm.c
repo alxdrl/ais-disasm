@@ -226,7 +226,6 @@ do_dump()
 		int n = 0;
 		nl++;
 		n = sscanf(line, "%" XSTR(TOKEN_MAX) "s ", token);
-		fprintf(stderr, "reading line %d(%d)\n\t\t>>>> %s\n", nl, n, line);
 		if (n == 0 || n == EOF)
 			continue;
 		if (strcmp("print", token) == 0) {
@@ -274,7 +273,6 @@ do_dump()
 				perror("unable to insert symbol into table");
 				exit(EXIT_FAILURE);
 			}
-			fprintf(stderr, "line %d: %s=%08x\n", nl, symbol, addr);
 		} else {
 			fprintf(stderr, "line %d: unknown command %s\n\t\t>>>>> %s\n", nl, token, line);
 			continue;
