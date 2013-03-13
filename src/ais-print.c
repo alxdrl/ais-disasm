@@ -42,10 +42,15 @@ tic6x_print_address(bfd_vma addr, struct disassemble_info *info)
 int
 tic6x_section_print_word(bfd_vma addr, struct disassemble_info *info)
 {
-     unsigned int word;
-     buffer_read_memory (addr, (bfd_byte *)&word, 4, info);
-     info->fprintf_func(info->stream, ".word 0x%08x", word);
-     return 4;
+	unsigned int word;
+	buffer_read_memory (addr, (bfd_byte *)&word, 4, info);
+	char *sym = tic6x_get_symbol(word);
+	if (sym == NULL) {
+		(*info->fprintf_func) (info->stream, ".word 0x%08x", word);
+	} else {
+		(*info->fprintf_func) (info->stream, ".word %s", sym);
+	} 
+	return 4;
 }
 
 int
