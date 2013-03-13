@@ -10,11 +10,26 @@ extern hashtab_t *s_table;
 #define TIC6X_VMA_FMT "l"
 #define tic6x_sprintf_vma(s,x) sprintf (s, "%08" TIC6X_VMA_FMT "x", x)
 
+char *
+tic6x_get_symbol(ais_vma addr)
+{
+	return (char *)ht_search(s_table, &addr, sizeof(addr));
+}
+
+void
+tic6x_print_label(bfd_vma addr, char *buf)
+{
+       char *symbol = tic6x_get_symbol(addr);
+       buf[0] = '\0';
+       if (symbol != NULL) {
+               sprintf(buf, "%s:", symbol);
+       }
+}
+
 void
 tic6x_print_address(bfd_vma addr, struct disassemble_info *info)
 {
-  ais_vma ais_addr = addr;
-  char *sym = (char *)ht_search(s_table, &ais_addr, sizeof(ais_addr));
+  char *sym = tic6x_get_symbol(addr);
   if (sym == NULL) {
 	  char buf[30];
 	  tic6x_sprintf_vma (buf, addr);

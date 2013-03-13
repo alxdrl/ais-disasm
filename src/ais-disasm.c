@@ -150,9 +150,17 @@ tic6x_section_load_callback(ais_opcode_info *info)
 	memcpy(dst, src, info->section_load.size);
 }
 
+#define XSTR(s) STR(s)
+#define STR(s) #s
+#define FMTNS(s) "%" XSTR(s##_MAX) "s"
+#define FMTNSPR(s) "%-" XSTR(s##_MAX) "s"
+#define DATA_MAX 8
+#define LABEL_MAX 20
 static void
 tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype tic6x_print_func)
 {
+	char label[LABEL_MAX + 1];
+	bfd_byte data[DATA_MAX];
 	static SFILE sfile = {NULL, 0, 0};
 	struct disassemble_info *pinfo = tic6x_get_di(vma);
 	ais_vma vmamax = pinfo->buffer_vma + pinfo->buffer_length;
@@ -161,39 +169,37 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 		return;
 	alloc_buffer(&sfile);
 	pinfo->stream = &sfile;
-	printf(";\n; section @0x%08x, size = %zx\n;\n", vma, section_size);
 	while (vma < vmaend && vma >= pinfo->buffer_vma) {
+		int i;
         int bytes_used;
-        char format[32];
-        unsigned int word = 0;
         sfile.pos = 0;
         bytes_used = (tic6x_print_func)(vma, pinfo);
 		if (bytes_used <= 0) {
-        	printf("read %d bytes, broke down at 0x%08x\n", bytes_used, vma);
+        	fprintf(stderr, "*** error: read %d bytes, broke down at 0x%08x\n", bytes_used, vma);
 			break;
 		}
-        if (bytes_used <= 4) {
-	        buffer_read_memory (vma, (bfd_byte *)&word, (unsigned int)bytes_used, pinfo);
-	        snprintf(format, 32, "%%08x %%0%1dx%s%%s%%s\n", bytes_used * 2, &("         "[bytes_used * 2])); 
-        	printf(format, vma, word, "                    " , sfile.buffer);
-        } else {
-			printf("0x%08x          %s%s\n", (unsigned int)vma, "                    ", (char *)sfile.buffer);
-	    }
+		printf("%08x ", vma);
+		buffer_read_memory(vma, data, (bytes_used < DATA_MAX ? bytes_used : DATA_MAX) , pinfo);
+		for (i = 0 ; i < DATA_MAX ; i++) {
+			if (i < bytes_used)
+				printf("%02x", data[i]);
+			else
+				printf("  ");
+		}
+		tic6x_print_label(vma, label);
+	    printf(" "FMTNSPR(LABEL) "%s\n", label , sfile.buffer);
         vma += bytes_used;
 	}
 }
 
 #define SYMBOL_MAX 64
 #define TOKEN_MAX 10
-#define XSTR(s) STR(s)
-#define STR(s) #s
-#define FMTNS(s) "%" XSTR(s##_MAX) "s"
-
 static void
 do_dump()
 {
 	int nl = 0;
 	void *tic6x_mem_0x11800000, *tic6x_mem_0xc0000000;
+	ais_vma addr;
 	char line[LINE_MAX];
 	char symbol[SYMBOL_MAX + 1];
 	char token[TOKEN_MAX + 1];
@@ -219,7 +225,7 @@ do_dump()
 	while (fgets(line, LINE_MAX, config_data.cmd_file)) {
 		int n = 0;
 		nl++;
-		n = sscanf(line, FMTNS(TOKEN)" ", token);
+		n = sscanf(line, "%" XSTR(TOKEN_MAX) "s ", token);
 		fprintf(stderr, "reading line %d(%d)\n\t\t>>>> %s\n", nl, n, line);
 		if (n == 0 || n == EOF)
 			continue;
@@ -230,14 +236,15 @@ do_dump()
 				continue;
 			}
 			if (strcmp("region", token) == 0) {
-				uintmax_t addr = 0;
+				uintmax_t m = 0;
 				size_t len = 0;
 				tic6x_print_region_ftype print_func = NULL;
-				n = sscanf(line, "print region %ji,%zi as " FMTNS(TOKEN), &addr, &len, token);
+				n = sscanf(line, "print region %ji,%zi as " FMTNS(TOKEN), &m, &len, token);
 				if (n < 2 || n == EOF) {
 					fprintf(stderr, "line %d: invalid region specification (%d) \n\t\t>>>>> %s\n", nl, n, line);
 					continue;
 				}
+				addr = m;
 				print_func = print_insn_tic6x;
 				if (n == 3) {
 					if (strcmp("string", token) == 0) {
@@ -254,12 +261,13 @@ do_dump()
 				tic6x_print_region(addr, len, print_func);
 			}
 		} else if (strcmp("define", token) == 0) {
-			ais_vma addr = 0;
-			n = sscanf(line, "define %i " FMTNS(SYMBOL), &addr, symbol);
+			uintmax_t m = 0;
+			n = sscanf(line, "define %ji " FMTNS(SYMBOL), &m, symbol);
 			if (n < 2 || n == EOF) {
 				fprintf(stderr, "line %d: invalid define command\n\t\t>>>>> %s\n", nl, line);
 				continue;
 			}
+			addr = m;
 			size_t slen = strlen(symbol);
 			void *ret = ht_insert(s_table, &addr, sizeof(addr), symbol, slen + 1);
 			if (ret == NULL) {

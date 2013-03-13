@@ -1,5 +1,4 @@
-define 0x1180d238 TOTO
-define 0x01c00000 EDMA3
+define 0xc0082700 entry_point
 print region 0x1180bc00, 0xdb00 as code
 print region 0x1180c060, 0x440 as code
 print region 0x1181c600, 0x340 as code
@@ -9,7 +8,6 @@ print region 0xc00906b0, 0x176c as string
 print region 0xc0091e1c, 0xb538 as word
 print region 0xc009d354, 0x410 as string
 print region 0xc009d764, 0x37e9c as word
-#0xc00d5600
 print region 0xc01157f8, 0xfabc as word
 print region 0xc0125400, 0x200 as code
 print region 0xc01259c8, 0x298 as word
