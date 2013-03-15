@@ -1,22 +1,25 @@
-#!/usr/bin/env awk --non-decimal-data -f
+#!/usr/bin/awk -f
 
 function leave()
 {
 	if (!is_in) return;
 	print ";";
 	print "; Fragment boundary";
-        print ";==========================================";
-		
+	print ";==========================================";
 	is_in = 0;
 	do_leave = 0;
 	about_to_leave = 0;
-	if (might_leave && !seen_ret)
-		enter();
+	enter();
 	might_leave = 0;
 }
 
 function enter()
 {
+	if (/^;/ || /nop / || /<fetch /) return ;
+	if (! /\|\|/ ) {
+		if (do_leave)
+			leave();
+	}
 	if (is_in) return;
 	print ";------------------------------------------";
 	print "; Fragment start";
@@ -32,22 +35,15 @@ function xref_mvk(reg)
 		lsb[reg] = "";
 	}
 }
+
 function format_word()
 {
-	word = gensub(/.* ([a-fx0-9-]+),[ab]([0-9]|[1-3][0-9]).*/, "\\1", "g", $0); 
+	word = gensub(/.* ([a-fx0-9-]+),[ab]([0-9]|[1-3][0-9]).*/, "\\1", "g", $0);
 	word = sprintf("%04x", word);
 }
 
-! /^;/ && ! /<fetch/ && ! /nop / {
-		enter();
-}
-
-! /\|\|/ {
-	if (do_leave)
-		leave();
-}
-
 {
+	enter();
 	if (seen_ret && ep >= 5) {
 		ep = 0;
 		pushed = 0
@@ -57,7 +53,13 @@ function format_word()
 	}
 }
 
+/bnop .S2 b3,/ {
+	seen_ret = 1;
+	ep = gensub(/.*b3,([0-9]+).*/, "\\1", "g", $0);
+}
+
 /addk \.S[12] [0-9]+,b15/ {
+	enter();
 	if (about_to_leave) {
 		do_leave = 1;
 	} else {
@@ -80,13 +82,13 @@ function format_word()
 	}
 }
 
-! /^;/ && ! / nop [0-9]+/  && ! /\|\|/ && ! /<fetch/ {
+! /^;/ && ! /\|\|/ && ! /<fetch/ {
 	if (seen_ret) {
 		ep++ ;
 	}
 }
 
-/addk \.S[12] -[0-9]+,b15/ {
+/addk? \.[LSD][12] -[0-9]+,b15/ {
 	about_to_leave = 0;
 }
 
@@ -96,7 +98,7 @@ function format_word()
 	}
 }
 
-/,\*b15--\([0-9]+\)/ || /addk \.S[12] -[0-9]+,b15/ {
+/,\*b15--\([0-9]+\)/ || /addk? \.[LSD][12] -[0-9]+,b15/ {
 	if (pushed <= 0) {
 		seen_ret = 0;
 		ep = 0;
@@ -106,8 +108,8 @@ function format_word()
 	if (x == x + 0) pushed += x;
 }
 
-/addk .*,b15/ {
-	x = gensub(/.* addk \.S[12] (-?[0-9]+),b15.*/, "\\1", "g", $0);
+/addk? .*,b15/ {
+	x = gensub(/.* addk? \.[LSD][12] (-?[0-9]+),b15.*/, "\\1", "g", $0);
 	if (x == x + 0) pushed += x
 }
 
@@ -120,11 +122,6 @@ function format_word()
 / b .S2 b3/ {
 	seen_ret = 1;
 	ep = 0;
-}
-
-/bnop .S2 b3,/ {
-	seen_ret = 1;
-	ep = gensub(/.*b3,([0-9]+).*/, "\\1", "g", $0);
 }
 
 { xref = "" ; }
