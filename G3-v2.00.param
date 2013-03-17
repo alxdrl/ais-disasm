@@ -8096,7 +8096,7 @@ define 0xc0061400 loc_c0061400
 define 0xc00614a0 f_c00614a0
 define 0xc0061540 f_c0061540
 define 0xc00615a4 loc_c00615a4
-define 0xc00615e0 f_c00615e0
+define 0xc00615e0 __memcpy
 define 0xc0061680 f_c0061680
 define 0xc0061700 loc_c0061700
 define 0xc0061704 loc_c0061704
@@ -9861,6 +9861,7 @@ define 0xc00c9458 lbl_c00c9458
 define 0xc00c9460 lbl_c00c9460
 define 0xc00c9468 lbl_c00c9468
 define 0xc00c9470 init_copy_table
+define 0xc00d745c lbl_c00d745c
 define 0xc00d7800 lbl_c00d7800
 define 0xc00d7b98 lbl_c00d7b98
 define 0xc00d7b9c lbl_c00d7b9c
@@ -10256,6 +10257,7 @@ define 0xc0ffffff lbl_c0ffffff
 print region 0x1180b000,  0xb060 as code
 print region 0x11816060,  0x32e0 as word
 print region 0x11819340,  0x780 as code
+print region 0x11f00000,  0x1000 as word
 print region 0xc0000000, 0x64e20 as code
 print region 0xc0064e20,  0x4570 as	word
 print region 0xc0069390,  0x16e8 as	string
@@ -10303,6 +10305,8 @@ print region 0xc009a5b0,  0x0018 as	string
 print region 0xc009a5c8,  0x0144 as	word
 print region 0xc009a70c,  0x0034 as	string
 print region 0xc009a740,  0x013c as	word
+print region 0xc00b3a70,  0xdd0 as word
+print region 0xc00b4840,  0x14c30 as	word
 print region 0xc00c9470,  0xc318 as	word
 print region 0xc00d5788,  0x0068 as	string
 print region 0xc00d57f0,  0x2a48 as	word

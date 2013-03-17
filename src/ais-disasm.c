@@ -22,6 +22,42 @@ static struct config_t {
 
 hashtab_t *s_table;
 
+int
+buffer_copy_memory (bfd_vma src_vma,
+                    bfd_vma dst_vma,
+                    unsigned int length,
+                    struct disassemble_info *src_info,
+                    struct disassemble_info *dst_info)
+{
+  unsigned int opb = src_info->octets_per_byte;
+
+  if (opb == 0 || dst_info->octets_per_byte != opb)
+        /* invalid opb values */
+        return EINVAL;
+
+  unsigned int end_addr_offset = length / opb;
+
+  unsigned int src_offset = (src_vma - src_info->buffer_vma) * opb;
+  unsigned int src_max_addr_offset = src_info->buffer_length / opb;
+  if (src_vma < src_info->buffer_vma
+      || src_vma - src_info->buffer_vma > src_max_addr_offset
+      || src_vma - src_info->buffer_vma + end_addr_offset > src_max_addr_offset)
+    /* Out of bounds.  Use EIO because GDB uses it.  */
+    return EIO;
+
+  unsigned int dst_offset = (dst_vma - dst_info->buffer_vma) * opb;
+  unsigned int dst_max_addr_offset = dst_info->buffer_length / opb;
+  if (dst_vma < dst_info->buffer_vma
+      || dst_vma - dst_info->buffer_vma > dst_max_addr_offset
+      || dst_vma - dst_info->buffer_vma + end_addr_offset > dst_max_addr_offset)
+    /* Out of bounds.  Use EIO because GDB uses it.  */
+    return EIO;
+
+  memcpy (dst_info->buffer + dst_offset, src_info->buffer + src_offset, length);
+
+  return 0;
+}
+
 static FILE *
 do_open(const char *filename, const char *mode)
 {
@@ -114,6 +150,7 @@ filesize(int fd)
 }
 
 static struct disassemble_info tic6x_space_at_0x11800000;
+static struct disassemble_info tic6x_space_at_0x11f00000;
 static struct disassemble_info tic6x_space_at_0xc0000000;
 
 static void
@@ -132,9 +169,11 @@ tic6x_init_section(struct disassemble_info *pinfo, void *buffer, bfd_vma vma, un
 static struct disassemble_info *
 tic6x_get_di(ais_vma vma)
 {
-	if (vma >= 0x11800000u && vma <= 0xbfffffffu)
+	if (vma >= 0x11800000u && vma <= 0x1183ffffu)
 		return &tic6x_space_at_0x11800000;
-	if (vma >= 0xc0000000u && vma <= 0xffffffffu)
+	if (vma >= 0x11f00000u && vma <= 0x11f07fffu)
+		return &tic6x_space_at_0x11f00000;
+	if (vma >= 0xc0000000u && vma <= 0xcfffffffu)
 		return &tic6x_space_at_0xc0000000;
 	return 0;
 }
@@ -163,6 +202,11 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 	bfd_byte data[DATA_MAX];
 	static SFILE sfile = {NULL, 0, 0};
 	struct disassemble_info *pinfo = tic6x_get_di(vma);
+	if (pinfo == 0) {
+		fprintf(stderr, "*** error: unable to get disassemble_info for vma 0x%08x\n", vma);
+		return;
+	}
+		
 	ais_vma vmamax = pinfo->buffer_vma + pinfo->buffer_length;
 	ais_vma vmaend = vma + section_size;
 	if (vmaend > vmamax)
@@ -171,11 +215,11 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 	pinfo->stream = &sfile;
 	while (vma < vmaend && vma >= pinfo->buffer_vma) {
 		int i;
-        int bytes_used;
-        sfile.pos = 0;
-        bytes_used = (tic6x_print_func)(vma, pinfo);
+		int bytes_used;
+		sfile.pos = 0;
+		bytes_used = (tic6x_print_func)(vma, pinfo);
 		if (bytes_used <= 0) {
-        	fprintf(stderr, "*** error: read %d bytes, broke down at 0x%08x\n", bytes_used, vma);
+			fprintf(stderr, "*** error: read %d bytes, broke down at 0x%08x\n", bytes_used, vma);
 			break;
 		}
 		printf("%08x ", vma);
@@ -192,13 +236,38 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 	}
 }
 
+static void
+zoom_copy_init_table(ais_vma vma)
+{
+	uint32_t size;
+	struct disassemble_info *di = tic6x_get_di(vma);
+
+	fprintf(stderr, "processing Zoom copy table @0x%08x\n", vma);
+	
+	buffer_read_memory(vma, (bfd_byte *)&size, sizeof(uint32_t), di);
+	while (size != 0) {
+		uint32_t dst_vma = 0;
+		struct disassemble_info *dst_di = NULL;
+		buffer_read_memory(vma + 4, (bfd_byte *)&dst_vma, sizeof(uint32_t), di);
+		dst_di = tic6x_get_di(dst_vma);
+		if (dst_di == 0) {
+			fprintf(stderr, "*** error: entry @%08x unable to get disassembe_info for vma %08x\n", vma, dst_vma);
+			continue;
+		}
+		fprintf(stderr, "processing copy table entry @0x%08x : copy 0x%x bytes from 0x%08x to 0x%08x\n", vma, size, vma + 8, dst_vma);
+		buffer_copy_memory(vma + 8, dst_vma, size, di, dst_di);
+		vma = (vma + size + 0xf) & 0xfffffff8;
+		buffer_read_memory(vma, (bfd_byte *)&size, sizeof(uint32_t), di);
+	}
+}
+
 #define SYMBOL_MAX 64
 #define TOKEN_MAX 10
 static void
 do_dump()
 {
 	int nl = 0;
-	void *tic6x_mem_0x11800000, *tic6x_mem_0xc0000000;
+	void *tic6x_mem_0x11800000, *tic6x_mem_0x11f00000, *tic6x_mem_0xc0000000;
 	ais_vma addr;
 	char line[LINE_MAX];
 	char symbol[SYMBOL_MAX + 1];
@@ -206,6 +275,13 @@ do_dump()
 
 	tic6x_mem_0x11800000 = mmap(0, 0x00040000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
 	if (tic6x_mem_0x11800000 == MAP_FAILED) {
+		perror("Error mmapping dsp adress space");
+		exit(EXIT_FAILURE);
+	}
+	fprintf(stderr, "tic6x space 0x11800000 mapped @ %p\n", tic6x_mem_0x11800000);
+
+	tic6x_mem_0x11f00000 = mmap(0, 0x00008000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
+	if (tic6x_mem_0x11f00000 == MAP_FAILED) {
 		perror("Error mmapping dsp adress space");
 		exit(EXIT_FAILURE);
 	}
@@ -219,9 +295,11 @@ do_dump()
 	fprintf(stderr, "tic6x space 0xc0000000 mapped @ %p\n", tic6x_mem_0xc0000000);
 
 	tic6x_init_section (&tic6x_space_at_0x11800000, tic6x_mem_0x11800000, 0x11800000, 0x00040000);
+	tic6x_init_section (&tic6x_space_at_0x11f00000, tic6x_mem_0x11f00000, 0x11f00000, 0x00008000);
 	tic6x_init_section (&tic6x_space_at_0xc0000000, tic6x_mem_0xc0000000, 0xc0000000, 0x00200000);
 
 	aisread(config_data.buffer, config_data.bufsize, tic6x_section_load_callback);
+	zoom_copy_init_table(0xc00c9470);
 	while (fgets(line, LINE_MAX, config_data.cmd_file)) {
 		int n = 0;
 		nl++;
