@@ -10,16 +10,13 @@ function leave()
 	do_leave = 0;
 	about_to_leave = 0;
 	enter();
-	might_leave = 0;
 }
 
 function enter()
 {
-	if (/^;/ || /nop / || /<fetch /) return ;
-	if (! /\|\|/ ) {
-		if (do_leave)
-			leave();
-	}
+	if ((/^;/ || /nop / || /<fetch /) && ! /ld.* \|\| nop/) return ;
+	if (do_leave)
+		leave();
 	if (is_in) return;
 	print ";------------------------------------------";
 	print "; Fragment start";
@@ -30,7 +27,7 @@ function enter()
 function xref_mvk(reg)
 {
 	if (msb[reg] != "" && lsb[reg] != "") {
-		xref = sprintf("0x%s%s", msb[reg], lsb[reg]);
+		xref = sprintf("0x%04s%04s", msb[reg], lsb[reg]);
 		msb[reg] = "";
 		lsb[reg] = "";
 	}
@@ -53,13 +50,7 @@ function format_word()
 	}
 }
 
-/bnop .S2 b3,/ {
-	seen_ret = 1;
-	ep = gensub(/.*b3,([0-9]+).*/, "\\1", "g", $0);
-}
-
 /addk \.S[12] [0-9]+,b15/ {
-	enter();
 	if (about_to_leave) {
 		do_leave = 1;
 	} else {
@@ -68,12 +59,20 @@ function format_word()
 }
 
 /callp .*,a3/ {
-	enter();
 	if (about_to_leave) {
 		do_leave = 1;
 	} else {
 		about_to_leave = 1;
 	}
+}
+
+/[^]] bnop .S2 b3,/ {
+	seen_ret = 1;
+	ep = gensub(/.*b3,([0-9]+).*/, "\\1", "g", $0);
+}
+
+/b .S2 irp/ {
+	seen_ret = 1;
 }
 
 / nop [0-9]+/ {
@@ -82,7 +81,7 @@ function format_word()
 	}
 }
 
-! /^;/ && ! /\|\|/ && ! /<fetch/ {
+! /^;/ && ! /\|\|/ && ! /<fetch/ && ! / nop [0-9]+/ && ! / bnop / || / ld.* \|\| nop/  {
 	if (seen_ret) {
 		ep++ ;
 	}
@@ -90,12 +89,6 @@ function format_word()
 
 /addk? \.[LSD][12] -[0-9]+,b15/ {
 	about_to_leave = 0;
-}
-
-/,\*b15--\([0-9]+\)/ || /callp .*,a3/ {
-	if (might_leave) {
-		leave();
-	}
 }
 
 /,\*b15--\([0-9]+\)/ || /addk? \.[LSD][12] -[0-9]+,b15/ {
@@ -114,12 +107,11 @@ function format_word()
 }
 
 /*\+\+b15\([0-9]+\),/ {
-	might_leave = 1;
 	x = gensub(/.*b15\(([0-9]+)\).*/, "\\1", "g", $0);
 	if (x == x + 0) pushed -= x
 }
 
-/ b .S2 b3/ {
+/[^]] b .S2X? b3/ {
 	seen_ret = 1;
 	ep = 0;
 }
@@ -151,7 +143,7 @@ function format_word()
 	}
 	if (length(word) > 4) {
 		word = substr(word, length(word) - 3, 4);
-	} 
+	}
 	msb[areg] = word
 #	printf "\t\t\t; mvkh word [%s] = %s", areg, word;
 	xref_mvk(areg);
