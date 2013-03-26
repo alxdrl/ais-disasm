@@ -7938,7 +7938,7 @@ define 0xc005f478 loc_c005f478
 define 0xc005f484 loc_c005f484
 define 0xc005f48c loc_c005f48c
 define 0xc005f498 loc_c005f498
-define 0xc005f4a0 f_c005f4a0
+define 0xc005f4a0 loc_c005f4a0
 define 0xc005f4a4 loc_c005f4a4
 define 0xc005f4c0 f_c005f4c0
 define 0xc005f54c loc_c005f54c
