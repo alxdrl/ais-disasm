@@ -10,7 +10,8 @@ BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 		cycles = 1;
 	}
 	if (ep > 5) {
-		printf "E%d; JUMP\n", ep
+		printf "E%d\n", ep
+		print ";======================================";
 		ep = -1;
 		cycles = 1;
 		if (!just_entered)
@@ -34,7 +35,7 @@ BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 		printf "E%d; JUMP\n", ep
 		cycles = 1;
 	}
-	if (!inside) {
+	if (inside) {
 		ep = 0;
 		cycles += 5;
 	}
@@ -47,8 +48,8 @@ BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 
 {
 	if (!inside && ! / nop /) {
-		print ";======================================";
-		print "; Boundary";
+		print ";--------------------------------------";
+		print "; Fragment start ";
 		print ";"
 		inside = 1;
 		just_entered = 1;
