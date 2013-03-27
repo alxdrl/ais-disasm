@@ -1,9 +1,5 @@
-#include <stdint.h>
-
 #include "ais-print.h"
 #include "hashtab.h"
-
-typedef uint32_t ais_vma;
 
 extern hashtab_t *s_table;
 
@@ -49,7 +45,7 @@ tic6x_section_print_word(bfd_vma addr, struct disassemble_info *info)
 		(*info->fprintf_func) (info->stream, ".word 0x%08x", word);
 	} else {
 		(*info->fprintf_func) (info->stream, ".word %s", sym);
-	} 
+	}
 	return 4;
 }
 

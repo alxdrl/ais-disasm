@@ -189,12 +189,48 @@ tic6x_section_load_callback(ais_opcode_info *info)
 	memcpy(dst, src, info->section_load.size);
 }
 
+typedef struct {
+	uint32_t val;
+	unsigned int lsb:1;
+	unsigned int msb:1;
+} tic6x_reg_t;
+
+static tic6x_reg_t regs[2][32];
+
+static int
+gather_xref(char *s, char *xref)
+{
+	intmax_t val;
+	int regnum;
+	int idx;
+	char regfile[2];
+	xref[0] = 0;
+	if (sscanf(s, "%*[][ab012|m !]vk .%*[LSD]%*[12] %jd,%[ab]%d", &val, regfile, &regnum) == 3) {
+		idx = regfile[0] - 'a';
+		regs[idx][regnum].val = (int32_t)val;
+	//	sprintf(xref, "%s%d = 0x%x", regfile, regnum, regs[idx][regnum].val);
+	//	return 1;
+	} else if (sscanf(s, "%*[][ab012|m !]vkh .%*[LSD]%*[12] %jd,%[ab]%d", &val, regfile, &regnum) == 3) {
+		idx = regfile[0] - 'a';
+		regs[idx][regnum].val = (regs[idx][regnum].val & 0x0000ffff) | (uint32_t)val;
+		char *symbol = tic6x_get_symbol(regs[idx][regnum].val);
+		if (symbol) {
+			sprintf(xref, "%s%d = %s [xref]", regfile, regnum, symbol);
+		} else {
+			sprintf(xref, "%s%d = 0x%08x", regfile, regnum, regs[idx][regnum].val);
+		}
+		return 1;
+	}
+	return 0;
+}
+
 #define XSTR(s) STR(s)
 #define STR(s) #s
 #define FMTNS(s) "%" XSTR(s##_MAX) "s"
 #define FMTNSPR(s) "%-" XSTR(s##_MAX) "s"
 #define DATA_MAX 8
 #define LABEL_MAX 20
+#define MIN(a,b) ((a)<(b)?(a):(b))
 static void
 tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype tic6x_print_func)
 {
@@ -206,7 +242,7 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 		fprintf(stderr, "*** error: unable to get disassemble_info for vma 0x%08x\n", vma);
 		return;
 	}
-		
+
 	ais_vma vmamax = pinfo->buffer_vma + pinfo->buffer_length;
 	ais_vma vmaend = vma + section_size;
 	if (vmaend > vmamax)
@@ -216,6 +252,7 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 	while (vma < vmaend && vma >= pinfo->buffer_vma) {
 		int i;
 		int bytes_used;
+		char xref[64];
 		sfile.pos = 0;
 		bytes_used = (tic6x_print_func)(vma, pinfo);
 		if (bytes_used <= 0) {
@@ -223,7 +260,7 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 			break;
 		}
 		printf("%08x ", vma);
-		buffer_read_memory(vma, data, (bytes_used < DATA_MAX ? bytes_used : DATA_MAX) , pinfo);
+		buffer_read_memory(vma, data, MIN(bytes_used, DATA_MAX) , pinfo);
 		for (i = 0 ; i < DATA_MAX ; i++) {
 			if (i < bytes_used)
 				printf("%02x", data[i]);
@@ -231,8 +268,11 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 				printf("  ");
 		}
 		tic6x_print_label(vma, label);
-	    printf(" "FMTNSPR(LABEL) "%s\n", label , sfile.buffer);
-        vma += bytes_used;
+		printf(" "FMTNSPR(LABEL) "%s", label , sfile.buffer);
+		if (gather_xref(sfile.buffer, xref))
+			printf("\t\t\t; %s", xref);
+		fputc('\n', stdout);
+		vma += bytes_used;
 	}
 }
 
@@ -243,7 +283,7 @@ zoom_copy_init_table(ais_vma vma)
 	struct disassemble_info *di = tic6x_get_di(vma);
 
 	fprintf(stderr, "processing Zoom copy table @0x%08x\n", vma);
-	
+
 	buffer_read_memory(vma, (bfd_byte *)&size, sizeof(uint32_t), di);
 	while (size != 0) {
 		uint32_t dst_vma = 0;
