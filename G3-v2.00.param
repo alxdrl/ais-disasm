@@ -546,6 +546,7 @@ define 0x62000000 EMIFA_ASYDATA_CS3
 define 0x64000000 EMIFA_ASYDATA_CS4
 define 0x66000000 EMIFA_ASYDATA_CS5
 define 0x68000000 EMIFA_CONTROL_REGS
+define 0xG3-v2.00.asm 221238.000000000
 define 0xb0000000 EMIFB_CONTROL_REGS
 define 0xc0000000 f_c0000000
 define 0xc0000010 loc_c0000010
@@ -4593,7 +4594,7 @@ define 0xc002ce8c loc_c002ce8c
 define 0xc002ce9c loc_c002ce9c
 define 0xc002cea0 loc_c002cea0
 define 0xc002cfcf lbl_c002cfcf
-define 0xc002d420 f_c002d420
+define 0xc002d420 do_nothing_d420
 define 0xc002d42e f_c002d42e
 define 0xc002d448 f_c002d448
 define 0xc002d458 f_c002d458
@@ -4944,7 +4945,7 @@ define 0xc00334e2 lbl_c00334e2
 define 0xc00334e8 lbl_c00334e8
 define 0xc00334ec loc_c00334ec
 define 0xc00335ac f_c00335ac
-define 0xc00335c0 f_c00335c0
+define 0xc00335c0 clear_dw_c00c8cfc
 define 0xc00335d0 f_c00335d0
 define 0xc0033600 f_c0033600
 define 0xc0033628 loc_c0033628
@@ -4955,7 +4956,7 @@ define 0xc0033698 loc_c0033698
 define 0xc00336b0 f_c00336b0
 define 0xc0033700 loc_c0033700
 define 0xc0033710 loc_c0033710
-define 0xc0033714 f_c0033714
+define 0xc0033714 set_c00c8d10_to_1
 define 0xc0033728 f_c0033728
 define 0xc0033740 loc_c0033740
 define 0xc0033744 loc_c0033744
@@ -4966,13 +4967,13 @@ define 0xc0033818 loc_c0033818
 define 0xc0033820 f_c0033820
 define 0xc0033868 f_c0033868
 define 0xc00338b4 f_c00338b4
-define 0xc00338c4 f_c00338c4
+define 0xc00338c4 dword_at_c00c8d10
 define 0xc00338d0 f_c00338d0
 define 0xc003391a loc_c003391a
 define 0xc0033920 loc_c0033920
 define 0xc0033924 f_c0033924
 define 0xc0033990 f_c0033990
-define 0xc00339d4 f_c00339d4
+define 0xc00339d4 copy_dw_c00c8cfc_to_c00c8cf8
 define 0xc00339ec f_c00339ec
 define 0xc0033a10 f_c0033a10
 define 0xc0033a74 f_c0033a74
@@ -9654,7 +9655,7 @@ define 0xc00c3e60 lbl_c00c3e60
 define 0xc00c3e64 lbl_c00c3e64
 define 0xc00c3e68 lbl_c00c3e68
 define 0xc00c3e6c lbl_c00c3e6c
-define 0xc00c3e70 lbl_c00c3e70
+define 0xc00c3e70 dw_parm_recgain
 define 0xc00c3e74 lbl_c00c3e74
 define 0xc00c3e78 lbl_c00c3e78
 define 0xc00c3e7c lbl_c00c3e7c

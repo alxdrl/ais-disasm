@@ -3,7 +3,7 @@
 function xref_mvk(reg)
 {
 	if (msb[reg] != "" && lsb[reg] != "") {
-		xref = sprintf("0x%4s%4s", msb[reg], lsb[reg]);
+		xref = sprintf("0x%s",  msb[reg] lsb[reg]);
 		msb[reg] = "";
 		lsb[reg] = "";
 	}
@@ -40,14 +40,13 @@ function format_word()
 	if (length(word) > 4) {
 		word = substr(word, length(word) - 3, 4);
 	}
-	msb[areg] = word
+	word = "000" word
+	msb[areg] = substr(word, length(word) - 3, 4);
 	xref_mvk(areg);
 }
 
 {
   printf "%s", $0
-  if (xref != "") { printf "\t\t\t; %s=%s [xref]", areg, xref ; }
+  if (xref != "") { printf "\t\t\t; %s = %s [xref]", areg, xref ; }
   printf "\n";
 }
-
-
