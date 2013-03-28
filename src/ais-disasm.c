@@ -229,7 +229,7 @@ gather_xref(char *s, char *xref)
 #define FMTNS(s) "%" XSTR(s##_MAX) "s"
 #define FMTNSPR(s) "%-" XSTR(s##_MAX) "s"
 #define DATA_MAX 8
-#define LABEL_MAX 20
+#define LABEL_MAX 40
 #define MIN(a,b) ((a)<(b)?(a):(b))
 static void
 tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype tic6x_print_func)
@@ -292,13 +292,15 @@ zoom_copy_init_table(ais_vma vma)
 		dst_di = tic6x_get_di(dst_vma);
 		if (dst_di == 0) {
 			fprintf(stderr, "*** error: entry @%08x unable to get disassembe_info for vma %08x\n", vma, dst_vma);
-			continue;
+			exit(EXIT_FAILURE);
 		}
-		fprintf(stderr, "processing copy table entry @0x%08x : copy 0x%x bytes from 0x%08x to 0x%08x\n", vma, size, vma + 8, dst_vma);
+		//fprintf(stderr, "processing copy table entry @0x%08x : copy 0x%x bytes from 0x%08x to 0x%08x\n", vma, size, vma + 8, dst_vma);
+		fputc('.', stderr);
 		buffer_copy_memory(vma + 8, dst_vma, size, di, dst_di);
 		vma = (vma + size + 0xf) & 0xfffffff8;
 		buffer_read_memory(vma, (bfd_byte *)&size, sizeof(uint32_t), di);
 	}
+	fprintf(stderr, "done\n");
 }
 
 #define SYMBOL_MAX 64
@@ -368,6 +370,8 @@ do_dump()
 						print_func = tic6x_section_print_string;
 					} else if (strcmp("word", token) == 0) {
 						print_func = tic6x_section_print_word;
+					} else if (strcmp("mixed", token) == 0) {
+						print_func = tic6x_section_print_mixed;
 					} else if (strcmp("code", token) == 0) {
 						print_func = print_insn_tic6x;
 					} else {

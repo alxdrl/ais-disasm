@@ -21,7 +21,7 @@ BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 		just_entered = 0;
 }
 
-/[^]] b .S2 b3$/ {
+/[^]] b .S2 b3$/ || / b .S2 irp$/ {
 	ep = 0;
 }
 
