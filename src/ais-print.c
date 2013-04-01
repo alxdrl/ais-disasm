@@ -109,7 +109,7 @@ tic6x_section_print_mixed(bfd_vma addr, struct disassemble_info *info)
 {
     bfd_byte str[MAX_STR + 1];
     int printable = 1;
-    int offset = 0 ;
+    off_t offset = 0 ;
     int d = 0;
     int i;
 
@@ -121,13 +121,13 @@ tic6x_section_print_mixed(bfd_vma addr, struct disassemble_info *info)
 
     for (offset = 0 ; offset < 3 ; offset++) {
 	printable = 1;
-        for (i = offset ; i < offset + strlen(str + offset) ; i++) {
+        for (i = offset ; i < offset + strlen((char *)(str + offset)) ; i++) {
             if ((str[i] < 32 || str[i] > 126) && str[i] != '\n' && str[i] != '\t' && str[i] != '\r') {
                 printable = 0;
                 break;
 	    }
         }
-    	if (printable && strlen(str + offset) > 1) {
+    	if (printable && strlen((char *)(str + offset)) > 1) {
 		switch (offset) {
 		case 0:
 			return tic6x_section_print_string(addr, info);
