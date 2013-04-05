@@ -25,7 +25,7 @@ BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 	ep = 0;
 }
 
-/[^]] bnop .S2 b3,/ {
+/[^]] bnop .S2 b[83],/ {
 	ep = 0;
         cycles += gensub(/.*b3,([0-9]+).*/, "\\1", "g", $0);
 }

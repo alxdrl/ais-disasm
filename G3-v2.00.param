@@ -71,7 +71,9 @@ define 0x01e20000 EMAC_CONTROL_MODULE_RAM
 define 0x01e22000 EMAC_CONTROL_MODULE_REGS
 define 0x01e23000 EMAC_CONTROL_REGS
 define 0x01e24000 EMAC_MDIO
-define 0x01e24184 XXXXXXXXX
+# hack
+define 0x01e24184 PSC1_PTSTAT
+# hack
 define 0x01e26000 GPIO
 define 0x01e27000 PSC1
 define 0x01e27120 PSC1_PTCMD
@@ -420,8 +422,8 @@ define 0x118154a4 f_118154a4
 define 0x118154e4 loc_118154e4
 define 0x118154ec f_118154ec
 define 0x11815528 loc_11815528
-define 0x11815530 f_11815530
-define 0x11815568 f_11815568
+define 0x11815530 f_io_pin_sel_SPI0_SCS[0]
+define 0x11815568 f_io_pin_sel_and_high_GP5[4]
 define 0x118155c0 f_118155c0
 define 0x118155cc loc_118155cc
 define 0x118155f6 loc_118155f6
@@ -432,9 +434,9 @@ define 0x118156d8 loc_118156d8
 define 0x118156f0 loc_118156f0
 define 0x11815710 loc_11815710
 define 0x1181573a loc_1181573a
-define 0x11815760 f_11815760
-define 0x11815774 f_11815774
-define 0x118157a4 f_118157a4
+define 0x11815760 f_mem_EMIFB_low_power
+define 0x11815774 f_mem_EMIFB_set_timing
+define 0x118157a4 f_mem_EMIFB_set_pins
 define 0x118157e8 f_118157e8
 define 0x11815824 loc_11815824
 define 0x11815844 loc_11815844
@@ -522,7 +524,7 @@ define 0x118192d8 w_PSC0_base
 define 0x118192dc w_PSC1_base
 define 0x118192e0 w_EMIFBCTL_base_e0
 define 0x118192e4 w_EMIFBCTL_base_e4
-define 0x118192e8 lbl_118192e8
+define 0x118192e8 arr_w_GPIO_BK45_pin_number
 define 0x118192f4 w_EDMA3_base_f4
 define 0x118192f8 w_EDMA3CC_SR1_base
 define 0x118192fc w_GPIO_base
@@ -568,10 +570,12 @@ define 0x11819a34 loc_11819a34
 define 0x11819a60 stub_call_c0064900_2
 define 0x11819a80 stub_call_c005e6e0
 define 0x11819aa0 stub_call_c0063d20_2
-define 0x1181e800 screen_buffer_0
-define 0x1181ec00 screen_buffer_1
-define 0x1181f000 screen_buffer_2
-define 0x1181f400 lbl_1181f400
+define 0x1181e800 scrbuf_a
+define 0x1181ec00 scrbuf_a[1]
+define 0x1181f000 scrbuf_a[2]
+define 0x1181f400 scrbuf_b
+define 0x1181f800 scrbuf_b[1]
+define 0x1181fc00 scrbuf_b[2]
 define 0x11f00000 L1DRAM
 define 0x11f00140 L1DRAM_0x0140
 define 0x11f00620 L1DRAM_0x0620
@@ -1418,12 +1422,12 @@ define 0xc0008e30 f_c0008e30
 define 0xc0008e78 loc_c0008e78
 define 0xc0008ee2 loc_c0008ee2
 define 0xc0008ee8 f_c0008ee8
-define 0xc0008f74 f_c0008f74
+define 0xc0008f74 f_USB0_reset
 define 0xc0008fb8 f_c0008fb8
 define 0xc0009076 loc_c0009076
 define 0xc0009078 f_c0009078
 define 0xc00090a0 loc_c00090a0
-define 0xc00090ac f_c00090ac
+define 0xc00090ac __returns_0_90ac
 define 0xc00090b0 f_c00090b0
 define 0xc00090e0 loc_c00090e0
 define 0xc00090e8 loc_c00090e8
@@ -1592,7 +1596,7 @@ define 0xc000a51a loc_c000a51a
 define 0xc000a524 __returns_0_a524
 define 0xc000a528 f_get_SYSCFG_base
 define 0xc000a534 f_c000a534
-define 0xc000a564 USB0_enable
+define 0xc000a564 f_USB0_enable
 define 0xc000a622 loc_c000a622
 define 0xc000a624 __returns_0_a624
 define 0xc000a628 f_c000a628
@@ -6935,7 +6939,7 @@ define 0xc0051f40 f_c0051f40
 define 0xc0051fb4 loc_c0051fb4
 define 0xc0052054 loc_c0052054
 define 0xc005206a loc_c005206a
-define 0xc00520a8 USB0_queue_init
+define 0xc00520a8 f_USB0_queue_init
 define 0xc005214c loc_c005214c
 define 0xc00521ac f_c00521ac
 define 0xc0052208 f_c0052208
@@ -8433,8 +8437,8 @@ define 0xc0064980 __plus_1_4980
 define 0xc00649a0 __zero_49a0
 define 0xc00649c0 __plus_1_49c0
 define 0xc00649e0 f_get_field_w_0
-define 0xc0064a00 f_get_field_h_12:
-define 0xc0064a20 f_c0064a20
+define 0xc0064a00 f_get_field_h_12
+define 0xc0064a20 f_get_w_c00b3fe0
 define 0xc0064a40 __minus_1
 define 0xc0064a60 f_c0064a60
 define 0xc0064a80 f_c0064a80
