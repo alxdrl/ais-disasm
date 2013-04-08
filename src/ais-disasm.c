@@ -6,6 +6,7 @@
 #include <errno.h>
 #include <getopt.h>
 #include <sys/mman.h>
+#include <arpa/inet.h>
 
 #include "ais.h"
 #include "ais-print.h"
@@ -217,7 +218,11 @@ gather_xref(char *s, char *xref)
 		if (symbol) {
 			sprintf(xref, "%s%d = %s [xref]", regfile, regnum, symbol);
 		} else {
-			sprintf(xref, "%s%d = 0x%08x", regfile, regnum, regs[idx][regnum].val);
+			float fval = *(float *)&(regs[idx][regnum].val);
+			if (fval > 1e-12)
+				sprintf(xref, "%s%d = 0x%08x / %e", regfile, regnum, regs[idx][regnum].val, fval);
+			else
+				sprintf(xref, "%s%d = 0x%08x", regfile, regnum, regs[idx][regnum].val);
 		}
 		return 1;
 	}
