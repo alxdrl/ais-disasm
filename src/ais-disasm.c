@@ -225,6 +225,20 @@ gather_xref(char *s, char *xref)
 				sprintf(xref, "%s%d = 0x%08x", regfile, regnum, regs[idx][regnum].val);
 		}
 		return 1;
+	} else {
+		char *b14 = strstr(s, "b14(");
+		char *symbol = NULL;
+		if (b14 != NULL) {
+			if (sscanf(b14, "b14(%jd)", &val) == 1) {
+				uint32_t addr = val + 0xc00d7b98;
+				symbol = tic6x_get_symbol(addr);
+				if (symbol) 
+					sprintf(xref, "%s [xref]", symbol);
+				else
+					sprintf(xref, "0x%08x", addr);
+				return 1;
+			}
+		}		
 	}
 	return 0;
 }
@@ -441,6 +455,10 @@ main(int argc, char **argv)
 	fprintf(stderr, "file mapped @ %p\n", config_data.buffer);
 
 	do_dump();
+
+	int des = open("./c0000000.bin", O_CREAT | O_WRONLY);
+	write(des, tic6x_space_at_0xc0000000.buffer, tic6x_space_at_0xc0000000.buffer_length);
+	perror("error\n");
 
 	if (munmap(config_data.buffer, config_data.bufsize) == -1) {
 		perror("unable to unmap file");
