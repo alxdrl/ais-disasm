@@ -387,6 +387,10 @@ do_dump()
 				if (n == 3) {
 					if (strcmp("string", token) == 0) {
 						print_func = tic6x_section_print_string;
+					} else if (strcmp("byte", token) == 0) {
+						print_func = tic6x_section_print_byte;
+					} else if (strcmp("short", token) == 0) {
+						print_func = tic6x_section_print_short;
 					} else if (strcmp("word", token) == 0) {
 						print_func = tic6x_section_print_word;
 					} else if (strcmp("mixed", token) == 0) {
