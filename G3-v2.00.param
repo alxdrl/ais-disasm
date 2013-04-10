@@ -201,14 +201,14 @@ define 0x11812ba0 f_11812ba0
 define 0x11812c20 f_11812c20
 define 0x11812c60 lbl_11812c60
 define 0x11812c74 loc_11812c74
-define 0x11812c80 stub_call_c0064b80
+define 0x11812c80 __intsp_stub
 define 0x11812ca0 stub_call_c0048c18
 define 0x11812cc0 stub_call_c0048be4
 define 0x11812ce0 stub_call_c005f760_1
 define 0x11812d00 stub_call_c005d220_1
-define 0x11812d20 stub_call_c0064740_1
-define 0x11812d40 stub_call_c0064760_1
-define 0x11812d60 stub_call_fdiv
+define 0x11812d20 __epilog_64740_stub_1
+define 0x11812d40 __prolog_64760_stub_1
+define 0x11812d60 __fdiv_stub
 define 0x11812d80 f_11812d80
 define 0x11812da0 loc_11812da0
 define 0x11812db4 loc_11812db4
@@ -327,11 +327,11 @@ define 0x118140a0 loc_118140a0
 define 0x118140b0 loc_118140b0
 define 0x118140e0 loc_118140e0
 define 0x118140f0 loc_118140f0
-define 0x11814180 module_enable_psc0
+define 0x11814180 f_module_enable_psc0
 define 0x118141e4 loc_118141e4
 define 0x11814220 loc_11814220
 define 0x11814234 loc_11814234
-define 0x11814240 module_enable_psc1
+define 0x11814240 f_module_enable_psc1
 define 0x118142b0 loc_118142b0
 define 0x118142f0 loc_118142f0
 define 0x1181430c loc_1181430c
@@ -345,9 +345,9 @@ define 0x118143f6 loc_118143f6
 define 0x11814408 loc_11814408
 define 0x11814452 loc_11814452
 define 0x11814464 loc_11814464
-define 0x11814490 kick_it
-define 0x118144ec module_enable_all
-define 0x118145e0 pinmux_init
+define 0x11814490 f_kick_it
+define 0x118144ec f_module_enable_all
+define 0x118145e0 f_pinmux_init
 define 0x118147cc f_118147cc
 define 0x11814880 f_11814880
 define 0x11814a3a loc_11814a3a
@@ -422,8 +422,8 @@ define 0x118154a4 f_118154a4
 define 0x118154e4 loc_118154e4
 define 0x118154ec f_118154ec
 define 0x11815528 loc_11815528
-define 0x11815530 f_io_pin_sel_SPI0_SCS[0]
-define 0x11815568 f_io_pin_sel_and_high_GP5[4]
+define 0x11815530 f_pinmux_SPI0_SCS[0]
+define 0x11815568 f_pinmux_GP5[4]
 define 0x118155c0 f_118155c0
 define 0x118155cc loc_118155cc
 define 0x118155f6 loc_118155f6
@@ -461,20 +461,20 @@ define 0x11815ae0 stub_call_c00388b4
 define 0x11815b00 stub_call_c003892c
 define 0x11815b20 stub_call_c001d718
 define 0x11815b40 stub_call_c001d7a0
-define 0x11815b60 stub_call_c0060780
+define 0x11815b60 __remi_stub
 define 0x11815b80 stub_call_c001d3a8
-define 0x11815ba0 stub_call_c0061540
+define 0x11815ba0 __remu_stub
 define 0x11815bc0 stub_call_c001d060
 define 0x11815be0 stub_call_c00528b8
-define 0x11815c00 stub_call_c005f4c0
+define 0x11815c00 __divi_stub
 define 0x11815c20 stub_call_c005f760_2
 define 0x11815c40 stub_call_c00392c8
 define 0x11815c60 stub_call_c002dbe8
 define 0x11815c80 stub_call_c005624c
 define 0x11815ca0 stub_call_c0051204
 define 0x11815cc0 stub_call_c005284c
-define 0x11815ce0 stub_call_c00041ec
-define 0x11815d00 stub_call_c00031b4
+define 0x11815ce0 f_draw_string_h11_stub
+define 0x11815d00 f_do_draw_xor_box_stub
 define 0x11815d20 stub_call_c0019024
 define 0x11815d40 stub_call_c00648c0
 define 0x11815d60 stub_call_c005fe60
@@ -485,22 +485,22 @@ define 0x11815de0 stub_call_c00648a0
 define 0x11815e00 stub_call_c003df68
 define 0x11815e20 stub_call_c0045208
 define 0x11815e40 stub_call_c00590a0
-define 0x11815e60 stub_call_c0064a20
+define 0x11815e60 f_get_w_c00b3fe0_stub
 define 0x11815e80 stub_call_c0055920
 define 0x11815ea0 stub_call_c005e4a0
 define 0x11815ec0 stub_call_c0063ea0
 define 0x11815ee0 stub_call_c0063120
 define 0x11815f00 stub_call_c004d8e0
 define 0x11815f20 stub_call_c0018330
-define 0x11815f40 stub_call_c0000854
+define 0x11815f40 f_draw_string_h7_stub
 define 0x11815f60 f_clear_screen_deep_stub
-define 0x11815f80 stub_call_c0064740_2
+define 0x11815f80 __epilog_64740_stub_2
 define 0x11815fa0 stub_call_c004a280
 define 0x11815fc0 stub_call_c0059234
 define 0x11815fe0 stub_call_c00591f8
-define 0x11816000 stub_call_c0059228
-define 0x11816020 stub_call_c0059218
-define 0x11816040 stub_call_c0064760_2
+define 0x11816000 f_get_w_118192d0_stub
+define 0x11816020 f_get_w_118192cc_stub
+define 0x11816040 __prolog_64760_stub_2
 define 0x11816060 lbl_11816060
 define 0x11816860 lbl_11816860
 define 0x11817060 lbl_11817060
@@ -524,7 +524,7 @@ define 0x118192d8 w_PSC0_base
 define 0x118192dc w_PSC1_base
 define 0x118192e0 w_EMIFBCTL_base_e0
 define 0x118192e4 w_EMIFBCTL_base_e4
-define 0x118192e8 arr_w_GPIO_BK45_pin_number
+define 0x118192e8 arr_w_3_GPIO_BK45_pin_number
 define 0x118192f4 w_EDMA3_base_f4
 define 0x118192f8 w_EDMA3CC_SR1_base
 define 0x118192fc w_GPIO_base
@@ -560,6 +560,7 @@ define 0x118196cc loc_118196cc
 define 0x118196e0 loc_118196e0
 define 0x11819740 stub_call_c0062440
 define 0x11819760 stub_call_c005a7e0
+define 0x11819780 f_11819780
 define 0x118197e0 f_118197e0
 define 0x11819808 loc_11819808
 define 0x11819844 f_11819844
@@ -2886,7 +2887,7 @@ define 0xc0017d76 loc_c0017d76
 define 0xc0017d80 f_c0017d80
 define 0xc0017d94 loc_c0017d94
 define 0xc0017db8 loc_c0017db8
-define 0xc0017dc4 f_c0017dc4
+define 0xc0017dc4 f_check_lcd_contrast
 define 0xc0017dd4 loc_c0017dd4
 define 0xc0017dfa loc_c0017dfa
 define 0xc0017e0c loc_c0017e0c
@@ -4775,8 +4776,8 @@ define 0xc002fb80 f_c002fb80
 define 0xc002fbc0 loc_c002fbc0
 define 0xc002fcbc loc_c002fcbc
 define 0xc002fd0c loc_c002fd0c
-define 0xc002fe04 loc_c002fe04
-define 0xc002fe20 f_c002fe20
+define 0xc002fe04 loc_exit_c002fe04
+define 0xc002fe20 loc_c002fe20
 define 0xc002ffff loc_c002ffff
 define 0xc0030000 loc_c0030000
 define 0xc0030008 loc_c0030008
@@ -6662,7 +6663,7 @@ define 0xc004d4d8 loc_c004d4d8
 define 0xc004d4ec loc_c004d4ec
 define 0xc004d4f4 loc_c004d4f4
 define 0xc004d500 loc_c004d500
-define 0xc004d520 __printfi
+define 0xc004d520 _printfi_minimal
 define 0xc004d5b0 loc_c004d5b0
 define 0xc004d5d4 loc_c004d5d4
 define 0xc004d5e4 loc_c004d5e4
@@ -7067,7 +7068,7 @@ define 0xc0053d50 loc_c0053d50
 define 0xc0053d90 loc_c0053d90
 define 0xc0053db0 loc_c0053db0
 define 0xc0053dc2 loc_c0053dc2
-define 0xc0053de0 f_c0053de0
+define 0xc0053de0 loc_c0053de0
 define 0xc0053e20 f_c0053e20
 define 0xc0053e90 loc_c0053e90
 define 0xc0053ea4 loc_c0053ea4
@@ -7311,7 +7312,7 @@ define 0xc0056b2c f_c0056b2c
 define 0xc0056b38 f_c0056b38
 define 0xc0056b40 f_c0056b40
 define 0xc0056b60 f_c0056b60
-define 0xc0056b80 f_c0056b80
+define 0xc0056b80 _pconv_e
 define 0xc0056c60 loc_c0056c60
 define 0xc0056c88 loc_c0056c88
 define 0xc0056c8c loc_c0056c8c
@@ -7555,7 +7556,7 @@ define 0xc0059ee0 loc_c0059ee0
 define 0xc0059eea loc_c0059eea
 define 0xc0059ef0 loc_c0059ef0
 define 0xc0059ef4 f_c0059ef4
-define 0xc0059f20 f_c0059f20
+define 0xc0059f20 _mcpy
 define 0xc0059f70 loc_c0059f70
 define 0xc0059fd0 loc_c0059fd0
 define 0xc005a020 loc_c005a020
@@ -7633,7 +7634,7 @@ define 0xc005afd4 f_c005afd4
 define 0xc005afe8 f_c005afe8
 define 0xc005affa loc_c005affa
 define 0xc005b000 loc_c005b000
-define 0xc005b020 f_c005b020
+define 0xc005b020 _divul
 define 0xc005b140 loc_c005b140
 define 0xc005b19c loc_c005b19c
 define 0xc005b1bc loc_c005b1bc
@@ -7686,9 +7687,9 @@ define 0xc005be40 f_c005be40
 define 0xc005be50 loc_c005be50
 define 0xc005beac loc_c005beac
 define 0xc005bec0 loc_c005bec0
-define 0xc005bec8 f_c005bec8
+define 0xc005bec8 f_arr_w_9_set
 define 0xc005bef0 loc_c005bef0
-define 0xc005bef8 f_c005bef8
+define 0xc005bef8 f_arr_w_9_clear
 define 0xc005bf48 loc_c005bf48
 define 0xc005bf50 f_c005bf50
 define 0xc005bf7a loc_c005bf7a
@@ -7824,7 +7825,7 @@ define 0xc005d73c loc_c005d73c
 define 0xc005d748 loc_c005d748
 define 0xc005d764 loc_c005d764
 define 0xc005d76c loc_c005d76c
-define 0xc005d780 loc_c005d780
+define 0xc005d780 _pproc_fflags
 define 0xc005d790 loc_c005d790
 define 0xc005d7ec loc_c005d7ec
 define 0xc005d80c loc_c005d80c
@@ -7978,7 +7979,7 @@ define 0xc005f278 f_c005f278
 define 0xc005f280 f_c005f280
 define 0xc005f2c0 f_c005f2c0
 define 0xc005f300 f_c005f300
-define 0xc005f3e0 f_c005f3e0
+define 0xc005f3e0 _div
 define 0xc005f474 loc_c005f474
 define 0xc005f478 loc_c005f478
 define 0xc005f484 loc_c005f484
@@ -8125,14 +8126,14 @@ define 0xc0060ecc loc_c0060ecc
 define 0xc0060ee4 loc_c0060ee4
 define 0xc0060f00 f_c0060f00
 define 0xc0060f28 f_c0060f28
-define 0xc0060f50 f_c0060f50
-define 0xc0060f70 f_rb_get_current_rhythm_w
-define 0xc0060f80 f_c0060f80
+define 0xc0060f50 f_get_str_rb_rhythm_name
+define 0xc0060f70 f_get_w_rb_rhythm
+define 0xc0060f80 f_get_w_rb_level
 define 0xc0060fa0 f_c0060fa0
 define 0xc0060fb4 loc_c0060fb4
 define 0xc0060fb8 f_c0060fb8
 define 0xc0060fd0 f_c0060fd0
-define 0xc0060fd8 f_c0060fd8
+define 0xc0060fd8 f_arr_w_9_do_clear_4
 define 0xc0060fec f_c0060fec
 define 0xc0060ff8 f_c0060ff8
 define 0xc0061010 f_c0061010
@@ -8148,7 +8149,7 @@ define 0xc0061138 loc_c0061138
 define 0xc006115a loc_c006115a
 define 0xc0061180 f_c0061180
 define 0xc0061220 loc_c0061220
-define 0xc00612c0 f_c00612c0
+define 0xc00612c0 _fcpy
 define 0xc0061356 loc_c0061356
 define 0xc0061360 __fixdli
 define 0xc00613e4 loc_c00613e4
@@ -8162,7 +8163,7 @@ define 0xc00615e0 __memcpy
 define 0xc0061680 f_c0061680
 define 0xc0061700 loc_c0061700
 define 0xc0061704 loc_c0061704
-define 0xc0061720 xnprintf
+define 0xc0061720 snprintf
 define 0xc00617c0 f_c00617c0
 define 0xc0061860 f_c0061860
 define 0xc0061900 f_c0061900
@@ -8213,7 +8214,7 @@ define 0xc0062140 f_c0062140
 define 0xc00621a0 loc_c00621a0
 define 0xc00621a4 f_c00621a4
 define 0xc00621b4 loc_c00621b4
-define 0xc00621c0 __ftlid
+define 0xc00621c0 __c6xabi_fltlid
 define 0xc00621fc f_c00621fc
 define 0xc0062234 loc_c0062234
 define 0xc0062240 __llshl
@@ -8293,7 +8294,7 @@ define 0xc0062eda loc_c0062eda
 define 0xc0062ee0 f_c0062ee0
 define 0xc0062f30 loc_c0062f30
 define 0xc0062f34 loc_c0062f34
-define 0xc0062f40 xprintf
+define 0xc0062f40 sprintf
 define 0xc0062fa0 f_c0062fa0
 define 0xc0062fa8 loc_c0062fa8
 define 0xc0062fda loc_c0062fda
@@ -8325,7 +8326,7 @@ define 0xc0063480 f_c0063480
 define 0xc00634e0 f_c00634e0
 define 0xc0063540 f_c0063540
 define 0xc00635a0 f_c00635a0
-define 0xc0063600 f_fdiv
+define 0xc0063600 __fdiv
 define 0xc0063660 f_c0063660
 define 0xc00636b0 loc_c00636b0
 define 0xc00636b8 loc_c00636b8
@@ -8344,14 +8345,14 @@ define 0xc0063830 f_c0063830
 define 0xc0063840 f_c0063840
 define 0xc0063860 f_c0063860
 define 0xc00638a0 ___isinf
-define 0xc00638e0 f_c00638e0
+define 0xc00638e0 __c6xabi_isnan
 define 0xc0063920 f_c0063920
 define 0xc0063960 f_c0063960
 define 0xc00639b8 loc_c00639b8
 define 0xc00639e0 _outc_639e0
 define 0xc0063a20 f_c0063a20
 define 0xc0063a60 f_c0063a60
-define 0xc0063aa0 f_c0063aa0
+define 0xc0063aa0 floor
 define 0xc0063ae0 f_c0063ae0
 define 0xc0063b0c loc_c0063b0c
 define 0xc0063b14 f_c0063b14
@@ -8414,8 +8415,8 @@ define 0xc00646c0 loc_c00646c0
 define 0xc00646e0 __negll
 define 0xc0064700 __retb3
 define 0xc0064720 _outc_64720
-define 0xc0064740 __epilog_64740
-define 0xc0064760 __prolog_64760
+define 0xc0064740 __c6xabi_pop_rts
+define 0xc0064760 __c6xabi_push_rts
 define 0xc0064780 f_set_proc_addr_c9450
 define 0xc00647a0 f_set_proc_addr_c9454
 define 0xc00647c0 f_c00647c0
@@ -8461,11 +8462,11 @@ define 0xc0064c40 stub_call_1180d990
 define 0xc0064c60 stub_call_11813080
 define 0xc0064c80 stub_call_11812fd8
 define 0xc0064ca0 stub_call_11812fbc
-define 0xc0064cc0 stub_call_118144ec
-define 0xc0064ce0 kick_it_stub
+define 0xc0064cc0 f_module_enable_all_stub
+define 0xc0064ce0 f_kick_it_stub
 define 0xc0064d00 stub_call_118195a0
-define 0xc0064d20 stub_call_11815568
-define 0xc0064d40 stub_call_11815530
+define 0xc0064d20 f_pinmux_GP5[4]_stub
+define 0xc0064d40 f_pinmux_SPI0_SCS[0]_stub
 define 0xc0064d60 stub_call_11815420
 define 0xc0064d80 stub_call_11815108
 define 0xc0064da0 stub_call_11815234
@@ -9731,7 +9732,7 @@ define 0xc0099dc0 lbl_c0099dc0
 define 0xc0099de0 lbl_c0099de0
 define 0xc0099e00 lbl_c0099e00
 define 0xc0099e20 lbl_c0099e20
-define 0xc0099e40 lbl_c0099e40
+define 0xc0099e40 arr_i_8_9e40
 define 0xc0099e60 lbl_c0099e60
 define 0xc0099e81 lbl_c0099e81
 define 0xc0099ea0 rb_rhythm_desc_3
@@ -10366,7 +10367,7 @@ define 0xc00c3e5c w_parm_light_tmout
 define 0xc00c3e60 w_parm_master_tempo
 define 0xc00c3e64 w_parm_sigpath
 define 0xc00c3e68 w_parm_battery_type
-define 0xc00c3e6c w_parm_monitor_levem
+define 0xc00c3e6c w_parm_monitor_level
 define 0xc00c3e70 w_parm_recgain
 define 0xc00c3e74 w_parm_tuner_calib
 define 0xc00c3e78 w_parm_output_type
@@ -10384,10 +10385,12 @@ define 0xc00c3ea8 lbl_c00c3ea8
 define 0xc00c3ed8 lbl_c00c3ed8
 define 0xc00c3ee4 lbl_c00c3ee4
 define 0xc00c3ee8 lbl_c00c3ee8
-define 0xc00c3f38 w_parm_lcd_contrast_left
-define 0xc00c3f3c w_parm_lcd_contrast_center
-define 0xc00c3f40 w_parm_lcd_contrast_right
-define 0xc00c3f48 lbl_c00c3f48
+define 0xc00c3f38 w_parm_lcd_contrast
+define 0xc00c3f3c w_parm_lcd_contrast[1]
+define 0xc00c3f40 w_parm_lcd_contrast[2]
+define 0xc00c3f48 w_lcd_contrast
+define 0xc00c3f4c w_lcd_contrast[1]
+define 0xc00c3f50 w_lcd_contrast[2]
 define 0xc00c3f54 parm_desc_level
 define 0xc00c3f7c parm_desc_light
 define 0xc00c3fa4 parm_desc_lcd_left
@@ -10697,8 +10700,8 @@ define 0xc00c8d84 lbl_c00c8d84
 define 0xc00c8de0 lbl_c00c8de0
 define 0xc00c8e0c lbl_c00c8e0c
 define 0xc00c8e10 lbl_c00c8e10
-define 0xc00c8e30 lbl_c00c8e30
-define 0xc00c8e58 lbl_c00c8e58
+define 0xc00c8e30 arr_w_9_c00c8e30
+define 0xc00c8e58 arr_fptr_9_c00c8e58
 define 0xc00c8e7c lbl_c00c8e7c
 define 0xc00c8ec8 lbl_c00c8ec8
 define 0xc00c8f00 lbl_c00c8f00
@@ -10788,8 +10791,8 @@ define 0xc00c944a lbl_c00c944a
 define 0xc00c944d lbl_c00c944d
 define 0xc00c9450 proc_addr_c00c9450
 define 0xc00c9454 proc_addr_c00c9454
-define 0xc00c9458 lbl_c00c9458
-define 0xc00c9460 lbl_c00c9460
+define 0xc00c9458 arr_b_4_c00c9458
+define 0xc00c9460 arr_b_3_lcd_contrast
 define 0xc00c9468 lbl_c00c9468
 define 0xc00c9469 lbl_c00c9469
 define 0xc00c9470 init_copy_table
@@ -10851,6 +10854,7 @@ define 0xc00d7b54 jump_table_c00d7b54
 define 0xc00d7b68 jump_table_c00d7b68
 define 0xc00d7b78 jump_table_c00d7b78
 define 0xc00d7b88 jump_table_c00d7b88
+define 0xc00d7bf4 lbl_c00d7bf4
 define 0xc00d7b98 lbl_c00d7b98
 define 0xc00d7c54 lbl_c00d7c54
 define 0xc00d7c58 lbl_c00d7c58
@@ -11080,8 +11084,9 @@ print region 0xc009a740,  0x013c as	word
 print region 0xc00b3a70,  0xdd0 as word
 print region 0xc00b4840,  0x14c30 as	word
 #print region 0xc00c9470,  0xc318 as	word
-print region 0xc00d5788,  0x0068 as	string
-print region 0xc00d57f0,  0x2010 as	word
+#print region 0xc00d5788,  0x0068 as	string
+#print region 0xc00d57f0,  0x2010 as	word
+print region 0xc00d745c,  0x3a4 as word
 print region 0xc00d7800,  0x200	 as 	code
 print region 0xc00d7a00,  0x838	 as 	word
 print region 0xc0110000, 0x60b4 as	short
