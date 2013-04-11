@@ -4414,7 +4414,7 @@ define 0xc002a0b4 loc_c002a0b4
 define 0xc002a0c8 loc_c002a0c8
 define 0xc002a0d0 f_c002a0d0
 define 0xc002a0e8 f_c002a0e8
-define 0xc002a120 f_c002a120
+define 0xc002a120 __printf_whatnot
 define 0xc002a170 loc_c002a170
 define 0xc002a280 loc_c002a280
 define 0xc002a28c loc_c002a28c
@@ -5993,7 +5993,7 @@ define 0xc0041b40 loc_c0041b40
 define 0xc0041b60 loc_c0041b60
 define 0xc0041b70 loc_c0041b70
 define 0xc0041b74 loc_c0041b74
-define 0xc0041b80 f_c0041b80
+define 0xc0041b80 f_get_fx_face_desc
 define 0xc0041b98 loc_c0041b98
 define 0xc0041bd6 loc_c0041bd6
 define 0xc0041bf0 loc_c0041bf0
@@ -8302,7 +8302,7 @@ define 0xc0062fe0 loc_c0062fe0
 define 0xc0063000 f_c0063000
 define 0xc0063038 loc_c0063038
 define 0xc0063054 loc_c0063054
-define 0xc0063060 f_c0063060
+define 0xc0063060 _ti_sysbios_family_c64p_Cache_setSize__E
 define 0xc00630c0 f_c00630c0
 define 0xc0063120 f_c0063120
 define 0xc0063160 loc_c0063160
@@ -8395,8 +8395,8 @@ define 0xc0064260 f_c0064260
 define 0xc00642a0 f_c00642a0
 define 0xc00642c8 loc_c00642c8
 define 0xc00642e0 f_c00642e0
-define 0xc0064320 f_c0064320
-define 0xc0064360 f_c0064360
+define 0xc0064320 __printf_whatnot_stub_64320
+define 0xc0064360 __printf_whatnot_stub_64360
 define 0xc00643a0 f_c00643a0
 define 0xc00643e0 f_c00643e0
 define 0xc0064420 loc_c0064420
@@ -8473,7 +8473,7 @@ define 0xc0064da0 stub_call_11815234
 define 0xc0064dc0 stub_call_11814fe0
 define 0xc0064de0 stub_call_11812c60
 define 0xc0064e00 stub_call_11814880
-define 0xc0064e20 loc_c0064e20
+define 0xc0064e20 fx_face_desc_table
 define 0xc0069398 lbl_c0069398
 define 0xc0069399 str_err_uninitialized
 define 0xc00695b6 str_err_badThrdTypeClk
