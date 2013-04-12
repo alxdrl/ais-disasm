@@ -8086,7 +8086,7 @@ define 0xc005eba4 loc_c005eba4
 define 0xc005eba6 loc_c005eba6
 define 0xc005ebac loc_c005ebac
 define 0xc005ebb0 f_c005ebb0
-define 0xc005ec20 loc_c005ec20
+define 0xc005ec20 f_c005ec20
 define 0xc005ec28 loc_c005ec28
 define 0xc005ec6c loc_c005ec6c
 define 0xc005ec74 loc_c005ec74
@@ -8520,7 +8520,6 @@ define 0xc0063c60 f_c0063c60
 define 0xc0063ca0 f_c0063ca0
 define 0xc0063ce0 f_c0063ce0
 define 0xc0063d20 f_c0063d20
-define 0xc0063d40 f_c0063d40
 define 0xc0063d60 loc_c0063d60
 define 0xc0063da0 f_c0063da0
 define 0xc0063de0 f_c0063de0
