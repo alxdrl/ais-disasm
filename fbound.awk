@@ -21,7 +21,11 @@ BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 		just_entered = 0;
 }
 
-/[^]] b .S2 b3$/ || / b .S2 irp$/ {
+/^c0064764/ || /^c005f744/ || /^c005d8a8/ {
+	ep = 0;
+}
+
+/[^]] b .S2 b3$/ || / b .S2 irp$/ || / b .S2X a25$/{
 	ep = 0;
 }
 
