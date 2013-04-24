@@ -1,4 +1,4 @@
-#!/usr/bin/awk -f
+#!/usr/bin/env awk --non-decimal-data -f
 
 BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 
