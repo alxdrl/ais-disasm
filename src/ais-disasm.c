@@ -463,6 +463,9 @@ main(int argc, char **argv)
 	int des = open("./c0000000.bin", O_CREAT | O_WRONLY);
 	write(des, tic6x_space_at_0xc0000000.buffer, tic6x_space_at_0xc0000000.buffer_length);
 	perror("error\n");
+	des = open("./c0110000.bin", O_CREAT | O_WRONLY);
+	write(des, tic6x_space_at_0xc0000000.buffer + 0x110000, 0x16038);
+	perror("error\n");
 
 	if (munmap(config_data.buffer, config_data.bufsize) == -1) {
 		perror("unable to unmap file");
