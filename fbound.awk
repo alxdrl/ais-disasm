@@ -1,4 +1,4 @@
-#!/usr/bin/env awk --non-decimal-data -f
+#!/usr/bin/awk -f
 
 BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 
@@ -21,7 +21,7 @@ BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 		just_entered = 0;
 }
 
-/^c0064764/ || /^c005f744/ || /^c005d8a8/ || /^c005ed00/ || /^118113b0/ || /^c00648e0/ {
+/^11812140/ || /^c0064764/ || /^c005f744/ || /^c005d8a8/ || /^c005ed00/ || /^118113b0/ || /^c00648e0/ || /^c00620a8/ {
 	ep = 0;
 }
 
@@ -34,7 +34,7 @@ BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
         cycles += gensub(/.*..,([0-9]+).*/, "\\1", "g", $0);
 }
 
-/[^]] bnop .S2 b[83],/ {
+/[^]] bnop .S2 b[83],/ && ! /^11811726/ && ! /^c00621a0/ {
 	ep = 0;
         cycles += gensub(/.*b3,([0-9]+).*/, "\\1", "g", $0);
 }
