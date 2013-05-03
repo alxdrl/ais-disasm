@@ -58,7 +58,7 @@ BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 {
 	if (!inside && ! / nop /) {
 		print ";--------------------------------------";
-		print "; Fragment start ";
+		print "; Fragment start";
 		print ";"
 		inside = 1;
 		just_entered = 1;

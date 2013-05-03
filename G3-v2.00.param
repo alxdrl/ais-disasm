@@ -452,7 +452,7 @@ define 0x11815900 f_11815900
 define 0x11815980 f_11815980
 define 0x118159a0 stub_call_c0014ff4
 define 0x118159c0 stub_call_c0015064
-define 0x118159e0 stub_call_c005be40
+define 0x118159e0 f_arr_fptr_9_c00c8e58_dispatch_stub
 define 0x11815a00 stub_call_c005d220_2
 define 0x11815a20 stub_call_c0059d98
 define 0x11815a40 stub_call_c003888c
@@ -7784,9 +7784,9 @@ define 0xc005af90 loc_c005af90
 define 0xc005af98 f_c005af98
 define 0xc005afb6 loc_c005afb6
 define 0xc005afb8 loc_c005afb8
-define 0xc005afc4 f_c005afc4
-define 0xc005afd4 f_c005afd4
-define 0xc005afe8 f_c005afe8
+define 0xc005afc4 f_b_c00c9384_set
+define 0xc005afd4 f_b_c00c9384_clear
+define 0xc005afe8 f_b_c00c9384_state
 define 0xc005affa loc_c005affa
 define 0xc005b000 loc_c005b000
 define 0xc005b020 _divul
@@ -7839,7 +7839,7 @@ define 0xc005bb40 f_c005bb40
 define 0xc005bbd4 loc_c005bbd4
 define 0xc005bcc0 f_c005bcc0
 define 0xc005bd54 loc_c005bd54
-define 0xc005be40 f_c005be40
+define 0xc005be40 f_arr_fptr_9_c00c8e58_dispatch
 define 0xc005be50 loc_c005be50
 define 0xc005beac loc_c005beac
 define 0xc005bec0 loc_c005bec0
@@ -7850,7 +7850,7 @@ define 0xc005bf48 loc_c005bf48
 define 0xc005bf50 f_c005bf50
 define 0xc005bf7a loc_c005bf7a
 define 0xc005bf80 loc_c005bf80
-define 0xc005bf88 f_c005bf88
+define 0xc005bf88 arr_fptr_9_c00c8e58_set
 define 0xc005bfb4 loc_c005bfb4
 define 0xc005bfc0 f_c005bfc0
 define 0xc005c140 f_c005c140
@@ -8630,7 +8630,7 @@ define 0xc0064dc0 stub_call_11814fe0
 define 0xc0064de0 stub_call_11812c60
 define 0xc0064e00 stub_call_11814880
 define 0xc0064e20 fx_face_desc_table
-define 0xc0069398 lbl_c0069398
+define 0xc0069398 str_table_c0069398
 define 0xc0069399 str_err_uninitialized
 define 0xc00695b6 str_err_badThrdTypeClk
 define 0xc00695fc str_err_allBlocked
@@ -9410,7 +9410,7 @@ define 0xc0093818 float_table_81_3818
 define 0xc009395c float_table_55_395c
 define 0xc0093a3c float_table_31_3a3c
 define 0xc0093ab8 float_table_55_3ab8
-define 0xc0093b98 arr_h_104_3b98
+define 0xc0093b98 arr_h_104_str_offset
 define 0xc0093c68 float_table_51_3c68
 define 0xc0093d38 int_table_51_3d38
 define 0xc0093e04 str_note_A
@@ -10923,7 +10923,7 @@ define 0xc00c933c x_w_3_looper_mem_zone_933c
 define 0xc00c9348 x_w_3_looper_mem_zone_9348
 define 0xc00c9354 lbl_c00c9354
 define 0xc00c9378 lbl_c00c9378
-define 0xc00c9384 lbl_c00c9384
+define 0xc00c9384 b_c00c9384
 define 0xc00c9388 lbl_c00c9388
 define 0xc00c9398 lbl_c00c9398
 define 0xc00c93b0 lbl_c00c93b0
