@@ -1,4 +1,4 @@
-#!/usr/bin/awk -f
+#!/usr/local/bin/gawk -f
 
 BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 
@@ -21,8 +21,13 @@ BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 		just_entered = 0;
 }
 
-/^11812140/ || /^c0064764/ || /^c005f744/ || /^c005d8a8/ || /^c005ed00/ || /^118113b0/ || /^c00648e0/ || /^c00620a8/ {
+/^11812140/ || /^c0064764/ || /^c005d8a8/ || /^118113b0/ {
 	ep = 0;
+}
+
+/^c0048e14/ || /^c005ed00/ || /^c005f744/ || /^c00620a8/ || /^c00648e0/ {
+	ep = 0;
+        cycles += gensub(/.*,([0-9]+).*/, "\\1", "g", $0);
 }
 
 /[^]] b .S2 b3$/ || / b .S2 irp$/ || / b .S2X a25$/ {
@@ -31,7 +36,7 @@ BEGIN { ep = -1 ; just_entered = 0 ; cycles = 1}
 
 /bnop .S2X a..,/ {
 	ep = 0;
-        cycles += gensub(/.*..,([0-9]+).*/, "\\1", "g", $0);
+        cycles += gensub(/.*,([0-9]+).*/, "\\1", "g", $0);
 }
 
 /[^]] bnop .S2 b[83],/ && ! /^11811726/ && ! /^c00621a0/ {
