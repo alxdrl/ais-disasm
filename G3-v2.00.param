@@ -7578,7 +7578,7 @@ define 0xc00583d0 loc_c00583d0
 define 0xc0058454 loc_c0058454
 define 0xc00584b8 loc_c00584b8
 define 0xc00584d4 loc_c00584d4
-define 0xc00584ec loc_c00584ec
+define 0xc00584ec f_nop_c00584ec
 define 0xc0058500 f_c0058500
 define 0xc0058538 loc_c0058538
 define 0xc0058540 loc_c0058540
@@ -7850,7 +7850,7 @@ define 0xc005bf48 loc_c005bf48
 define 0xc005bf50 f_c005bf50
 define 0xc005bf7a loc_c005bf7a
 define 0xc005bf80 loc_c005bf80
-define 0xc005bf88 arr_fptr_9_c00c8e58_set
+define 0xc005bf88 f_arr_fptr_9_c00c8e58_set
 define 0xc005bfb4 loc_c005bfb4
 define 0xc005bfc0 f_c005bfc0
 define 0xc005c140 f_c005c140
@@ -8079,8 +8079,8 @@ define 0xc005e9ce loc_c005e9ce
 define 0xc005e9d4 f_c005e9d4
 define 0xc005ea20 f_c005ea20
 define 0xc005ea58 f_c005ea58
-define 0xc005ea94 f_c005ea94
-define 0xc005eae8 f_c005eae8
+define 0xc005ea94 f_arr_fptr_2x6_c8988_set_nop
+define 0xc005eae8 f_arr_fptr_2x6_c8988_set_all_nop
 define 0xc005eaec loc_c005eaec
 define 0xc005eb20 f_c005eb20
 define 0xc005eb38 loc_c005eb38
@@ -10808,12 +10808,12 @@ define 0xc00c88a0 SDRAM_zone_table_6_88a0
 define 0xc00c88e8 SDRAM_zone_table_1_88e8
 define 0xc00c88f8 lbl_c00c88f8
 define 0xc00c8960 lbl_c00c8960
-define 0xc00c8978 lbl_c00c8978
-define 0xc00c8979 lbl_c00c8979
-define 0xc00c8988 lbl_c00c8988
-define 0xc00c898c lbl_c00c898c
-define 0xc00c89c0 lbl_c00c89c0
-define 0xc00c89c4 lbl_c00c89c4
+define 0xc00c8978 arr_b_2x6_c8978
+define 0xc00c8979 arr_b_2x6_c8979+1
+define 0xc00c8988 arr_fptr_2x6_c8988
+define 0xc00c898c arr_fptr_2x6_c8988+4
+define 0xc00c89c0 arr_w_2x6_c89c0
+define 0xc00c89c4 arr_w_2x6_c89c0+4
 define 0xc00c89f8 lbl_c00c89f8
 define 0xc00c8a78 lbl_c00c8a78
 define 0xc00c8af8 arr_x24_5_rb_sample_table
