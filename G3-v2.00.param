@@ -489,7 +489,7 @@ define 0x11815e00 stub_call_c003df68
 define 0x11815e20 stub_call_c0045208
 define 0x11815e40 stub_call_c00590a0
 define 0x11815e60 f_get_w_c00b3fe0_stub
-define 0x11815e80 stub_call_c0055920
+define 0x11815e80 f_sysbios_task_sleep_stub
 define 0x11815ea0 stub_call_c005e4a0
 define 0x11815ec0 stub_call_c0063ea0
 define 0x11815ee0 stub_call_c0063120
@@ -562,7 +562,7 @@ define 0x1181965c loc_1181965c
 define 0x118196cc loc_118196cc
 define 0x118196e0 loc_118196e0
 define 0x11819740 stub_call_c0062440
-define 0x11819760 stub_call_c005a7e0
+define 0x11819760 f_sysbios_runtime_err_stub
 define 0x11819780 f_11819780
 define 0x118197e0 f_118197e0
 define 0x11819808 loc_11819808
@@ -1509,11 +1509,11 @@ define 0xc0008834 f_c0008834
 define 0xc00088b0 f_c00088b0
 define 0xc00088e0 loc_c00088e0
 define 0xc0008968 f_c0008968
-define 0xc00089e0 f_c00089e0
+define 0xc00089e0 f_usb_pop_packet
 define 0xc0008a0c loc_c0008a0c
 define 0xc0008a12 loc_c0008a12
-define 0xc0008a14 f_c0008a14
-define 0xc0008a30 f_c0008a30
+define 0xc0008a14 f_is_host_packet
+define 0xc0008a30 f_usb_add_packet
 define 0xc0008a60 f_c0008a60
 define 0xc0008a70 loc_c0008a70
 define 0xc0008b20 loc_c0008b20
@@ -2767,7 +2767,7 @@ define 0xc001504c loc_c001504c
 define 0xc0015054 f_c0015054
 define 0xc0015064 f_c0015064
 define 0xc0015084 loc_c0015084
-define 0xc00150a0 f_c00150a0
+define 0xc00150a0 f_store_or_swap
 define 0xc00150da loc_c00150da
 define 0xc00150f8 loc_c00150f8
 define 0xc0015108 loc_c0015108
@@ -2800,7 +2800,7 @@ define 0xc0015688 loc_c0015688
 define 0xc00156b8 loc_c00156b8
 define 0xc00156cc loc_c00156cc
 define 0xc00156d4 f_c00156d4
-define 0xc0015750 f_c0015750
+define 0xc0015750 f_x_to_screen_number
 define 0xc0015778 loc_c0015778
 define 0xc001579a loc_c001579a
 define 0xc00157a0 loc_c00157a0
@@ -3236,7 +3236,7 @@ define 0xc001b5f8 loc_c001b5f8
 define 0xc001b638 loc_c001b638
 define 0xc001b674 loc_c001b674
 define 0xc001b680 f_c001b680
-define 0xc001b6a4 f_c001b6a4
+define 0xc001b6a4 f_fx_generic_Crunch_OnOff
 define 0xc001b6d8 loc_c001b6d8
 define 0xc001b6f8 loc_c001b6f8
 define 0xc001b700 f_c001b700
@@ -3655,11 +3655,11 @@ define 0xc0021360 f_c0021360
 define 0xc0021398 loc_c0021398
 define 0xc00213ae loc_c00213ae
 define 0xc00213b4 f_c00213b4
-define 0xc00213d0 f_c00213d0
+define 0xc00213d0 f_fx_parm_delay_Tone
 define 0xc0021424 loc_c0021424
 define 0xc0021454 f_c0021454
 define 0xc00214a4 f_c00214a4
-define 0xc0021680 f_c0021680
+define 0xc0021680 f_fx_parm_delay_Level
 define 0xc00216a4 f_c00216a4
 define 0xc0021704 f_c0021704
 define 0xc0021790 f_c0021790
@@ -3674,7 +3674,7 @@ define 0xc0021aa6 loc_c0021aa6
 define 0xc0021ab2 loc_c0021ab2
 define 0xc0021af4 loc_c0021af4
 define 0xc0021b00 loc_c0021b00
-define 0xc0021b04 f_c0021b04
+define 0xc0021b04 f_fx_parm_MultiTapD_Time_or_PTTRN
 define 0xc0021b6e loc_c0021b6e
 define 0xc0021bb0 loc_c0021bb0
 define 0xc0021bb8 loc_c0021bb8
@@ -3682,8 +3682,8 @@ define 0xc0021c10 loc_c0021c10
 define 0xc0021c34 loc_c0021c34
 define 0xc0021ca0 loc_c0021ca0
 define 0xc0021ca4 loc_c0021ca4
-define 0xc0021ca8 f_c0021ca8
-define 0xc0021d08 f_c0021d08
+define 0xc0021ca8 f_fx_parm_MultiTapD_Mix
+define 0xc0021d08 f_fx_delay_c0021d08
 define 0xc0021d74 loc_c0021d74
 define 0xc0021d88 loc_c0021d88
 define 0xc0021dd0 loc_c0021dd0
@@ -3692,7 +3692,7 @@ define 0xc0021e08 f_c0021e08
 define 0xc0021e52 loc_c0021e52
 define 0xc0021f02 loc_c0021f02
 define 0xc0021f10 loc_c0021f10
-define 0xc0021f14 f_c0021f14
+define 0xc0021f14 f_fx_MultiTapD_OnOff
 define 0xc0021f54 loc_c0021f54
 define 0xc0021f80 loc_c0021f80
 define 0xc0021f84 f_c0021f84
@@ -3744,7 +3744,7 @@ define 0xc0022692 loc_c0022692
 define 0xc00226b0 loc_c00226b0
 define 0xc0022730 loc_c0022730
 define 0xc0022740 loc_c0022740
-define 0xc0022748 f_c0022748
+define 0xc0022748 f_fx_desc_param_count
 define 0xc0022776 loc_c0022776
 define 0xc0022798 loc_c0022798
 define 0xc00227a8 f_c00227a8
@@ -4440,8 +4440,8 @@ define 0xc0028f08 loc_c0028f08
 define 0xc0028f4a loc_c0028f4a
 define 0xc0028f50 loc_c0028f50
 define 0xc0028f58 loc_c0028f58
-define 0xc0028f74 f_c0028f74
-define 0xc0028f88 f_c0028f88
+define 0xc0028f74 f_set_L1DRAM_0x0550
+define 0xc0028f88 f_clear_L1DRAM_0x0520
 define 0xc0028f98 f_c0028f98
 define 0xc0028fb4 f_c0028fb4
 define 0xc0028fd8 f_c0028fd8
@@ -5049,7 +5049,7 @@ define 0xc00321e0 loc_c00321e0
 define 0xc00323e8 loc_c00323e8
 define 0xc0032780 f_c0032780
 define 0xc00327e4 f_c00327e4
-define 0xc0032810 f_c0032810
+define 0xc0032810 f_fx_parm_Dly_Rev_DlyTm
 define 0xc0032870 loc_c0032870
 define 0xc00328a4 loc_c00328a4
 define 0xc00328b0 loc_c00328b0
@@ -5063,16 +5063,16 @@ define 0xc0032a28 f_c0032a28
 define 0xc0032a60 f_c0032a60
 define 0xc0032b4c loc_c0032b4c
 define 0xc0032b50 f_c0032b50
-define 0xc0032ba8 f_c0032ba8
-define 0xc0032c0c f_c0032c0c
-define 0xc0032c30 f_c0032c30
+define 0xc0032ba8 f_fx_parm_Dly_Rev_RevMix
+define 0xc0032c0c f_fx_parm_Dly_Rev_Level
+define 0xc0032c30 f_fx_Dly_Rev_OnOff
 define 0xc0032c68 loc_c0032c68
 define 0xc0032c78 loc_c0032c78
-define 0xc0032c80 f_c0032c80
-define 0xc0032ce0 f_c0032ce0
+define 0xc0032c80 f_fx_parm_Dly_Rev_DlyFB
+define 0xc0032ce0 f_fx_parm_Dly_Rev_DlyMx
 define 0xc0032d32 loc_c0032d32
 define 0xc0032d4c loc_c0032d4c
-define 0xc0032d68 f_c0032d68
+define 0xc0032d68 f_fx_Dly_Rev_c0032d68
 define 0xc0032e58 f_c0032e58
 define 0xc0032ea0 f_c0032ea0
 define 0xc0032ed8 loc_c0032ed8
@@ -5899,7 +5899,7 @@ define 0xc003fb54 f_c003fb54
 define 0xc003fb60 f_c003fb60
 define 0xc003fba0 f_c003fba0
 define 0xc003fbb2 loc_c003fbb2
-define 0xc003fbc0 f_c003fbc0
+define 0xc003fbc0 f_fx_delay_c003fbc0
 define 0xc003fc74 loc_c003fc74
 define 0xc003ffd4 loc_c003ffd4
 define 0xc003ffff loc_c003ffff
@@ -6648,7 +6648,7 @@ define 0xc004b390 f_c004b390
 define 0xc004b3e4 f_c004b3e4
 define 0xc004b414 loc_c004b414
 define 0xc004b41a loc_c004b41a
-define 0xc004b424 f_c004b424
+define 0xc004b424 f_fx_param_M_Comp_THRSH
 define 0xc004b48c f_c004b48c
 define 0xc004b4e0 f_c004b4e0
 define 0xc004b548 f_fx_Other_Comp_OnOff
@@ -7181,7 +7181,7 @@ define 0xc005353c loc_c005353c
 define 0xc005359c loc_c005359c
 define 0xc00535bc loc_c00535bc
 define 0xc0053624 loc_c0053624
-define 0xc0053640 f_c0053640
+define 0xc0053640 f_fx_matrix_init_defaults
 define 0xc0053650 loc_c0053650
 define 0xc0053660 loc_c0053660
 define 0xc0053674 loc_c0053674
@@ -7193,8 +7193,8 @@ define 0xc0053724 loc_c0053724
 define 0xc0053778 loc_c0053778
 define 0xc0053790 loc_c0053790
 define 0xc00537ec loc_c00537ec
-define 0xc00537f4 f_c00537f4
-define 0xc0053818 f_c0053818
+define 0xc00537f4 f_parm_matrix_save
+define 0xc0053818 f_parm_matrix_restore
 define 0xc0053840 f_c0053840
 define 0xc00538e0 f_c00538e0
 define 0xc0053968 loc_c0053968
@@ -7374,7 +7374,7 @@ define 0xc0055790 loc_c0055790
 define 0xc0055798 loc_c0055798
 define 0xc00557cc loc_c00557cc
 define 0xc0055908 loc_c0055908
-define 0xc0055920 f_c0055920
+define 0xc0055920 f_sysbios_task_sleep
 define 0xc0055984 loc_c0055984
 define 0xc005598c loc_c005598c
 define 0xc00559c0 loc_c00559c0
@@ -7558,14 +7558,14 @@ define 0xc0057f00 f_c0057f00
 define 0xc0057f18 f_c0057f18
 define 0xc0058100 f_c0058100
 define 0xc0058150 f_c0058150
-define 0xc0058174 f_c0058174
+define 0xc0058174 f_fx_VintageCE_OnOff
 define 0xc00581b0 loc_c00581b0
 define 0xc00581d0 loc_c00581d0
 define 0xc00581d4 f_c00581d4
 define 0xc0058230 f_c0058230
 define 0xc0058264 loc_c0058264
 define 0xc005827a loc_c005827a
-define 0xc0058284 f_c0058284
+define 0xc0058284 f_fx_VintageCE_c0058284
 define 0xc0058300 f_c0058300
 define 0xc0058310 loc_c0058310
 define 0xc0058320 loc_c0058320
@@ -7741,7 +7741,7 @@ define 0xc005a620 f_c005a620
 define 0xc005a740 loc_c005a740
 define 0xc005a7b0 loc_c005a7b0
 define 0xc005a7b8 loc_c005a7b8
-define 0xc005a7e0 f_c005a7e0
+define 0xc005a7e0 f_sysbios_runtime_err
 define 0xc005a830 loc_c005a830
 define 0xc005a84c loc_c005a84c
 define 0xc005a860 loc_c005a860
@@ -7751,7 +7751,7 @@ define 0xc005a974 loc_c005a974
 define 0xc005a978 loc_c005a978
 define 0xc005a9a0 f_c005a9a0
 define 0xc005aaa8 loc_c005aaa8
-define 0xc005ab40 f_c005ab40
+define 0xc005ab40 f_fx_Dly_Rev_c005ab40
 define 0xc005ac10 loc_c005ac10
 define 0xc005ac48 loc_c005ac48
 define 0xc005ace0 f_c005ace0
@@ -8558,7 +8558,7 @@ define 0xc00643e0 f_c00643e0
 define 0xc0064420 f_c0064420
 define 0xc0064460 f_fx_Flanger_c0064460
 define 0xc00644a0 f_c00644a0
-define 0xc00644e0 f_c00644e0
+define 0xc00644e0 f_fx_VintageCE_c00644e0
 define 0xc0064520 f_c0064520
 define 0xc0064560 f_c0064560
 define 0xc00645a0 f_fx_Pitch_c00645a0
@@ -8994,7 +8994,6 @@ define 0xc007d830 fx_face_desc_CAR_DRIVE
 define 0xc007daa0 fx_face_desc_REVO_1
 define 0xc007dd08 fx_face_desc_Dly_Rev
 define 0xc007df70 fx_face_desc_Z_Wild
-define 0xc007e0e0 lbl_c007e0e0
 define 0xc007e1d8 fx_face_desc_AutoWah
 define 0xc007e438 lbl_c007e438
 define 0xc007e690 fx_face_desc_BGN_DRIVE
@@ -9012,7 +9011,6 @@ define 0xc007fff0 fx_face_desc_VintageCE
 define 0xc0080238 fx_face_desc_MS_1959
 define 0xc0080478 fx_face_desc_Z_Clean
 define 0xc00806b8 fx_face_desc_HPS
-define 0xc0080700 lbl_c0080700
 define 0xc00808f8 fx_face_desc_Step
 define 0xc0080b38 fx_face_desc_PitchSHFT
 define 0xc0080d70 fx_face_desc_Bomber
@@ -10061,7 +10059,7 @@ define 0xc009a824 jump_table_c009a824
 define 0xc009a838 jump_table_c009a838
 define 0xc009a848 jump_table_c009a848
 define 0xc009a85c jump_table_c009a85c
-define 0xc009a880 lbl_c009a880
+define 0xc009a880 arr_parm_matrix_6x117x44
 define 0xc00a2128 lbl_c00a2128
 define 0xc00a99d0 lbl_c00a99d0
 define 0xc00aadec lbl_c00aadec
@@ -10573,7 +10571,7 @@ define 0xc00c4278 scr_desc_global
 define 0xc00c42a0 lbl_c00c42a0
 define 0xc00c42a8 lbl_c00c42a8
 define 0xc00c42b0 lbl_c00c42b0
-define 0xc00c42bc lbl_c00c42bc
+define 0xc00c42bc w_patch_index_c00c42bc
 define 0xc00c42c0 lbl_c00c42c0
 define 0xc00c43fc lbl_c00c43fc
 define 0xc00c4538 lbl_c00c4538
@@ -10809,7 +10807,7 @@ define 0xc00c88e8 SDRAM_zone_table_1_88e8
 define 0xc00c88f8 lbl_c00c88f8
 define 0xc00c8960 lbl_c00c8960
 define 0xc00c8978 arr_b_2x6_c8978
-define 0xc00c8979 arr_b_2x6_c8979+1
+define 0xc00c8979 arr_b_2x6_c8978+1
 define 0xc00c8988 arr_fptr_2x6_c8988
 define 0xc00c898c arr_fptr_2x6_c8988+4
 define 0xc00c89c0 arr_w_2x6_c89c0
@@ -11119,7 +11117,7 @@ define 0xc00d7d6c lbl_c00d7d6c
 define 0xc00d7d70 lbl_c00d7d70
 define 0xc00d7d74 lbl_c00d7d74
 define 0xc00d7d78 lbl_c00d7d78
-define 0xc00d7d7c lbl_c00d7d7c
+define 0xc00d7d7c w_c00d7d7c
 define 0xc00d7d80 w_current_patch_index
 define 0xc00d7d84 w_target_patch_index
 define 0xc00d7d88 lbl_c00d7d88
@@ -11313,6 +11311,7 @@ print region 0xc009a5b0,  0x0018 as	string
 print region 0xc009a5c8,  0x0144 as	word
 print region 0xc009a70c,  0x0034 as	string
 print region 0xc009a740,  0x013c as	word
+print region 0xc009a87c,  0x191f4 as word
 print region 0xc00b3a70,  0xdd0 as word
 print region 0xc00b4840,  0x14c30 as	word
 print region 0xc00d745c,  0x3a4 as word
