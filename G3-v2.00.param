@@ -479,12 +479,12 @@ define 0x11815cc0 f_arr_b_8_hw_flag_fill_stub
 define 0x11815ce0 f_draw_string_h11_stub
 define 0x11815d00 f_do_draw_xor_box_stub
 define 0x11815d20 f_io_drive_GP2P7_GP5P7_stub
-define 0x11815d40 stub_call_c00648c0
+define 0x11815d40 irq_save_mvc_stub
 define 0x11815d60 stub_call_c005fe60
 define 0x11815d80 stub_call_c0062840
 define 0x11815da0 ti_sysbios_knl_Task_disable__E_stub
 define 0x11815dc0 ti_sysbios_knl_Swi_disable__E_stub
-define 0x11815de0 stub_call_c00648a0
+define 0x11815de0 irq_save_dint_stub
 define 0x11815e00 stub_call_c003df68
 define 0x11815e20 stub_call_c0045208
 define 0x11815e40 stub_call_c00590a0
@@ -8584,8 +8584,8 @@ define 0xc0064820 f_c0064820
 define 0xc0064840 f_c0064840
 define 0xc0064860 f_c0064860
 define 0xc0064880 f_c0064880
-define 0xc00648a0 f_c00648a0
-define 0xc00648c0 f_c00648c0
+define 0xc00648a0 irq_save_dint
+define 0xc00648c0 irq_save_mvc
 define 0xc00648e0 f_c00648e0
 define 0xc0064900 f_c0064900
 define 0xc0064920 __read_csr
@@ -10105,7 +10105,7 @@ define 0xc00b3b00 lbl_c00b3b00
 define 0xc00b3b18 lbl_c00b3b18
 define 0xc00b3b30 lbl_c00b3b30
 define 0xc00b3b48 lbl_c00b3b48
-define 0xc00b3b58 lbl_c00b3b58:
+define 0xc00b3b58 lbl_c00b3b58
 define 0xc00b3b60 lbl_c00b3b60
 define 0xc00b3b68 lbl_c00b3b68
 define 0xc00b3b6c lbl_c00b3b6c
