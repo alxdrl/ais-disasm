@@ -6847,7 +6847,7 @@ define 0xc004dc80 loc_c004dc80
 define 0xc004dc84 loc_c004dc84
 define 0xc004dca0 f_c004dca0
 define 0xc004de50 loc_c004de50
-define 0xc004e040 f_c004e040
+define 0xc004e040 f_fx_floatval_to_parmval
 define 0xc004e086 loc_c004e086
 define 0xc004e0d8 loc_c004e0d8
 define 0xc004e134 loc_c004e134
@@ -6858,7 +6858,7 @@ define 0xc004e1e0 loc_c004e1e0
 define 0xc004e208 loc_c004e208
 define 0xc004e234 loc_c004e234
 define 0xc004e254 loc_c004e254
-define 0xc004e260 f_c004e260
+define 0xc004e260 f_fx_parmval_to_floatval
 define 0xc004e2b0 loc_c004e2b0
 define 0xc004e2ec loc_c004e2ec
 define 0xc004e338 loc_c004e338
@@ -8343,8 +8343,7 @@ define 0xc0061e74 loc_c0061e74
 define 0xc0061e80 loc_c0061e80
 define 0xc0061e84 loc_c0061e84
 define 0xc0061e88 loc_c0061e88
-define 0xc0061ea0 f_c0061ea0
-define 0xc0061ee8 f_c0061ee8
+define 0xc0061ea0 __sqrtf
 define 0xc0061f40 f_init_looper_pointers
 define 0xc0061fc0 f_c0061fc0
 define 0xc0062010 f_c0062010
