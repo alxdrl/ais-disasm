@@ -392,7 +392,7 @@ define 0x11814f8e loc_11814f8e
 define 0x11814f94 loc_11814f94
 define 0x11814fb0 loc_11814fb0
 define 0x11814fd0 loc_11814fd0
-define 0x11814fe0 f_11814fe0
+define 0x11814fe0 f_lcdc_send
 define 0x11815008 loc_11815008
 define 0x11815020 loc_11815020
 define 0x118150ac loc_118150ac
@@ -489,7 +489,7 @@ define 0x11815de0 ti_sysbios_family_c64p_Hwi_disable__E_stub
 define 0x11815e00 stub_call_c003df68
 define 0x11815e20 stub_call_c0045208
 define 0x11815e40 stub_call_c00590a0
-define 0x11815e60 f_get_w_c00b3fe0_stub
+define 0x11815e60 Clock_getTicks_stub
 define 0x11815e80 f_sysbios_task_sleep_stub
 define 0x11815ea0 stub_call_c005e4a0
 define 0x11815ec0 stub_call_c0063ea0
@@ -2882,7 +2882,7 @@ define 0xc0016950 loc_c0016950
 define 0xc0016988 loc_c0016988
 define 0xc0016994 loc_c0016994
 define 0xc00169a8 loc_c00169a8
-define 0xc00169c0 f_c00169c0
+define 0xc00169c0 f_scr_set_contrast_parm
 define 0xc00169e0 f_parm_lcd_left
 define 0xc00169ec f_parm_lcd_center
 define 0xc00169f8 f_parm_lcd_right
@@ -3015,7 +3015,7 @@ define 0xc0017e10 loc_c0017e10
 define 0xc0017e18 f_c0017e18
 define 0xc0017e2c loc_c0017e2c
 define 0xc0017e74 loc_c0017e74
-define 0xc0017e80 f_get_w_c00c3e64
+define 0xc0017e80 f_get_w_parm_sigpath
 define 0xc0017e8c f_get_w_parm_autosave
 define 0xc0017e98 f_get_w_parm_mute_state
 define 0xc0017ea8 f_set_w_parm_mute_state
@@ -3023,7 +3023,7 @@ define 0xc0017ee0 f_c0017ee0
 define 0xc0017f8c loc_c0017f8c
 define 0xc0018024 loc_c0018024
 define 0xc0018198 loc_c0018198
-define 0xc00181ac f_c00181ac
+define 0xc00181ac f_lcdc_set_contrast
 define 0xc00181e8 f_c00181e8
 define 0xc0018204 loc_c0018204
 define 0xc0018244 loc_c0018244
@@ -3192,14 +3192,14 @@ define 0xc001abac loc_c001abac
 define 0xc001abd0 loc_c001abd0
 define 0xc001abe4 f_c001abe4
 define 0xc001abf8 loc_c001abf8
-define 0xc001ac0c loc_c001ac0c
+define 0xc001ac0c loc_greater_103
 define 0xc001ac12 loc_c001ac12
 define 0xc001ac52 loc_c001ac52
 define 0xc001ac56 loc_c001ac56
 define 0xc001ac58 loc_c001ac58
 define 0xc001ac64 f_c001ac64
 define 0xc001ac7a loc_c001ac7a
-define 0xc001ac90 loc_c001ac90
+define 0xc001ac90 gt_103_c001ac90
 define 0xc001ac96 loc_c001ac96
 define 0xc001accc loc_c001accc
 define 0xc001ad28 loc_c001ad28
@@ -3212,7 +3212,7 @@ define 0xc001ae28 f_c001ae28
 define 0xc001aeb8 loc_c001aeb8
 define 0xc001af58 loc_c001af58
 define 0xc001af70 loc_c001af70
-define 0xc001b030 f_c001b030
+define 0xc001b030 f_next_multiple
 define 0xc001b056 loc_c001b056
 define 0xc001b058 loc_c001b058
 define 0xc001b064 f_c001b064
@@ -5003,7 +5003,7 @@ define 0xc0031b16 loc_c0031b16
 define 0xc0031b2e loc_c0031b2e
 define 0xc0031b6c f_c0031b6c
 define 0xc0031b88 loc_c0031b88
-define 0xc0031b90 f_c0031b90
+define 0xc0031b90 call_f_c001ac64_ret0
 define 0xc0031bac f_c0031bac
 define 0xc0031bd0 f_c0031bd0
 define 0xc0031bf0 loc_c0031bf0
@@ -5314,7 +5314,7 @@ define 0xc0035fa8 loc_c0035fa8
 define 0xc0035fb0 f_c0035fb0
 define 0xc0036024 loc_c0036024
 define 0xc0036030 loc_c0036030
-define 0xc0036038 f_c0036038
+define 0xc0036038 f_SPI0_c0036038
 define 0xc00360b4 loc_c00360b4
 define 0xc00360cc loc_c00360cc
 define 0xc00360e4 loc_c00360e4
@@ -6746,7 +6746,7 @@ define 0xc004cda0 f_c004cda0
 define 0xc004cdb4 f_c004cdb4
 define 0xc004ce38 loc_c004ce38
 define 0xc004ce58 f_c004ce58
-define 0xc004ce84 f_c004ce84
+define 0xc004ce84 f_samples_per_n_pulsations
 define 0xc004ced8 loc_c004ced8
 define 0xc004cf12 loc_c004cf12
 define 0xc004cf20 f_calc_temposync_duration
@@ -7765,7 +7765,7 @@ define 0xc005ad84 loc_c005ad84
 define 0xc005ad88 loc_c005ad88
 define 0xc005ad98 loc_c005ad98
 define 0xc005ada0 f_c005ada0
-define 0xc005adf8 f_c005adf8
+define 0xc005adf8 f_scr_set_contrast
 define 0xc005ae28 f_c005ae28
 define 0xc005ae48 f_c005ae48
 define 0xc005ae58 loc_c005ae58
@@ -8351,9 +8351,9 @@ define 0xc0061ea0 __sqrtf
 define 0xc0061f40 f_init_looper_pointers
 define 0xc0061fc0 f_c0061fc0
 define 0xc0062010 f_c0062010
-define 0xc006202e loc_c006202e
-define 0xc0062032 loc_c0062032
-define 0xc0062034 loc_c0062034
+define 0xc006202e above_59
+define 0xc0062032 above_99
+define 0xc0062034 ret
 define 0xc0062040 f_c0062040
 define 0xc0062044 loc_c0062044
 define 0xc0062060 loc_c0062060
@@ -8598,7 +8598,7 @@ define 0xc00649a0 __zero_49a0
 define 0xc00649c0 __plus_1_49c0
 define 0xc00649e0 f_get_field_w_0
 define 0xc0064a00 f_get_field_h_12
-define 0xc0064a20 f_get_w_c00b3fe0
+define 0xc0064a20 Clock_getTicks
 define 0xc0064a40 __minus_1
 define 0xc0064a60 ti_sysbios_knl_Swi_disable__E
 define 0xc0064a80 ti_sysbios_knl_Task_disable__E
@@ -8628,7 +8628,7 @@ define 0xc0064d40 f_pinmux_SPI0_SCS[0]_stub
 define 0xc0064d60 f_SPI_select_format_stub
 define 0xc0064d80 stub_call_11815108
 define 0xc0064da0 stub_call_11815234
-define 0xc0064dc0 stub_call_11814fe0
+define 0xc0064dc0 f_lcdc_send_stub
 define 0xc0064de0 stub_call_11812c60
 define 0xc0064e00 stub_call_11814880
 define 0xc0064e20 fx_face_desc_table
@@ -8733,7 +8733,7 @@ define 0xc006e810 lbl_c006e810
 define 0xc006e824 lbl_c006e824
 define 0xc006e828 pix_font_h25
 define 0xc006f9bc lbl_c006f9bc
-define 0xc006f9c0 lbl_c006f9c0
+define 0xc006f9c0 arr_b_91x40
 define 0xc00707f8 pix_font_bank_letters_h56
 define 0xc0071518 pix_font_bank_digits_h56
 define 0xc0072238 pix_font_h16
@@ -9084,7 +9084,7 @@ define 0xc0088980 fx_face_desc_OverDrive
 define 0xc0088b28 fx_face_desc_Hall
 define 0xc0088cd0 fx_face_desc_Booster
 define 0xc0088e78 fx_face_desc_GreatMuff
-define 0xc0089020 lbl_c0089020
+define 0xc0089020 arr_w_104_size_table
 define 0xc00891c0 fx_face_desc_PDL_MnPit
 define 0xc0089360 fx_face_desc_HD_Reverb
 define 0xc0089500 fx_face_desc_Z_MP1
@@ -9889,7 +9889,7 @@ define 0xc0099dc0 lbl_c0099dc0
 define 0xc0099de0 lbl_c0099de0
 define 0xc0099e00 lbl_c0099e00
 define 0xc0099e20 lbl_c0099e20
-define 0xc0099e40 arr_i_8_9e40
+define 0xc0099e40 arr_i_8_lcd_contrast_table
 define 0xc0099e60 lbl_c0099e60
 define 0xc0099e81 lbl_c0099e81
 define 0xc0099ea0 rb_rhythm_desc_3
@@ -10191,7 +10191,7 @@ define 0xc00b3f88 lbl_c00b3f88
 define 0xc00b3f98 lbl_c00b3f98
 define 0xc00b3fa0 lbl_c00b3fa0
 define 0xc00b3fc0 lbl_c00b3fc0
-define 0xc00b3fe0 lbl_c00b3fe0
+define 0xc00b3fe0 w_clock_ticks
 define 0xc00b3ff4 lbl_c00b3ff4
 define 0xc00b3ffc lbl_c00b3ffc
 define 0xc00b4000 lbl_c00b4000
@@ -10515,7 +10515,7 @@ define 0xc00c37c0 arr_fx44_6_7a0.w32
 define 0xc00c37c4 arr_fx44_6_7a0.w36
 define 0xc00c38a8 lbl_c00c38a8
 define 0xc00c39e8 lbl_c00c39e8
-define 0xc00c3de8 lbl_c00c3de8
+define 0xc00c3de8 arr_b_91x1
 define 0xc00c3e43 lbl_c00c3e43
 define 0xc00c3e48 lbl_c00c3e48
 define 0xc00c3e50 lbl_c00c3e50
