@@ -1,4 +1,5 @@
 #include "ais-print.h"
+#include "ais-symbol.h"
 #include "hashtab.h"
 
 extern hashtab_t *s_table;
@@ -6,16 +7,38 @@ extern hashtab_t *s_table;
 #define TIC6X_VMA_FMT "l"
 #define tic6x_sprintf_vma(s,x) sprintf (s, "%08" TIC6X_VMA_FMT "x", x)
 
+static ais_vma cached_address;
+static ais_symbol_t *cached_sym;
+
 char *
-tic6x_get_symbol(ais_vma addr)
+tic6x_get_cached_symbol_name(ais_vma addr)
 {
-	return (char *)ht_search(s_table, &addr, sizeof(addr));
+	ais_symbol_t *sym = cached_sym;
+	cached_sym = NULL;
+	if (cached_address == addr && cached_sym != NULL)
+		return cached_sym->name;
+	cached_address = 0;
+	sym = (ais_symbol_t *)ht_search(s_table, &addr, sizeof(addr));
+	cached_sym = sym;
+	cached_address = addr;
+	if (sym == NULL)
+		return NULL;
+	return cached_sym->name;
+}
+
+char *
+tic6x_get_symbol_name(ais_vma addr)
+{
+	ais_symbol_t *sym = (ais_symbol_t *)ht_search(s_table, &addr, sizeof(addr));
+	if (sym == NULL)
+		return NULL;
+	return cached_sym->name;
 }
 
 void
 tic6x_print_label(bfd_vma addr, char *buf)
 {
-       char *symbol = tic6x_get_symbol(addr);
+       char *symbol = tic6x_get_symbol_name(addr);
        buf[0] = '\0';
        if (symbol != NULL) {
                sprintf(buf, "%s:", symbol);
@@ -25,7 +48,7 @@ tic6x_print_label(bfd_vma addr, char *buf)
 void
 tic6x_print_address(bfd_vma addr, struct disassemble_info *info)
 {
-  char *sym = tic6x_get_symbol(addr);
+  char *sym = tic6x_get_symbol_name(addr);
   if (sym == NULL) {
 	  char buf[30];
 	  tic6x_sprintf_vma (buf, addr);
@@ -67,7 +90,7 @@ tic6x_section_print_word(bfd_vma addr, struct disassemble_info *info)
 		return tic6x_section_print_short(addr, info);
 	}
 	buffer_read_memory (addr, (bfd_byte *)&word, 4, info);
-	char *sym = tic6x_get_symbol(word);
+	char *sym = tic6x_get_symbol_name(word);
 	if (sym == NULL) {
 		(*info->fprintf_func) (info->stream, ".word 0x%08x", word);
 	} else {

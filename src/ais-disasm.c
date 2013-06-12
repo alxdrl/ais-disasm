@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 
 #include "ais.h"
+#include "ais-symbol.h"
 #include "ais-print.h"
 #include "ais-helper.h"
 #include "hashtab.h"
@@ -209,12 +210,10 @@ gather_xref(char *s, char *xref)
 	if (sscanf(s, "%*[][ab012|m !]vk .%*[LSD]%*[12] %jd,%[ab]%d", &val, regfile, &regnum) == 3) {
 		idx = regfile[0] - 'a';
 		regs[idx][regnum].val = (int32_t)val;
-	//	sprintf(xref, "%s%d = 0x%x", regfile, regnum, regs[idx][regnum].val);
-	//	return 1;
 	} else if (sscanf(s, "%*[][ab012|m !]vkh .%*[LSD]%*[12] %jd,%[ab]%d", &val, regfile, &regnum) == 3) {
 		idx = regfile[0] - 'a';
 		regs[idx][regnum].val = (regs[idx][regnum].val & 0x0000ffff) | (uint32_t)val;
-		char *symbol = tic6x_get_symbol(regs[idx][regnum].val);
+		char *symbol = tic6x_get_symbol_name(regs[idx][regnum].val);
 		if (symbol) {
 			sprintf(xref, "%s%d = %s [xref]", regfile, regnum, symbol);
 		} else {
@@ -231,14 +230,14 @@ gather_xref(char *s, char *xref)
 		if (b14 != NULL) {
 			if (sscanf(b14, "b14(%jd)", &val) == 1) {
 				uint32_t addr = val + 0xc00d7b98;
-				symbol = tic6x_get_symbol(addr);
-				if (symbol) 
+				symbol = tic6x_get_symbol_name(addr);
+				if (symbol)
 					sprintf(xref, "%s [xref]", symbol);
 				else
 					sprintf(xref, "0x%08x", addr);
 				return 1;
 			}
-		}		
+		}
 	}
 	return 0;
 }
@@ -331,7 +330,7 @@ do_dump()
 	void *tic6x_mem_0x11800000, *tic6x_mem_0x11f00000, *tic6x_mem_0xc0000000;
 	ais_vma addr;
 	char line[LINE_MAX];
-	char symbol[SYMBOL_MAX + 1];
+	char symbol_name[SYMBOL_MAX + 1];
 	char token[TOKEN_MAX + 1];
 
 	tic6x_mem_0x11800000 = mmap(0, 0x00040000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
@@ -414,18 +413,52 @@ do_dump()
 				tic6x_print_region(addr, len, print_func);
 			}
 		} else if (strcmp("define", token) == 0) {
-			uintmax_t m = 0;
-			n = sscanf(line, "define %ji " FMTNS(SYMBOL), &m, symbol);
-			if (n < 2 || n == EOF) {
-				fprintf(stderr, "line %d: invalid define command\n\t\t>>>>> %s\n", nl, line);
+			ais_symbol_t symbol;
+			n = sscanf(line, "define " FMTNS(TOKEN), token);
+			if (n == 0 || n == EOF) {
+				fprintf(stderr, "line %d: invalid print command\n\t\t>>>>> %s\n", nl, line);
 				continue;
 			}
-			addr = m;
-			size_t slen = strlen(symbol);
-			void *ret = ht_insert(s_table, &addr, sizeof(addr), symbol, slen + 1);
-			if (ret == NULL) {
-				perror("unable to insert symbol into table");
-				exit(EXIT_FAILURE);
+			if (strcmp("symbol", token) == 0) {
+				uintmax_t m = 0;
+				n = sscanf(line, "define symbol %ji " FMTNS(SYMBOL), &m, symbol_name);
+				if (n < 2 || n == EOF) {
+					fprintf(stderr, "line %d: invalid define symbol command\n\t\t>>>>> %s\n", nl, line);
+					continue;
+				}
+				addr = m;
+				symbol.func = NULL;
+				symbol.name = malloc(strlen(symbol_name) + 1);
+				if (symbol.name == NULL) {
+					perror("unable to allocate memory for symbol name");
+					exit(EXIT_FAILURE);
+				}
+				strncpy(symbol.name, symbol_name, SYMBOL_MAX);
+				void *ret = ht_insert(s_table, &addr, sizeof(addr), &symbol, sizeof(symbol));
+				if (ret == NULL) {
+					perror("unable to insert symbol into table");
+					exit(EXIT_FAILURE);
+				}
+			} else if (strcmp("function", token) == 0) {
+				uintmax_t m = 0;
+				n = sscanf(line, "define function %ji " FMTNS(SYMBOL), &m, symbol_name);
+				if (n < 2 || n == EOF) {
+					fprintf(stderr, "line %d: invalid define function command\n\t\t>>>>> %s\n", nl, line);
+					continue;
+				}
+				addr = m;
+				symbol.func = (void *)-1;
+				symbol.name = malloc(strlen(symbol_name) + 1);
+				if (symbol.name == NULL) {
+					perror("unable to allocate memory for symbol name");
+					exit(EXIT_FAILURE);
+				}
+				strncpy(symbol.name, symbol_name, SYMBOL_MAX);
+				void *ret = ht_insert(s_table, &addr, sizeof(addr), &symbol, sizeof(symbol));
+				if (ret == NULL) {
+					perror("unable to insert symbol into table");
+					exit(EXIT_FAILURE);
+				}
 			}
 		} else {
 			fprintf(stderr, "line %d: unknown command %s\n\t\t>>>>> %s\n", nl, token, line);
@@ -468,13 +501,6 @@ main(int argc, char **argv)
 	fprintf(stderr, "file mapped @ %p\n", config_data.buffer);
 
 	do_dump();
-
-//	int des = open("./c0000000.bin", O_CREAT | O_WRONLY);
-//	write(des, tic6x_space_at_0xc0000000.buffer, tic6x_space_at_0xc0000000.buffer_length);
-//	perror("error\n");
-//	des = open("./c0110000.bin", O_CREAT | O_WRONLY);
-//	write(des, tic6x_space_at_0xc0000000.buffer + 0x110000, 0x16038);
-//	perror("error\n");
 
 	if (munmap(config_data.buffer, config_data.bufsize) == -1) {
 		perror("unable to unmap file");
