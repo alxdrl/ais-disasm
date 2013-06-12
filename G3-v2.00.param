@@ -3,7 +3,7 @@
 #print region 0xc00c9470,  0xc318 as	word
 #print region 0xc00d5788,  0x0068 as	string
 #print region 0xc00d57f0,  0x2010 as	word
-copy table at 0xc00c9470
+process copy table at 0xc00c9470
 define 0x01800104 INTMUX1
 define 0x01840000 L2CFG
 define 0x01844000 L2WBAR
@@ -236,10 +236,10 @@ define 0x11812fbc f_UART2_write_0x80
 define 0x11812fd8 f_11812fd8
 define 0x11813026 loc_11813026
 define 0x11813028 loc_11813028
-define 0x11813030 f_11813030
+define 0x11813030 f_guru_meditation
 define 0x11813044 loc_11813044
 define 0x1181307a loc_1181307a
-define 0x11813080 lbl_11813080
+define 0x11813080 f_11813080
 define 0x1181318c loc_1181318c
 define 0x118131ac loc_118131ac
 define 0x118131e8 loc_118131e8
@@ -10429,9 +10429,9 @@ define 0xc00bf5d8 arr_b_3_128_c00bf5d8
 define 0xc00bf758 arr_b_3_128_c00bf758
 define 0xc00bf8d8 arr_b_3_128_c00bf8d8
 define 0xc00bfa58 arr_b_3_sccol_c00bfa58
-define 0xc00bfa60 lbl_c00bfa60
+define 0xc00bfa60 arr_b_3_c00bfa60
 define 0xc00bfa68 arr_b_3_scrow_c00bfa68
-define 0xc00bfa70 lbl_c00bfa70
+define 0xc00bfa70 arr_b_3_c00bfa70
 define 0xc00bfa78 lbl_c00bfa78
 define 0xc00bfe78 lbl_c00bfe78
 define 0xc00bffff lbl_c00bffff

@@ -360,14 +360,23 @@ do_dump()
 	tic6x_init_section (&tic6x_space_at_0xc0000000, tic6x_mem_0xc0000000, 0xc0000000, 0x00200000);
 
 	aisread(config_data.buffer, config_data.bufsize, tic6x_section_load_callback);
-	zoom_copy_init_table(0xc00c9470);
+
 	while (fgets(line, LINE_MAX, config_data.cmd_file)) {
 		int n = 0;
 		nl++;
 		n = sscanf(line, "%" XSTR(TOKEN_MAX) "s ", token);
 		if (n == 0 || n == EOF)
 			continue;
-		if (strcmp("print", token) == 0) {
+		if (strcmp("process", token) == 0) {
+			uintmax_t m;
+			n = sscanf(line, "process copy table at %ji", &m);
+			if (n < 1 || n == EOF) {
+				fprintf(stderr, "line %d: invalid process command (%d) \n\t\t>>>>> %s\n", nl, n, line);
+				continue;
+			}
+			addr = m;
+			zoom_copy_init_table(addr);
+		} else if (strcmp("print", token) == 0) {
 			n = sscanf(line, "print " FMTNS(TOKEN), token);
 			if (n == 0 || n == EOF) {
 				fprintf(stderr, "line %d: invalid print command\n\t\t>>>>> %s\n", nl, line);
@@ -460,12 +469,12 @@ main(int argc, char **argv)
 
 	do_dump();
 
-	int des = open("./c0000000.bin", O_CREAT | O_WRONLY);
-	write(des, tic6x_space_at_0xc0000000.buffer, tic6x_space_at_0xc0000000.buffer_length);
-	perror("error\n");
-	des = open("./c0110000.bin", O_CREAT | O_WRONLY);
-	write(des, tic6x_space_at_0xc0000000.buffer + 0x110000, 0x16038);
-	perror("error\n");
+//	int des = open("./c0000000.bin", O_CREAT | O_WRONLY);
+//	write(des, tic6x_space_at_0xc0000000.buffer, tic6x_space_at_0xc0000000.buffer_length);
+//	perror("error\n");
+//	des = open("./c0110000.bin", O_CREAT | O_WRONLY);
+//	write(des, tic6x_space_at_0xc0000000.buffer + 0x110000, 0x16038);
+//	perror("error\n");
 
 	if (munmap(config_data.buffer, config_data.bufsize) == -1) {
 		perror("unable to unmap file");
