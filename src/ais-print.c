@@ -32,16 +32,21 @@ tic6x_get_symbol_name(ais_vma addr)
 	ais_symbol_t *sym = (ais_symbol_t *)ht_search(s_table, &addr, sizeof(addr));
 	if (sym == NULL)
 		return NULL;
-	return cached_sym->name;
+	return sym->name;
+}
+
+ais_symbol_t *
+tic6x_get_symbol(ais_vma addr)
+{
+	return (ais_symbol_t *)ht_search(s_table, &addr, sizeof(addr));
 }
 
 void
-tic6x_print_label(bfd_vma addr, char *buf)
+tic6x_print_label(ais_symbol_t *symbol, char *buf)
 {
-       char *symbol = tic6x_get_symbol_name(addr);
        buf[0] = '\0';
-       if (symbol != NULL) {
-               sprintf(buf, "%s:", symbol);
+       if (symbol && symbol->name) {
+               sprintf(buf, "%s", symbol->name);
        }
 }
 

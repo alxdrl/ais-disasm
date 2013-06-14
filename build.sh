@@ -28,13 +28,14 @@ LDFLAGS="-lbfd -lopcodes -L${BINUTILS_TIC6X_LIBRARY_DIR}"
 LDFLAGS="$LDFLAGS -liberty -L${BINUTILS_PREFIX}/lib/${HOST_SUBDIR}"
 LDFLAGS_TUI="-lncurses"
 
-CFLAGS="-Wall -Werror -I${INCDIR} -I${BINUTILS_TIC6X_INCLUDE_DIR} -I${BINUTILS_PREFIX}/include"
+CFLAGS="-g -Wall -Werror -I${INCDIR} -I${BINUTILS_TIC6X_INCLUDE_DIR} -I${BINUTILS_PREFIX}/include"
 
 gcc -c ${INCDIR}/ais.h -o /dev/null ${CFLAGS}
 gcc -c ${INCDIR}/ais-helper.h -o /dev/null ${CFLAGS}
 gcc -c ${INCDIR}/ais-print.h -o /dev/null ${CFLAGS}
 gcc -c ${INCDIR}/ais-region.h -o /dev/null ${CFLAGS}
 gcc -c ${INCDIR}/ais-device.h -o /dev/null ${CFLAGS}
+gcc -c ${INCDIR}/ais-symbol.h -o /dev/null ${CFLAGS}
 gcc -c ${INCDIR}/ais-function-table.h -o /dev/null ${CFLAGS}
 
 gcc -c ${SRCDIR}/hashtab.c ${CFLAGS}

@@ -1,4 +1,5 @@
-process copy table at 0xc00c0298
+define copy_table 0xc00c0298
+define data_page 0xc00c4998
 define 0x01800104 INTMUX1
 define 0x01840000 L2CFG
 define 0x01844000 L2WBAR

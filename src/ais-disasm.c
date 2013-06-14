@@ -20,6 +20,8 @@ static struct config_t {
     FILE *out_file;
 	size_t bufsize;
 	void *buffer;
+    ais_vma data_page;
+    ais_vma copy_table;
 } config_data;
 
 hashtab_t *s_table;
@@ -79,6 +81,8 @@ do_config(int argc, char **argv)
    config_data.ais_fd = -1;
    config_data.cmd_file = stdin;
    config_data.out_file = stdout;
+   config_data.copy_table = 0;
+   config_data.data_page = 0;
 
    while (1) {
        int option_index = 0;
@@ -106,7 +110,7 @@ do_config(int argc, char **argv)
 
        case 'i':
             fprintf(stderr, "option i with value '%s'\n", optarg);
-            config_data.out_file = do_open(optarg, "r");
+            config_data.cmd_file = do_open(optarg, "r");
             break;
 
        case 'o':
@@ -225,17 +229,19 @@ gather_xref(char *s, char *xref)
 		}
 		return 1;
 	} else {
-		char *b14 = strstr(s, "b14(");
-		char *symbol = NULL;
-		if (b14 != NULL) {
-			if (sscanf(b14, "b14(%jd)", &val) == 1) {
-				uint32_t addr = val + 0xc00d7b98;
-				symbol = tic6x_get_symbol_name(addr);
-				if (symbol)
-					sprintf(xref, "%s [xref]", symbol);
-				else
-					sprintf(xref, "0x%08x", addr);
-				return 1;
+		if (config_data.data_page) {
+			char *b14 = strstr(s, "b14(");
+			char *symbol = NULL;
+			if (b14 != NULL) {
+				if (sscanf(b14, "b14(%jd)", &val) == 1) {
+					uint32_t addr = config_data.data_page + val;
+					symbol = tic6x_get_symbol_name(addr);
+					if (symbol)
+						sprintf(xref, "%s [xref]", symbol);
+					else
+						sprintf(xref, "0x%08x", addr);
+					return 1;
+				}
 			}
 		}
 	}
@@ -248,11 +254,12 @@ gather_xref(char *s, char *xref)
 #define FMTNSPR(s) "%-" XSTR(s##_MAX) "s"
 #define DATA_MAX 8
 #define LABEL_MAX 40
+#define XREF_MAX 48
+#define INSN_MAX 48
 #define MIN(a,b) ((a)<(b)?(a):(b))
 static void
 tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype tic6x_print_func)
 {
-	char label[LABEL_MAX + 1];
 	bfd_byte data[DATA_MAX];
 	static SFILE sfile = {NULL, 0, 0};
 	struct disassemble_info *pinfo = tic6x_get_di(vma);
@@ -268,16 +275,33 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 	alloc_buffer(&sfile);
 	pinfo->stream = &sfile;
 	while (vma < vmaend && vma >= pinfo->buffer_vma) {
+		ais_symbol_t *sym;
 		int i;
 		int bytes_used;
-		char xref[64];
+		char xref[XREF_MAX];
+		char label[LABEL_MAX];
 		sfile.pos = 0;
+		sym = tic6x_get_symbol(vma);
+		// proc header
+		if (sym && sym->func)
+			printf(";--------------------------------------\n; proc %s\n;\n", sym->name);
+		// label
+		if (sym && sym->name) {
+			label[0] = '\0';
+			snprintf(label, LABEL_MAX, "%s", sym->name);
+			printf("%08x                 %s:\n" , vma, label);
+		}
+		// disassemble instruction
 		bytes_used = (tic6x_print_func)(vma, pinfo);
 		if (bytes_used <= 0) {
 			fprintf(stderr, "*** error: read %d bytes, broke down at 0x%08x\n", bytes_used, vma);
 			break;
 		}
+		xref[0] = '\0';
+		gather_xref(sfile.buffer, xref);
+		// print address
 		printf("%08x ", vma);
+		// print data
 		buffer_read_memory(vma, data, MIN(bytes_used, DATA_MAX) , pinfo);
 		for (i = 0 ; i < DATA_MAX ; i++) {
 			if (i < bytes_used)
@@ -285,10 +309,12 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 			else
 				printf("  ");
 		}
-		tic6x_print_label(vma, label);
-		printf(" "FMTNSPR(LABEL) "%s", label , sfile.buffer);
-		if (gather_xref(sfile.buffer, xref))
-			printf("\t\t\t; %s", xref);
+		// print instruction
+		if (xref[0])
+			printf("                                       " FMTNSPR(INSN) "; %s", sfile.buffer, xref);
+		else
+			printf("                                       %s", sfile.buffer);
+		// eol
 		fputc('\n', stdout);
 		vma += bytes_used;
 	}
@@ -360,22 +386,16 @@ do_dump()
 
 	aisread(config_data.buffer, config_data.bufsize, tic6x_section_load_callback);
 
+	if (config_data.copy_table)
+		zoom_copy_init_table(config_data.copy_table);
+
 	while (fgets(line, LINE_MAX, config_data.cmd_file)) {
 		int n = 0;
 		nl++;
 		n = sscanf(line, "%" XSTR(TOKEN_MAX) "s ", token);
 		if (n == 0 || n == EOF)
 			continue;
-		if (strcmp("process", token) == 0) {
-			uintmax_t m;
-			n = sscanf(line, "process copy table at %ji", &m);
-			if (n < 1 || n == EOF) {
-				fprintf(stderr, "line %d: invalid process command (%d) \n\t\t>>>>> %s\n", nl, n, line);
-				continue;
-			}
-			addr = m;
-			zoom_copy_init_table(addr);
-		} else if (strcmp("print", token) == 0) {
+		if (strcmp("print", token) == 0) {
 			n = sscanf(line, "print " FMTNS(TOKEN), token);
 			if (n == 0 || n == EOF) {
 				fprintf(stderr, "line %d: invalid print command\n\t\t>>>>> %s\n", nl, line);
@@ -419,7 +439,23 @@ do_dump()
 				fprintf(stderr, "line %d: invalid print command\n\t\t>>>>> %s\n", nl, line);
 				continue;
 			}
-			if (strcmp("symbol", token) == 0) {
+			if (strcmp("data_page", token) == 0) {
+				uintmax_t m = 0;
+				n = sscanf(line, "define data_page %ji", &m);
+				if (n < 1 || n == EOF) {
+					fprintf(stderr, "line %d: invalid define data_page command\n\t\t>>>>> %s\n", nl, line);
+					continue;
+				}
+				config_data.data_page = m;
+			} else if (strcmp("copy_table", token) == 0) {
+				uintmax_t m = 0;
+				n = sscanf(line, "define copy_table %ji", &m);
+				if (n < 1 || n == EOF) {
+					fprintf(stderr, "line %d: invalid define copy_table command\n\t\t>>>>> %s\n", nl, line);
+					continue;
+				}
+				config_data.copy_table = m;
+			} else if (strcmp("symbol", token) == 0) {
 				uintmax_t m = 0;
 				n = sscanf(line, "define symbol %ji " FMTNS(SYMBOL), &m, symbol_name);
 				if (n < 2 || n == EOF) {
