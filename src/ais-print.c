@@ -78,6 +78,8 @@ tic6x_section_print_short(bfd_vma addr, struct disassemble_info *info)
 	unsigned short hword;
 	if (addr & 1)
 		return tic6x_section_print_byte(addr, info);
+	if (tic6x_get_symbol(addr + 1))
+		return tic6x_section_print_byte(addr, info);
 	buffer_read_memory (addr, (bfd_byte *)&hword, 2, info);
 	(*info->fprintf_func) (info->stream, ".short 0x%04x", hword);
 	return 2;
@@ -94,6 +96,13 @@ tic6x_section_print_word(bfd_vma addr, struct disassemble_info *info)
 	case 2:
 		return tic6x_section_print_short(addr, info);
 	}
+	if (tic6x_get_symbol(addr + 1))
+		return tic6x_section_print_byte(addr, info);
+	if (tic6x_get_symbol(addr + 2))
+		return tic6x_section_print_short(addr, info);
+	if (tic6x_get_symbol(addr + 3))
+		return tic6x_section_print_short(addr, info);
+	buffer_read_memory (addr, (bfd_byte *)&word, 4, info);
 	buffer_read_memory (addr, (bfd_byte *)&word, 4, info);
 	char *sym = tic6x_get_symbol_name(word);
 	if (sym == NULL) {
@@ -123,8 +132,12 @@ tic6x_section_print_string(bfd_vma addr, struct disassemble_info *info)
             info->fprintf_func(info->stream, "%c", c);
         buffer_read_memory (addr++, &c, 1, info);
         count++;
+	if (tic6x_get_symbol(addr)) break;
     }
-    info->fprintf_func(info->stream, "',0");
+    if (c == 0)
+	   info->fprintf_func(info->stream, "',0");
+    else
+	   info->fprintf_func(info->stream, "%c'", c);
     return count;
 }
 
@@ -138,11 +151,7 @@ tic6x_section_print_mixed(bfd_vma addr, struct disassemble_info *info)
     bfd_byte str[MAX_STR + 1];
     int printable = 1;
     off_t offset = 0 ;
-    int d = 0;
     int i;
-
-    if (addr == 0xc008c9feu)
-	d = 1;
 
     buffer_read_memory (addr, str, MAX_STR, info);
     str[MAX_STR] = 0;

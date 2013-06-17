@@ -283,8 +283,11 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 		sfile.pos = 0;
 		sym = tic6x_get_symbol(vma);
 		// proc header
-		if (sym && sym->func)
-			printf(";--------------------------------------\n; proc %s\n;\n", sym->name);
+		if (sym && sym->func) {
+			printf("%08x                 ;--------------------------------------\n", vma);
+			printf("%08x                 ;proc %s\n", vma, sym->name);
+			printf("%08x                 ;\n", vma);
+		}
 		// label
 		if (sym && sym->name) {
 			label[0] = '\0';
@@ -371,7 +374,7 @@ do_dump()
 		perror("Error mmapping dsp adress space");
 		exit(EXIT_FAILURE);
 	}
-	fprintf(stderr, "tic6x space 0x11800000 mapped @ %p\n", tic6x_mem_0x11800000);
+	fprintf(stderr, "tic6x space 0x11f00000 mapped @ %p\n", tic6x_mem_0x11800000);
 
 	tic6x_mem_0xc0000000 = mmap(0, 0x00200000, PROT_READ|PROT_WRITE, MAP_ANON|MAP_SHARED, -1, 0);
 	if (tic6x_mem_0xc0000000 == MAP_FAILED) {
@@ -455,9 +458,10 @@ do_dump()
 					continue;
 				}
 				config_data.copy_table = m;
+				zoom_copy_init_table(config_data.copy_table);
 			} else if (strcmp("symbol", token) == 0) {
 				uintmax_t m = 0;
-				n = sscanf(line, "define symbol %ji " FMTNS(SYMBOL), &m, symbol_name);
+				n = sscanf(line, "define symbol %ji " FMTNS(SYMBOL) " as " FMTNS(TOKEN), &m, symbol_name, token);
 				if (n < 2 || n == EOF) {
 					fprintf(stderr, "line %d: invalid define symbol command\n\t\t>>>>> %s\n", nl, line);
 					continue;
@@ -470,26 +474,9 @@ do_dump()
 					exit(EXIT_FAILURE);
 				}
 				strncpy(symbol.name, symbol_name, SYMBOL_MAX);
-				void *ret = ht_insert(s_table, &addr, sizeof(addr), &symbol, sizeof(symbol));
-				if (ret == NULL) {
-					perror("unable to insert symbol into table");
-					exit(EXIT_FAILURE);
+				if (n > 2 && strcmp("proc", token) == 0) {
+					symbol.func = (void *)-1;
 				}
-			} else if (strcmp("function", token) == 0) {
-				uintmax_t m = 0;
-				n = sscanf(line, "define function %ji " FMTNS(SYMBOL), &m, symbol_name);
-				if (n < 2 || n == EOF) {
-					fprintf(stderr, "line %d: invalid define function command\n\t\t>>>>> %s\n", nl, line);
-					continue;
-				}
-				addr = m;
-				symbol.func = (void *)-1;
-				symbol.name = malloc(strlen(symbol_name) + 1);
-				if (symbol.name == NULL) {
-					perror("unable to allocate memory for symbol name");
-					exit(EXIT_FAILURE);
-				}
-				strncpy(symbol.name, symbol_name, SYMBOL_MAX);
 				void *ret = ht_insert(s_table, &addr, sizeof(addr), &symbol, sizeof(symbol));
 				if (ret == NULL) {
 					perror("unable to insert symbol into table");
