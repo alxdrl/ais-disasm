@@ -127,13 +127,13 @@ define symbol 0x1180d0f4 loc_1180d0f4
 define symbol 0x1180d0f8 loc_1180d0f8
 define symbol 0x1180d100 loc_1180d100
 define symbol 0x1180d14c loc_1180d14c
-define symbol 0x1180d5c0 lbl_1180d5c0
+define symbol 0x1180d5c0 f_1180d5c0 as proc
 define symbol 0x1180d840 loc_1180d840
-define symbol 0x1180df0c lbl_1180df0c
+define symbol 0x1180df0c f_1180df0c as proc
 define symbol 0x1180e0e8 loc_1180e0e8
-define symbol 0x1180e77c lbl_1180e77c
+define symbol 0x1180e77c f_1180e77c as proc
 define symbol 0x1180e7d0 loc_1180e7d0
-define symbol 0x1180ea8c lbl_1180ea8c
+define symbol 0x1180ea8c f_1180ea8c as proc
 define symbol 0x1180ead4 loc_1180ead4
 define symbol 0x1180ee84 f_1180ee84 as proc
 define symbol 0x1180f0c0 loc_1180f0c0
@@ -160,7 +160,7 @@ define symbol 0x11810ec0 loc_11810ec0
 define symbol 0x11810f94 loc_11810f94
 define symbol 0x11811300 loc_11811300
 define symbol 0x1181130c loc_1181130c
-define symbol 0x11811620 lbl_11811620
+define symbol 0x11811620 f_11811620 as proc
 define symbol 0x11811660 f_11811660 as proc
 define symbol 0x11811704 loc_11811704
 define symbol 0x11811760 loc_11811760
@@ -235,7 +235,7 @@ define symbol 0x11813d48 loc_11813d48
 define symbol 0x11813d64 loc_11813d64
 define symbol 0x11813d80 loc_11813d80
 define symbol 0x11813d94 loc_11813d94
-define symbol 0x11813dc0 lbl_11813dc0
+define symbol 0x11813dc0 f_11813dc0 as proc
 define symbol 0x11813dec loc_11813dec
 define symbol 0x11813e40 f_11813e40 as proc
 define symbol 0x11813e80 loc_11813e80
@@ -267,7 +267,7 @@ define symbol 0x118141e4 loc_118141e4
 define symbol 0x118141f8 loc_118141f8
 define symbol 0x11814218 loc_11814218
 define symbol 0x11814220 f_11814220 as proc
-define symbol 0x11814240 lbl_11814240
+define symbol 0x11814240 f_11814240 as proc
 define symbol 0x1181428a loc_1181428a
 define symbol 0x1181428c loc_1181428c
 define symbol 0x11814294 f_11814294 as proc
@@ -594,7 +594,6 @@ define symbol 0x1181f400 lbl_1181f400
 define symbol 0x118811b0 lbl_118811b0
 define symbol 0x11882200 lbl_11882200
 define symbol 0x11882244 lbl_11882244
-define symbol 0x11888880 lbl_11888880
 define symbol 0x118c089e lbl_118c089e
 define symbol 0x11f00000 L1DRAM+0x0000
 define symbol 0x11f0000c L1DRAM+0x000c
@@ -719,14 +718,14 @@ define symbol 0x11f03100 L1DRAM+0x3100
 define symbol 0x11f03200 L1DRAM+0x3200
 define symbol 0x11f03600 L1DRAM+0x3600
 define symbol 0x11f03c00 L1DRAM+0x3c00
-define symbol 0xc0000000 lbl_c0000000
+define symbol 0xc0000000 f_c0000000 as proc
 define symbol 0xc0000010 loc_c0000010
-define symbol 0xc0000030 lbl_c0000030
-define symbol 0xc0000040 lbl_c0000040
+define symbol 0xc0000030 f_c0000030 as proc
+define symbol 0xc0000040 f_c0000040 as proc
 define symbol 0xc000004c loc_c000004c
 define symbol 0xc0000054 f_c0000054 as proc
 define symbol 0xc00000a0 loc_c00000a0
-define symbol 0xc0000101 lbl_c0000101
+define symbol 0xc0000101 f_c0000101 as proc
 define symbol 0xc0000104 loc_c0000104
 define symbol 0xc0000124 loc_c0000124
 define symbol 0xc0000178 loc_c0000178
@@ -1013,11 +1012,11 @@ define symbol 0xc00041c8 loc_c00041c8
 define symbol 0xc00041d8 loc_c00041d8
 define symbol 0xc00041ec loc_c00041ec
 define symbol 0xc0004200 loc_c0004200
-define symbol 0xc0004210 lbl_c0004210
-define symbol 0xc0004224 lbl_c0004224
-define symbol 0xc0004234 lbl_c0004234
-define symbol 0xc0004248 lbl_c0004248
-define symbol 0xc0004258 lbl_c0004258
+define symbol 0xc0004210 f_c0004210 as proc
+define symbol 0xc0004224 f_c0004224 as proc
+define symbol 0xc0004234 f_c0004234 as proc
+define symbol 0xc0004248 f_c0004248 as proc
+define symbol 0xc0004258 f_c0004258 as proc
 define symbol 0xc000426c loc_c000426c
 define symbol 0xc0004280 loc_c0004280
 define symbol 0xc0004290 loc_c0004290
@@ -1061,9 +1060,9 @@ define symbol 0xc00048b0 loc_c00048b0
 define symbol 0xc00048b8 f_c00048b8 as proc
 define symbol 0xc00048e0 f_c00048e0 as proc
 define symbol 0xc0004938 loc_c0004938
-define symbol 0xc0004944 lbl_c0004944
+define symbol 0xc0004944 f_c0004944 as proc
 define symbol 0xc00049a0 loc_c00049a0
-define symbol 0xc00049c0 lbl_c00049c0
+define symbol 0xc00049c0 f_c00049c0 as proc
 define symbol 0xc0004a10 loc_c0004a10
 define symbol 0xc0004a58 loc_c0004a58
 define symbol 0xc0004aa8 loc_c0004aa8
@@ -1072,7 +1071,7 @@ define symbol 0xc0004b08 loc_c0004b08
 define symbol 0xc0004b16 loc_c0004b16
 define symbol 0xc0004b1a loc_c0004b1a
 define symbol 0xc0004b36 loc_c0004b36
-define symbol 0xc0004b40 lbl_c0004b40
+define symbol 0xc0004b40 f_c0004b40 as proc
 define symbol 0xc0004b4e loc_c0004b4e
 define symbol 0xc0004b62 loc_c0004b62
 define symbol 0xc0004b78 loc_c0004b78
@@ -1086,26 +1085,26 @@ define symbol 0xc0004c04 loc_c0004c04
 define symbol 0xc0004c30 loc_c0004c30
 define symbol 0xc0004c40 loc_c0004c40
 define symbol 0xc0004c54 loc_c0004c54
-define symbol 0xc0004c64 lbl_c0004c64
+define symbol 0xc0004c64 f_c0004c64 as proc
 define symbol 0xc0004c68 loc_c0004c68
 define symbol 0xc0004c70 f_c0004c70 as proc
 define symbol 0xc0004cb0 loc_c0004cb0
 define symbol 0xc0004cb8 loc_c0004cb8
-define symbol 0xc0004cf2 lbl_c0004cf2
+define symbol 0xc0004cf2 f_c0004cf2 as proc
 define symbol 0xc0004d16 loc_c0004d16
-define symbol 0xc0004d22 lbl_c0004d22
-define symbol 0xc0004d2e lbl_c0004d2e
+define symbol 0xc0004d22 f_c0004d22 as proc
+define symbol 0xc0004d2e f_c0004d2e as proc
 define symbol 0xc0004d50 loc_c0004d50
 define symbol 0xc0004d64 loc_c0004d64
 define symbol 0xc0004d6c loc_c0004d6c
-define symbol 0xc0004d8a lbl_c0004d8a
+define symbol 0xc0004d8a f_c0004d8a as proc
 define symbol 0xc0004db4 loc_c0004db4
-define symbol 0xc0004dc2 lbl_c0004dc2
+define symbol 0xc0004dc2 f_c0004dc2 as proc
 define symbol 0xc0004de2 loc_c0004de2
-define symbol 0xc0004df6 lbl_c0004df6
+define symbol 0xc0004df6 f_c0004df6 as proc
 define symbol 0xc0004e18 loc_c0004e18
 define symbol 0xc0004e28 loc_c0004e28
-define symbol 0xc0004e30 lbl_c0004e30
+define symbol 0xc0004e30 f_c0004e30 as proc
 define symbol 0xc0004e44 loc_c0004e44
 define symbol 0xc0004e60 loc_c0004e60
 define symbol 0xc0004e80 loc_c0004e80
@@ -1113,7 +1112,7 @@ define symbol 0xc0004e8a loc_c0004e8a
 define symbol 0xc0004eae loc_c0004eae
 define symbol 0xc0004eb8 loc_c0004eb8
 define symbol 0xc0004ed6 loc_c0004ed6
-define symbol 0xc0004efa lbl_c0004efa
+define symbol 0xc0004efa f_c0004efa as proc
 define symbol 0xc0004f00 loc_c0004f00
 define symbol 0xc0004f08 f_c0004f08 as proc
 define symbol 0xc0004f28 loc_c0004f28
@@ -1138,15 +1137,15 @@ define symbol 0xc00051c6 loc_c00051c6
 define symbol 0xc00051c8 loc_c00051c8
 define symbol 0xc00051d0 f_c00051d0 as proc
 define symbol 0xc0005226 loc_c0005226
-define symbol 0xc0005264 lbl_c0005264
+define symbol 0xc0005264 f_c0005264 as proc
 define symbol 0xc000528a loc_c000528a
-define symbol 0xc00052a8 lbl_c00052a8
-define symbol 0xc000531a lbl_c000531a
-define symbol 0xc0005360 lbl_c0005360
+define symbol 0xc00052a8 f_c00052a8 as proc
+define symbol 0xc000531a f_c000531a as proc
+define symbol 0xc0005360 f_c0005360 as proc
 define symbol 0xc00053a8 loc_c00053a8
 define symbol 0xc00053b4 loc_c00053b4
 define symbol 0xc00053d0 loc_c00053d0
-define symbol 0xc00053e0 lbl_c00053e0
+define symbol 0xc00053e0 f_c00053e0 as proc
 define symbol 0xc00053e4 loc_c00053e4
 define symbol 0xc00053ec f_c00053ec as proc
 define symbol 0xc0005442 loc_c0005442
@@ -1163,7 +1162,7 @@ define symbol 0xc00054ec f_c00054ec as proc
 define symbol 0xc000553a loc_c000553a
 define symbol 0xc0005548 loc_c0005548
 define symbol 0xc0005554 loc_c0005554
-define symbol 0xc0005555 lbl_c0005555
+define symbol 0xc0005555 f_c0005555 as proc
 define symbol 0xc0005592 loc_c0005592
 define symbol 0xc0005594 loc_c0005594
 define symbol 0xc00055a0 f_c00055a0 as proc
@@ -1202,19 +1201,19 @@ define symbol 0xc0005948 loc_c0005948
 define symbol 0xc0005988 loc_c0005988
 define symbol 0xc000598c loc_c000598c
 define symbol 0xc0005994 f_c0005994 as proc
-define symbol 0xc00059f4 lbl_c00059f4
+define symbol 0xc00059f4 f_c00059f4 as proc
 define symbol 0xc0005a10 loc_c0005a10
 define symbol 0xc0005a5a loc_c0005a5a
 define symbol 0xc0005a94 loc_c0005a94
-define symbol 0xc0005ac8 lbl_c0005ac8
+define symbol 0xc0005ac8 f_c0005ac8 as proc
 define symbol 0xc0005ad8 loc_c0005ad8
 define symbol 0xc0005af4 loc_c0005af4
 define symbol 0xc0005af8 loc_c0005af8
-define symbol 0xc0005b14 lbl_c0005b14
+define symbol 0xc0005b14 f_c0005b14 as proc
 define symbol 0xc0005b60 loc_c0005b60
-define symbol 0xc0005b70 lbl_c0005b70
+define symbol 0xc0005b70 f_c0005b70 as proc
 define symbol 0xc0005bb8 loc_c0005bb8
-define symbol 0xc0005bcc lbl_c0005bcc
+define symbol 0xc0005bcc f_c0005bcc as proc
 define symbol 0xc0005bec loc_c0005bec
 define symbol 0xc0005c0c loc_c0005c0c
 define symbol 0xc0005c30 loc_c0005c30
@@ -1263,23 +1262,23 @@ define symbol 0xc00060aa loc_c00060aa
 define symbol 0xc00060cc loc_c00060cc
 define symbol 0xc00060d8 loc_c00060d8
 define symbol 0xc00060e4 f_c00060e4 as proc
-define symbol 0xc0006134 lbl_c0006134
+define symbol 0xc0006134 f_c0006134 as proc
 define symbol 0xc00061c6 loc_c00061c6
-define symbol 0xc00061e8 lbl_c00061e8
+define symbol 0xc00061e8 f_c00061e8 as proc
 define symbol 0xc0006200 loc_c0006200
 define symbol 0xc0006214 loc_c0006214
 define symbol 0xc000622c loc_c000622c
 define symbol 0xc0006244 loc_c0006244
 define symbol 0xc0006258 loc_c0006258
-define symbol 0xc0006270 lbl_c0006270
+define symbol 0xc0006270 f_c0006270 as proc
 define symbol 0xc00062a4 loc_c00062a4
-define symbol 0xc00062cc lbl_c00062cc
+define symbol 0xc00062cc f_c00062cc as proc
 define symbol 0xc0006300 loc_c0006300
 define symbol 0xc0006328 loc_c0006328
 define symbol 0xc0006340 loc_c0006340
 define symbol 0xc0006366 loc_c0006366
 define symbol 0xc0006388 loc_c0006388
-define symbol 0xc0006394 lbl_c0006394
+define symbol 0xc0006394 f_c0006394 as proc
 define symbol 0xc00063ae loc_c00063ae
 define symbol 0xc00063c0 loc_c00063c0
 define symbol 0xc00063d8 loc_c00063d8
@@ -1370,13 +1369,13 @@ define symbol 0xc0006f20 loc_c0006f20
 define symbol 0xc0006f34 loc_c0006f34
 define symbol 0xc0006f44 loc_c0006f44
 define symbol 0xc0006f4c f_c0006f4c as proc
-define symbol 0xc0006f60 lbl_c0006f60
-define symbol 0xc0006fc0 lbl_c0006fc0
-define symbol 0xc0006fd0 lbl_c0006fd0
-define symbol 0xc0006fe4 lbl_c0006fe4
+define symbol 0xc0006f60 f_c0006f60 as proc
+define symbol 0xc0006fc0 f_c0006fc0 as proc
+define symbol 0xc0006fd0 f_c0006fd0 as proc
+define symbol 0xc0006fe4 f_c0006fe4 as proc
 define symbol 0xc0006ff2 loc_c0006ff2
 define symbol 0xc0006ff8 loc_c0006ff8
-define symbol 0xc0007012 lbl_c0007012
+define symbol 0xc0007012 f_c0007012 as proc
 define symbol 0xc0007034 loc_c0007034
 define symbol 0xc0007040 f_c0007040 as proc
 define symbol 0xc00070ac f_c00070ac as proc
@@ -1477,7 +1476,7 @@ define symbol 0xc0008024 f_c0008024 as proc
 define symbol 0xc0008050 loc_c0008050
 define symbol 0xc0008058 loc_c0008058
 define symbol 0xc0008078 loc_c0008078
-define symbol 0xc0008080 lbl_c0008080
+define symbol 0xc0008080 f_c0008080 as proc
 define symbol 0xc0008084 f_c0008084 as proc
 define symbol 0xc00080ac f_c00080ac as proc
 define symbol 0xc00080d8 loc_c00080d8
@@ -1645,16 +1644,16 @@ define symbol 0xc0009470 loc_c0009470
 define symbol 0xc0009476 loc_c0009476
 define symbol 0xc0009488 loc_c0009488
 define symbol 0xc0009494 loc_c0009494
-define symbol 0xc00094d4 lbl_c00094d4
+define symbol 0xc00094d4 f_c00094d4 as proc
 define symbol 0xc00094e4 loc_c00094e4
 define symbol 0xc00094ec loc_c00094ec
-define symbol 0xc00094f4 lbl_c00094f4
+define symbol 0xc00094f4 f_c00094f4 as proc
 define symbol 0xc0009504 loc_c0009504
 define symbol 0xc000950c loc_c000950c
-define symbol 0xc0009514 lbl_c0009514
-define symbol 0xc0009522 lbl_c0009522
-define symbol 0xc0009530 lbl_c0009530
-define symbol 0xc0009544 lbl_c0009544
+define symbol 0xc0009514 f_c0009514 as proc
+define symbol 0xc0009522 f_c0009522 as proc
+define symbol 0xc0009530 f_c0009530 as proc
+define symbol 0xc0009544 f_c0009544 as proc
 define symbol 0xc000954e loc_c000954e
 define symbol 0xc0009560 loc_c0009560
 define symbol 0xc000958e loc_c000958e
@@ -1840,12 +1839,12 @@ define symbol 0xc000b190 f_c000b190 as proc
 define symbol 0xc000b1c4 f_c000b1c4 as proc
 define symbol 0xc000b206 loc_c000b206
 define symbol 0xc000b264 f_c000b264 as proc
-define symbol 0xc000b294 lbl_c000b294
-define symbol 0xc000b2f4 lbl_c000b2f4
-define symbol 0xc000b328 lbl_c000b328
-define symbol 0xc000b358 lbl_c000b358
+define symbol 0xc000b294 f_c000b294 as proc
+define symbol 0xc000b2f4 f_c000b2f4 as proc
+define symbol 0xc000b328 f_c000b328 as proc
+define symbol 0xc000b358 f_c000b358 as proc
 define symbol 0xc000b38c loc_c000b38c
-define symbol 0xc000b3a8 lbl_c000b3a8
+define symbol 0xc000b3a8 f_c000b3a8 as proc
 define symbol 0xc000b3b0 f_c000b3b0 as proc
 define symbol 0xc000b40c loc_c000b40c
 define symbol 0xc000b42c loc_c000b42c
@@ -1883,17 +1882,17 @@ define symbol 0xc000bfd8 f_c000bfd8 as proc
 define symbol 0xc000c000 loc_c000c000
 define symbol 0xc000c034 f_c000c034 as proc
 define symbol 0xc000c10c f_c000c10c as proc
-define symbol 0xc000c1c1 lbl_c000c1c1
+define symbol 0xc000c1c1 f_c000c1c1 as proc
 define symbol 0xc000c1c6 loc_c000c1c6
 define symbol 0xc000c1f4 loc_c000c1f4
 define symbol 0xc000c200 f_c000c200 as proc
 define symbol 0xc000c2f4 loc_c000c2f4
 define symbol 0xc000c300 f_c000c300 as proc
-define symbol 0xc000c30c lbl_c000c30c
-define symbol 0xc000c328 lbl_c000c328
-define symbol 0xc000c344 lbl_c000c344
-define symbol 0xc000c360 lbl_c000c360
-define symbol 0xc000c378 lbl_c000c378
+define symbol 0xc000c30c f_c000c30c as proc
+define symbol 0xc000c328 f_c000c328 as proc
+define symbol 0xc000c344 f_c000c344 as proc
+define symbol 0xc000c360 f_c000c360 as proc
+define symbol 0xc000c378 f_c000c378 as proc
 define symbol 0xc000c392 loc_c000c392
 define symbol 0xc000c3b8 loc_c000c3b8
 define symbol 0xc000c3c4 f_c000c3c4 as proc
@@ -1929,7 +1928,7 @@ define symbol 0xc000cf18 f_c000cf18 as proc
 define symbol 0xc000cf44 loc_c000cf44
 define symbol 0xc000cf78 loc_c000cf78
 define symbol 0xc000cfa0 f_c000cfa0 as proc
-define symbol 0xc000cfcf lbl_c000cfcf
+define symbol 0xc000cfcf f_c000cfcf as proc
 define symbol 0xc000cfd8 loc_c000cfd8
 define symbol 0xc000d008 loc_c000d008
 define symbol 0xc000d058 loc_c000d058
@@ -2021,22 +2020,22 @@ define symbol 0xc000de70 f_c000de70 as proc
 define symbol 0xc000ded0 loc_c000ded0
 define symbol 0xc000ded8 f_c000ded8 as proc
 define symbol 0xc000df2c loc_c000df2c
-define symbol 0xc000df44 lbl_c000df44
-define symbol 0xc000df4c lbl_c000df4c
+define symbol 0xc000df44 f_c000df44 as proc
+define symbol 0xc000df4c f_c000df4c as proc
 define symbol 0xc000df54 loc_c000df54
-define symbol 0xc000df60 lbl_c000df60
-define symbol 0xc000df68 lbl_c000df68
-define symbol 0xc000df70 lbl_c000df70
-define symbol 0xc000df78 lbl_c000df78
-define symbol 0xc000df84 lbl_c000df84
+define symbol 0xc000df60 f_c000df60 as proc
+define symbol 0xc000df68 f_c000df68 as proc
+define symbol 0xc000df70 f_c000df70 as proc
+define symbol 0xc000df78 f_c000df78 as proc
+define symbol 0xc000df84 f_c000df84 as proc
 define symbol 0xc000df8c loc_c000df8c
 define symbol 0xc000dfa8 loc_c000dfa8
-define symbol 0xc000dfb4 lbl_c000dfb4
+define symbol 0xc000dfb4 f_c000dfb4 as proc
 define symbol 0xc000dfc8 loc_c000dfc8
 define symbol 0xc000e020 loc_c000e020
 define symbol 0xc000e028 f_c000e028 as proc
 define symbol 0xc000e0a8 loc_c000e0a8
-define symbol 0xc000e0e0 lbl_c000e0e0
+define symbol 0xc000e0e0 f_c000e0e0 as proc
 define symbol 0xc000e0e4 loc_c000e0e4
 define symbol 0xc000e0f8 loc_c000e0f8
 define symbol 0xc000e102 loc_c000e102
@@ -2086,27 +2085,27 @@ define symbol 0xc000e56e loc_c000e56e
 define symbol 0xc000e576 loc_c000e576
 define symbol 0xc000e582 loc_c000e582
 define symbol 0xc000e58a loc_c000e58a
-define symbol 0xc000e592 lbl_c000e592
-define symbol 0xc000e59a lbl_c000e59a
+define symbol 0xc000e592 f_c000e592 as proc
+define symbol 0xc000e59a f_c000e59a as proc
 define symbol 0xc000e5a6 loc_c000e5a6
 define symbol 0xc000e5ae loc_c000e5ae
 define symbol 0xc000e5b6 loc_c000e5b6
-define symbol 0xc000e5c2 lbl_c000e5c2
-define symbol 0xc000e5ce lbl_c000e5ce
+define symbol 0xc000e5c2 f_c000e5c2 as proc
+define symbol 0xc000e5ce f_c000e5ce as proc
 define symbol 0xc000e5d4 loc_c000e5d4
 define symbol 0xc000e64c loc_c000e64c
-define symbol 0xc000e66c lbl_c000e66c
-define symbol 0xc000e680 lbl_c000e680
-define symbol 0xc000e690 lbl_c000e690
-define symbol 0xc000e6a4 lbl_c000e6a4
-define symbol 0xc000e6b4 lbl_c000e6b4
-define symbol 0xc000e6c4 lbl_c000e6c4
-define symbol 0xc000e6d4 lbl_c000e6d4
-define symbol 0xc000e6e8 lbl_c000e6e8
+define symbol 0xc000e66c f_c000e66c as proc
+define symbol 0xc000e680 f_c000e680 as proc
+define symbol 0xc000e690 f_c000e690 as proc
+define symbol 0xc000e6a4 f_c000e6a4 as proc
+define symbol 0xc000e6b4 f_c000e6b4 as proc
+define symbol 0xc000e6c4 f_c000e6c4 as proc
+define symbol 0xc000e6d4 f_c000e6d4 as proc
+define symbol 0xc000e6e8 f_c000e6e8 as proc
 define symbol 0xc000e6f8 loc_c000e6f8
 define symbol 0xc000e720 loc_c000e720
 define symbol 0xc000e730 loc_c000e730
-define symbol 0xc000e74c lbl_c000e74c
+define symbol 0xc000e74c f_c000e74c as proc
 define symbol 0xc000e758 f_c000e758 as proc
 define symbol 0xc000e78c loc_c000e78c
 define symbol 0xc000e7b0 loc_c000e7b0
@@ -2169,15 +2168,15 @@ define symbol 0xc000f040 loc_c000f040
 define symbol 0xc000f06c loc_c000f06c
 define symbol 0xc000f084 loc_c000f084
 define symbol 0xc000f0a0 loc_c000f0a0
-define symbol 0xc000f0c4 lbl_c000f0c4
+define symbol 0xc000f0c4 f_c000f0c4 as proc
 define symbol 0xc000f0e8 loc_c000f0e8
 define symbol 0xc000f10a loc_c000f10a
-define symbol 0xc000f118 lbl_c000f118
+define symbol 0xc000f118 f_c000f118 as proc
 define symbol 0xc000f146 loc_c000f146
-define symbol 0xc000f158 lbl_c000f158
+define symbol 0xc000f158 f_c000f158 as proc
 define symbol 0xc000f186 loc_c000f186
-define symbol 0xc000f194 lbl_c000f194
-define symbol 0xc000f1c4 lbl_c000f1c4
+define symbol 0xc000f194 f_c000f194 as proc
+define symbol 0xc000f1c4 f_c000f1c4 as proc
 define symbol 0xc000f1f0 loc_c000f1f0
 define symbol 0xc000f20e loc_c000f20e
 define symbol 0xc000f220 loc_c000f220
@@ -2210,12 +2209,12 @@ define symbol 0xc000f618 loc_c000f618
 define symbol 0xc000f628 loc_c000f628
 define symbol 0xc000f634 loc_c000f634
 define symbol 0xc000f650 loc_c000f650
-define symbol 0xc000f668 lbl_c000f668
+define symbol 0xc000f668 f_c000f668 as proc
 define symbol 0xc000f68c loc_c000f68c
-define symbol 0xc000f698 lbl_c000f698
-define symbol 0xc000f6b4 lbl_c000f6b4
-define symbol 0xc000f6d2 lbl_c000f6d2
-define symbol 0xc000f6d8 lbl_c000f6d8
+define symbol 0xc000f698 f_c000f698 as proc
+define symbol 0xc000f6b4 f_c000f6b4 as proc
+define symbol 0xc000f6d2 f_c000f6d2 as proc
+define symbol 0xc000f6d8 f_c000f6d8 as proc
 define symbol 0xc000f6e4 loc_c000f6e4
 define symbol 0xc000f6ec loc_c000f6ec
 define symbol 0xc000f6f8 loc_c000f6f8
@@ -2230,10 +2229,10 @@ define symbol 0xc000f88a loc_c000f88a
 define symbol 0xc000f8a0 loc_c000f8a0
 define symbol 0xc000f8a8 loc_c000f8a8
 define symbol 0xc000f8b4 loc_c000f8b4
-define symbol 0xc000f8c4 lbl_c000f8c4
-define symbol 0xc000f8e4 lbl_c000f8e4
-define symbol 0xc000f930 lbl_c000f930
-define symbol 0xc000f946 lbl_c000f946
+define symbol 0xc000f8c4 f_c000f8c4 as proc
+define symbol 0xc000f8e4 f_c000f8e4 as proc
+define symbol 0xc000f930 f_c000f930 as proc
+define symbol 0xc000f946 f_c000f946 as proc
 define symbol 0xc000f954 loc_c000f954
 define symbol 0xc000f970 loc_c000f970
 define symbol 0xc000f984 loc_c000f984
@@ -2271,8 +2270,8 @@ define symbol 0xc000fdc0 loc_c000fdc0
 define symbol 0xc000fdc8 f_c000fdc8 as proc
 define symbol 0xc000fec8 loc_c000fec8
 define symbol 0xc000ff68 loc_c000ff68
-define symbol 0xc000ffff lbl_c000ffff
-define symbol 0xc0010000 lbl_c0010000
+define symbol 0xc000ffff f_c000ffff as proc
+define symbol 0xc0010000 f_c0010000 as proc
 define symbol 0xc0010004 loc_c0010004
 define symbol 0xc0010010 loc_c0010010
 define symbol 0xc0010030 loc_c0010030
@@ -2280,11 +2279,11 @@ define symbol 0xc0010044 loc_c0010044
 define symbol 0xc001004c f_c001004c as proc
 define symbol 0xc00100a0 loc_c00100a0
 define symbol 0xc00100c0 f_c00100c0 as proc
-define symbol 0xc00100c8 lbl_c00100c8
-define symbol 0xc00100e0 lbl_c00100e0
-define symbol 0xc00100f4 lbl_c00100f4
-define symbol 0xc001010c lbl_c001010c
-define symbol 0xc0010124 lbl_c0010124
+define symbol 0xc00100c8 f_c00100c8 as proc
+define symbol 0xc00100e0 f_c00100e0 as proc
+define symbol 0xc00100f4 f_c00100f4 as proc
+define symbol 0xc001010c f_c001010c as proc
+define symbol 0xc0010124 f_c0010124 as proc
 define symbol 0xc0010138 loc_c0010138
 define symbol 0xc0010154 loc_c0010154
 define symbol 0xc00101a8 f_c00101a8 as proc
@@ -2639,7 +2638,7 @@ define symbol 0xc00145c0 loc_c00145c0
 define symbol 0xc00145e0 loc_c00145e0
 define symbol 0xc00145e8 f_c00145e8 as proc
 define symbol 0xc0014610 f_c0014610 as proc
-define symbol 0xc00146e0 lbl_c00146e0
+define symbol 0xc00146e0 f_c00146e0 as proc
 define symbol 0xc00146f0 f_c00146f0 as proc
 define symbol 0xc0014728 loc_c0014728
 define symbol 0xc0014740 loc_c0014740
@@ -2968,7 +2967,7 @@ define symbol 0xc0017f60 f_c0017f60 as proc
 define symbol 0xc0017f98 f_c0017f98 as proc
 define symbol 0xc0017fd4 f_c0017fd4 as proc
 define symbol 0xc0018010 f_c0018010 as proc
-define symbol 0xc001804c lbl_c001804c
+define symbol 0xc001804c f_c001804c as proc
 define symbol 0xc0018080 f_c0018080 as proc
 define symbol 0xc00180b0 loc_c00180b0
 define symbol 0xc00180c0 loc_c00180c0
@@ -3046,7 +3045,7 @@ define symbol 0xc0019748 loc_c0019748
 define symbol 0xc001974c f_c001974c as proc
 define symbol 0xc0019798 loc_c0019798
 define symbol 0xc00197c8 f_c00197c8 as proc
-define symbol 0xc0019824 lbl_c0019824
+define symbol 0xc0019824 f_c0019824 as proc
 define symbol 0xc0019838 f_c0019838 as proc
 define symbol 0xc0019860 f_c0019860 as proc
 define symbol 0xc00198ac loc_c00198ac
@@ -3179,7 +3178,7 @@ define symbol 0xc001b6b0 loc_c001b6b0
 define symbol 0xc001b880 f_c001b880 as proc
 define symbol 0xc001b9d8 f_c001b9d8 as proc
 define symbol 0xc001bc6c f_c001bc6c as proc
-define symbol 0xc001bf08 lbl_c001bf08
+define symbol 0xc001bf08 f_c001bf08 as proc
 define symbol 0xc001bfac loc_c001bfac
 define symbol 0xc001bfe0 loc_c001bfe0
 define symbol 0xc001bff4 loc_c001bff4
@@ -3189,13 +3188,13 @@ define symbol 0xc001c05c f_c001c05c as proc
 define symbol 0xc001c068 f_c001c068 as proc
 define symbol 0xc001c0a8 f_c001c0a8 as proc
 define symbol 0xc001c0b8 loc_c001c0b8
-define symbol 0xc001c1c1 lbl_c001c1c1
+define symbol 0xc001c1c1 f_c001c1c1 as proc
 define symbol 0xc001c2d4 loc_c001c2d4
 define symbol 0xc001c2e4 loc_c001c2e4
 define symbol 0xc001c554 loc_c001c554
 define symbol 0xc001c560 f_c001c560 as proc
 define symbol 0xc001c572 loc_c001c572
-define symbol 0xc001c580 lbl_c001c580
+define symbol 0xc001c580 f_c001c580 as proc
 define symbol 0xc001c588 f_c001c588 as proc
 define symbol 0xc001c5e4 loc_c001c5e4
 define symbol 0xc001c5e8 loc_c001c5e8
@@ -3205,9 +3204,9 @@ define symbol 0xc001c63a loc_c001c63a
 define symbol 0xc001c652 loc_c001c652
 define symbol 0xc001c680 loc_c001c680
 define symbol 0xc001c6a8 loc_c001c6a8
-define symbol 0xc001c6b0 lbl_c001c6b0
+define symbol 0xc001c6b0 f_c001c6b0 as proc
 define symbol 0xc001c6b8 f_c001c6b8 as proc
-define symbol 0xc001c700 lbl_c001c700
+define symbol 0xc001c700 f_c001c700 as proc
 define symbol 0xc001c724 loc_c001c724
 define symbol 0xc001c72c loc_c001c72c
 define symbol 0xc001c730 loc_c001c730
@@ -3223,7 +3222,7 @@ define symbol 0xc001c7ea loc_c001c7ea
 define symbol 0xc001c802 loc_c001c802
 define symbol 0xc001c810 loc_c001c810
 define symbol 0xc001c826 loc_c001c826
-define symbol 0xc001c858 lbl_c001c858
+define symbol 0xc001c858 f_c001c858 as proc
 define symbol 0xc001c878 loc_c001c878
 define symbol 0xc001c884 loc_c001c884
 define symbol 0xc001c888 loc_c001c888
@@ -3235,14 +3234,14 @@ define symbol 0xc001c8ea loc_c001c8ea
 define symbol 0xc001c918 loc_c001c918
 define symbol 0xc001c942 loc_c001c942
 define symbol 0xc001c970 loc_c001c970
-define symbol 0xc001c974 lbl_c001c974
+define symbol 0xc001c974 f_c001c974 as proc
 define symbol 0xc001c9a6 loc_c001c9a6
 define symbol 0xc001c9c2 loc_c001c9c2
 define symbol 0xc001ca02 loc_c001ca02
 define symbol 0xc001ca34 loc_c001ca34
 define symbol 0xc001ca64 loc_c001ca64
 define symbol 0xc001ca90 loc_c001ca90
-define symbol 0xc001ca94 lbl_c001ca94
+define symbol 0xc001ca94 f_c001ca94 as proc
 define symbol 0xc001ca98 loc_c001ca98
 define symbol 0xc001cac4 loc_c001cac4
 define symbol 0xc001cad0 f_c001cad0 as proc
@@ -3252,7 +3251,7 @@ define symbol 0xc001cb20 f_c001cb20 as proc
 define symbol 0xc001cb4a loc_c001cb4a
 define symbol 0xc001cb60 loc_c001cb60
 define symbol 0xc001cb90 loc_c001cb90
-define symbol 0xc001cb98 lbl_c001cb98
+define symbol 0xc001cb98 f_c001cb98 as proc
 define symbol 0xc001cba4 f_c001cba4 as proc
 define symbol 0xc001cbce loc_c001cbce
 define symbol 0xc001cbe4 loc_c001cbe4
@@ -3352,7 +3351,7 @@ define symbol 0xc001ddb0 loc_c001ddb0
 define symbol 0xc001ddb4 f_c001ddb4 as proc
 define symbol 0xc001ddf4 loc_c001ddf4
 define symbol 0xc001de20 loc_c001de20
-define symbol 0xc001de24 lbl_c001de24
+define symbol 0xc001de24 f_c001de24 as proc
 define symbol 0xc001de38 f_c001de38 as proc
 define symbol 0xc001de60 f_c001de60 as proc
 define symbol 0xc001de66 f_c001de66 as proc
@@ -3597,7 +3596,7 @@ define symbol 0xc001fd58 loc_c001fd58
 define symbol 0xc001fd5a loc_c001fd5a
 define symbol 0xc001fd60 f_c001fd60 as proc
 define symbol 0xc001fdc6 loc_c001fdc6
-define symbol 0xc001fdfd lbl_c001fdfd
+define symbol 0xc001fdfd f_c001fdfd as proc
 define symbol 0xc001fe04 loc_c001fe04
 define symbol 0xc001fe14 loc_c001fe14
 define symbol 0xc001fe42 loc_c001fe42
@@ -3613,26 +3612,26 @@ define symbol 0xc001ff14 loc_c001ff14
 define symbol 0xc001ff38 loc_c001ff38
 define symbol 0xc001ff4c loc_c001ff4c
 define symbol 0xc001ff58 loc_c001ff58
-define symbol 0xc001ff74 lbl_c001ff74
-define symbol 0xc001ff78 lbl_c001ff78
-define symbol 0xc001ff80 lbl_c001ff80
-define symbol 0xc001ff84 lbl_c001ff84
-define symbol 0xc001ff88 lbl_c001ff88
-define symbol 0xc001ff8c lbl_c001ff8c
-define symbol 0xc001ff90 lbl_c001ff90
-define symbol 0xc001ff94 lbl_c001ff94
-define symbol 0xc001ff98 lbl_c001ff98
+define symbol 0xc001ff74 f_c001ff74 as proc
+define symbol 0xc001ff78 f_c001ff78 as proc
+define symbol 0xc001ff80 f_c001ff80 as proc
+define symbol 0xc001ff84 f_c001ff84 as proc
+define symbol 0xc001ff88 f_c001ff88 as proc
+define symbol 0xc001ff8c f_c001ff8c as proc
+define symbol 0xc001ff90 f_c001ff90 as proc
+define symbol 0xc001ff94 f_c001ff94 as proc
+define symbol 0xc001ff98 f_c001ff98 as proc
 define symbol 0xc001ff9a loc_c001ff9a
 define symbol 0xc001ffa4 loc_c001ffa4
 define symbol 0xc001ffba loc_c001ffba
 define symbol 0xc001ffe0 f_c001ffe0 as proc
-define symbol 0xc001ffff lbl_c001ffff
-define symbol 0xc0020000 lbl_c0020000
+define symbol 0xc001ffff f_c001ffff as proc
+define symbol 0xc0020000 f_c0020000 as proc
 define symbol 0xc0020002 loc_c0020002
 define symbol 0xc0020008 f_c0020008 as proc
 define symbol 0xc0020034 loc_c0020034
 define symbol 0xc0020052 loc_c0020052
-define symbol 0xc0020058 lbl_c0020058
+define symbol 0xc0020058 f_c0020058 as proc
 define symbol 0xc0020090 loc_c0020090
 define symbol 0xc0020098 loc_c0020098
 define symbol 0xc00200a0 f_c00200a0 as proc
@@ -3654,15 +3653,15 @@ define symbol 0xc0020260 loc_c0020260
 define symbol 0xc0020264 f_c0020264 as proc
 define symbol 0xc0020280 loc_c0020280
 define symbol 0xc0020288 loc_c0020288
-define symbol 0xc00202f0 lbl_c00202f0
-define symbol 0xc0020300 lbl_c0020300
-define symbol 0xc002030c lbl_c002030c
-define symbol 0xc002031a lbl_c002031a
+define symbol 0xc00202f0 f_c00202f0 as proc
+define symbol 0xc0020300 f_c0020300 as proc
+define symbol 0xc002030c f_c002030c as proc
+define symbol 0xc002031a f_c002031a as proc
 define symbol 0xc0020330 loc_c0020330
-define symbol 0xc0020368 lbl_c0020368
-define symbol 0xc0020372 lbl_c0020372
-define symbol 0xc0020380 lbl_c0020380
-define symbol 0xc002038a lbl_c002038a
+define symbol 0xc0020368 f_c0020368 as proc
+define symbol 0xc0020372 f_c0020372 as proc
+define symbol 0xc0020380 f_c0020380 as proc
+define symbol 0xc002038a f_c002038a as proc
 define symbol 0xc0020398 loc_c0020398
 define symbol 0xc002039a loc_c002039a
 define symbol 0xc00203d0 loc_c00203d0
@@ -3677,27 +3676,27 @@ define symbol 0xc0020450 loc_c0020450
 define symbol 0xc0020454 loc_c0020454
 define symbol 0xc002046c loc_c002046c
 define symbol 0xc002046e loc_c002046e
-define symbol 0xc0020472 lbl_c0020472
-define symbol 0xc0020476 lbl_c0020476
+define symbol 0xc0020472 f_c0020472 as proc
+define symbol 0xc0020476 f_c0020476 as proc
 define symbol 0xc0020480 f_c0020480 as proc
 define symbol 0xc0020498 loc_c0020498
 define symbol 0xc00204d0 loc_c00204d0
 define symbol 0xc00204d2 loc_c00204d2
 define symbol 0xc00204ec loc_c00204ec
 define symbol 0xc0020504 f_c0020504 as proc
-define symbol 0xc0020530 lbl_c0020530
+define symbol 0xc0020530 f_c0020530 as proc
 define symbol 0xc002057a loc_c002057a
 define symbol 0xc0020582 loc_c0020582
 define symbol 0xc00205a8 loc_c00205a8
-define symbol 0xc00205aa lbl_c00205aa
+define symbol 0xc00205aa f_c00205aa as proc
 define symbol 0xc00205c8 loc_c00205c8
 define symbol 0xc00205da loc_c00205da
-define symbol 0xc00205e4 lbl_c00205e4
+define symbol 0xc00205e4 f_c00205e4 as proc
 define symbol 0xc00205fa loc_c00205fa
 define symbol 0xc0020630 loc_c0020630
 define symbol 0xc0020644 loc_c0020644
 define symbol 0xc002064c loc_c002064c
-define symbol 0xc0020654 lbl_c0020654
+define symbol 0xc0020654 f_c0020654 as proc
 define symbol 0xc002066e loc_c002066e
 define symbol 0xc0020694 loc_c0020694
 define symbol 0xc00206a4 f_c00206a4 as proc
@@ -3705,7 +3704,7 @@ define symbol 0xc00206ce loc_c00206ce
 define symbol 0xc00206d0 loc_c00206d0
 define symbol 0xc00206fa loc_c00206fa
 define symbol 0xc0020704 loc_c0020704
-define symbol 0xc002071f lbl_c002071f
+define symbol 0xc002071f f_c002071f as proc
 define symbol 0xc0020724 loc_c0020724
 define symbol 0xc0020728 loc_c0020728
 define symbol 0xc002072c loc_c002072c
@@ -3811,11 +3810,11 @@ define symbol 0xc0022850 loc_c0022850
 define symbol 0xc0022858 f_c0022858 as proc
 define symbol 0xc00228f4 f_c00228f4 as proc
 define symbol 0xc0022968 loc_c0022968
-define symbol 0xc002296c lbl_c002296c
-define symbol 0xc0022970 lbl_c0022970
-define symbol 0xc0022974 lbl_c0022974
-define symbol 0xc0022978 lbl_c0022978
-define symbol 0xc0022980 lbl_c0022980
+define symbol 0xc002296c f_c002296c as proc
+define symbol 0xc0022970 f_c0022970 as proc
+define symbol 0xc0022974 f_c0022974 as proc
+define symbol 0xc0022978 f_c0022978 as proc
+define symbol 0xc0022980 f_c0022980 as proc
 define symbol 0xc0022984 loc_c0022984
 define symbol 0xc0022a00 f_c0022a00 as proc
 define symbol 0xc00232e0 f_c00232e0 as proc
@@ -3838,22 +3837,22 @@ define symbol 0xc0023b08 loc_c0023b08
 define symbol 0xc0023b14 loc_c0023b14
 define symbol 0xc0023b24 loc_c0023b24
 define symbol 0xc0023e40 f_c0023e40 as proc
-define symbol 0xc0023eb8 lbl_c0023eb8
+define symbol 0xc0023eb8 f_c0023eb8 as proc
 define symbol 0xc0023fb4 loc_c0023fb4
-define symbol 0xc00240b4 lbl_c00240b4
+define symbol 0xc00240b4 f_c00240b4 as proc
 define symbol 0xc00240e8 loc_c00240e8
 define symbol 0xc0024124 loc_c0024124
-define symbol 0xc00241d4 lbl_c00241d4
+define symbol 0xc00241d4 f_c00241d4 as proc
 define symbol 0xc002420e loc_c002420e
 define symbol 0xc002424c loc_c002424c
-define symbol 0xc002430c lbl_c002430c
-define symbol 0xc00243d0 lbl_c00243d0
-define symbol 0xc0024468 lbl_c0024468
-define symbol 0xc0024540 lbl_c0024540
-define symbol 0xc0024618 lbl_c0024618
-define symbol 0xc00246e4 lbl_c00246e4
-define symbol 0xc0024778 lbl_c0024778
-define symbol 0xc00247c4 lbl_c00247c4
+define symbol 0xc002430c f_c002430c as proc
+define symbol 0xc00243d0 f_c00243d0 as proc
+define symbol 0xc0024468 f_c0024468 as proc
+define symbol 0xc0024540 f_c0024540 as proc
+define symbol 0xc0024618 f_c0024618 as proc
+define symbol 0xc00246e4 f_c00246e4 as proc
+define symbol 0xc0024778 f_c0024778 as proc
+define symbol 0xc00247c4 f_c00247c4 as proc
 define symbol 0xc0024810 loc_c0024810
 define symbol 0xc0024820 f_c0024820 as proc
 define symbol 0xc002484c loc_c002484c
@@ -4054,7 +4053,7 @@ define symbol 0xc0026360 loc_c0026360
 define symbol 0xc0026370 loc_c0026370
 define symbol 0xc00263b4 loc_c00263b4
 define symbol 0xc00263c8 loc_c00263c8
-define symbol 0xc00263d0 lbl_c00263d0
+define symbol 0xc00263d0 f_c00263d0 as proc
 define symbol 0xc00263e8 f_c00263e8 as proc
 define symbol 0xc0026420 f_c0026420 as proc
 define symbol 0xc0026470 loc_c0026470
@@ -4160,9 +4159,9 @@ define symbol 0xc00276f0 loc_c00276f0
 define symbol 0xc00276f8 loc_c00276f8
 define symbol 0xc00277d4 loc_c00277d4
 define symbol 0xc0027a84 loc_c0027a84
-define symbol 0xc0027e40 lbl_c0027e40
+define symbol 0xc0027e40 f_c0027e40 as proc
 define symbol 0xc0027e4e f_c0027e4e as proc
-define symbol 0xc0027e68 lbl_c0027e68
+define symbol 0xc0027e68 f_c0027e68 as proc
 define symbol 0xc0027e78 f_c0027e78 as proc
 define symbol 0xc0028144 loc_c0028144
 define symbol 0xc0028168 loc_c0028168
@@ -4193,7 +4192,7 @@ define symbol 0xc0028574 loc_c0028574
 define symbol 0xc0028598 loc_c0028598
 define symbol 0xc00285d8 loc_c00285d8
 define symbol 0xc0028600 loc_c0028600
-define symbol 0xc0028608 lbl_c0028608
+define symbol 0xc0028608 f_c0028608 as proc
 define symbol 0xc0028660 f_c0028660 as proc
 define symbol 0xc00286d4 f_c00286d4 as proc
 define symbol 0xc002872a loc_c002872a
@@ -4262,15 +4261,15 @@ define symbol 0xc0029334 f_c0029334 as proc
 define symbol 0xc002934c loc_c002934c
 define symbol 0xc0029368 loc_c0029368
 define symbol 0xc002936c f_c002936c as proc
-define symbol 0xc0029390 lbl_c0029390
+define symbol 0xc0029390 f_c0029390 as proc
 define symbol 0xc00293d2 loc_c00293d2
 define symbol 0xc0029402 loc_c0029402
-define symbol 0xc002940e lbl_c002940e
+define symbol 0xc002940e f_c002940e as proc
 define symbol 0xc0029436 loc_c0029436
-define symbol 0xc002944c lbl_c002944c
+define symbol 0xc002944c f_c002944c as proc
 define symbol 0xc0029476 loc_c0029476
 define symbol 0xc002948c loc_c002948c
-define symbol 0xc0029492 lbl_c0029492
+define symbol 0xc0029492 f_c0029492 as proc
 define symbol 0xc00294ec loc_c00294ec
 define symbol 0xc00294f4 f_c00294f4 as proc
 define symbol 0xc0029504 loc_c0029504
@@ -4311,7 +4310,7 @@ define symbol 0xc0029a00 loc_c0029a00
 define symbol 0xc0029a04 f_c0029a04 as proc
 define symbol 0xc0029a54 loc_c0029a54
 define symbol 0xc0029a70 loc_c0029a70
-define symbol 0xc0029a8c lbl_c0029a8c
+define symbol 0xc0029a8c f_c0029a8c as proc
 define symbol 0xc0029aa4 f_c0029aa4 as proc
 define symbol 0xc0029ac8 f_c0029ac8 as proc
 define symbol 0xc0029b0a loc_c0029b0a
@@ -4324,7 +4323,7 @@ define symbol 0xc0029c2c loc_c0029c2c
 define symbol 0xc0029c48 f_c0029c48 as proc
 define symbol 0xc0029ca8 loc_c0029ca8
 define symbol 0xc0029cb8 loc_c0029cb8
-define symbol 0xc0029cf4 lbl_c0029cf4
+define symbol 0xc0029cf4 f_c0029cf4 as proc
 define symbol 0xc0029d0c f_c0029d0c as proc
 define symbol 0xc0029d40 f_c0029d40 as proc
 define symbol 0xc0029d78 loc_c0029d78
@@ -4418,7 +4417,7 @@ define symbol 0xc002b06c loc_c002b06c
 define symbol 0xc002b070 f_c002b070 as proc
 define symbol 0xc002b0f8 f_c002b0f8 as proc
 define symbol 0xc002b184 f_c002b184 as proc
-define symbol 0xc002b194 lbl_c002b194
+define symbol 0xc002b194 f_c002b194 as proc
 define symbol 0xc002b1ac f_c002b1ac as proc
 define symbol 0xc002b1d0 f_c002b1d0 as proc
 define symbol 0xc002b212 loc_c002b212
@@ -4431,11 +4430,11 @@ define symbol 0xc002b3ce loc_c002b3ce
 define symbol 0xc002b3d4 f_c002b3d4 as proc
 define symbol 0xc002b3f0 f_c002b3f0 as proc
 define symbol 0xc002b436 loc_c002b436
-define symbol 0xc002b474 lbl_c002b474
-define symbol 0xc002b47a lbl_c002b47a
-define symbol 0xc002b484 lbl_c002b484
-define symbol 0xc002b48a lbl_c002b48a
-define symbol 0xc002b490 lbl_c002b490
+define symbol 0xc002b474 f_c002b474 as proc
+define symbol 0xc002b47a f_c002b47a as proc
+define symbol 0xc002b484 f_c002b484 as proc
+define symbol 0xc002b48a f_c002b48a as proc
+define symbol 0xc002b490 f_c002b490 as proc
 define symbol 0xc002b500 f_c002b500 as proc
 define symbol 0xc002b550 f_c002b550 as proc
 define symbol 0xc002b5ee loc_c002b5ee
@@ -4443,10 +4442,10 @@ define symbol 0xc002b634 loc_c002b634
 define symbol 0xc002b638 f_c002b638 as proc
 define symbol 0xc002b660 f_c002b660 as proc
 define symbol 0xc002b6e0 loc_c002b6e0
-define symbol 0xc002b6ec lbl_c002b6ec
-define symbol 0xc002b6f8 lbl_c002b6f8
-define symbol 0xc002b704 lbl_c002b704
-define symbol 0xc002b710 lbl_c002b710
+define symbol 0xc002b6ec f_c002b6ec as proc
+define symbol 0xc002b6f8 f_c002b6f8 as proc
+define symbol 0xc002b704 f_c002b704 as proc
+define symbol 0xc002b710 f_c002b710 as proc
 define symbol 0xc002b718 loc_c002b718
 define symbol 0xc002b804 loc_c002b804
 define symbol 0xc002b808 f_c002b808 as proc
@@ -4454,14 +4453,14 @@ define symbol 0xc002b84c f_c002b84c as proc
 define symbol 0xc002b884 loc_c002b884
 define symbol 0xc002b8a4 loc_c002b8a4
 define symbol 0xc002b8a8 f_c002b8a8 as proc
-define symbol 0xc002b908 lbl_c002b908
+define symbol 0xc002b908 f_c002b908 as proc
 define symbol 0xc002b920 f_c002b920 as proc
 define symbol 0xc002b944 f_c002b944 as proc
 define symbol 0xc002b9b0 loc_c002b9b0
-define symbol 0xc002b9b6 lbl_c002b9b6
-define symbol 0xc002b9c0 lbl_c002b9c0
-define symbol 0xc002b9c6 lbl_c002b9c6
-define symbol 0xc002b9cc lbl_c002b9cc
+define symbol 0xc002b9b6 f_c002b9b6 as proc
+define symbol 0xc002b9c0 f_c002b9c0 as proc
+define symbol 0xc002b9c6 f_c002b9c6 as proc
+define symbol 0xc002b9cc f_c002b9cc as proc
 define symbol 0xc002b9d0 loc_c002b9d0
 define symbol 0xc002ba90 f_c002ba90 as proc
 define symbol 0xc002bac0 f_c002bac0 as proc
@@ -4486,7 +4485,7 @@ define symbol 0xc002c0b6 loc_c002c0b6
 define symbol 0xc002c0d0 loc_c002c0d0
 define symbol 0xc002c0d4 f_c002c0d4 as proc
 define symbol 0xc002c0f8 f_c002c0f8 as proc
-define symbol 0xc002c1c1 lbl_c002c1c1
+define symbol 0xc002c1c1 f_c002c1c1 as proc
 define symbol 0xc002c1e0 f_c002c1e0 as proc
 define symbol 0xc002c200 loc_c002c200
 define symbol 0xc002c218 loc_c002c218
@@ -4588,7 +4587,7 @@ define symbol 0xc002d6e0 f_c002d6e0 as proc
 define symbol 0xc002d7a4 loc_c002d7a4
 define symbol 0xc002d948 loc_c002d948
 define symbol 0xc002ddc0 f_c002ddc0 as proc
-define symbol 0xc002dede lbl_c002dede
+define symbol 0xc002dede f_c002dede as proc
 define symbol 0xc002df30 loc_c002df30
 define symbol 0xc002e460 f_c002e460 as proc
 define symbol 0xc002e478 f_c002e478 as proc
@@ -4681,7 +4680,7 @@ define symbol 0xc002f5d8 f_c002f5d8 as proc
 define symbol 0xc002f610 loc_c002f610
 define symbol 0xc002f630 loc_c002f630
 define symbol 0xc002f634 f_c002f634 as proc
-define symbol 0xc002f698 lbl_c002f698
+define symbol 0xc002f698 f_c002f698 as proc
 define symbol 0xc002f6b0 f_c002f6b0 as proc
 define symbol 0xc002f6d4 f_c002f6d4 as proc
 define symbol 0xc002f768 f_c002f768 as proc
@@ -4699,21 +4698,21 @@ define symbol 0xc002fba8 f_c002fba8 as proc
 define symbol 0xc002fbf2 loc_c002fbf2
 define symbol 0xc002fbf4 loc_c002fbf4
 define symbol 0xc002fc00 f_c002fc00 as proc
-define symbol 0xc002fc58 lbl_c002fc58
+define symbol 0xc002fc58 f_c002fc58 as proc
 define symbol 0xc002fcb4 f_c002fcb4 as proc
 define symbol 0xc002fcd6 loc_c002fcd6
 define symbol 0xc002fcda loc_c002fcda
 define symbol 0xc002fce4 f_c002fce4 as proc
-define symbol 0xc002fd0c lbl_c002fd0c
+define symbol 0xc002fd0c f_c002fd0c as proc
 define symbol 0xc002fd32 loc_c002fd32
 define symbol 0xc002fd34 loc_c002fd34
-define symbol 0xc002fd40 lbl_c002fd40
+define symbol 0xc002fd40 f_c002fd40 as proc
 define symbol 0xc002fd72 loc_c002fd72
 define symbol 0xc002fd74 loc_c002fd74
-define symbol 0xc002fd80 lbl_c002fd80
+define symbol 0xc002fd80 f_c002fd80 as proc
 define symbol 0xc002fdba loc_c002fdba
 define symbol 0xc002fdc0 loc_c002fdc0
-define symbol 0xc002fdc8 lbl_c002fdc8
+define symbol 0xc002fdc8 f_c002fdc8 as proc
 define symbol 0xc002fdee loc_c002fdee
 define symbol 0xc002fdf0 loc_c002fdf0
 define symbol 0xc002fdf8 f_c002fdf8 as proc
@@ -4724,12 +4723,12 @@ define symbol 0xc002fe4c loc_c002fe4c
 define symbol 0xc002fe74 loc_c002fe74
 define symbol 0xc002fe80 f_c002fe80 as proc
 define symbol 0xc002fecc loc_c002fecc
-define symbol 0xc002feec lbl_c002feec
-define symbol 0xc002ff08 lbl_c002ff08
-define symbol 0xc002ff24 lbl_c002ff24
-define symbol 0xc002ffff lbl_c002ffff
-define symbol 0xc0030000 lbl_c0030000
-define symbol 0xc0030290 lbl_c0030290
+define symbol 0xc002feec f_c002feec as proc
+define symbol 0xc002ff08 f_c002ff08 as proc
+define symbol 0xc002ff24 f_c002ff24 as proc
+define symbol 0xc002ffff f_c002ffff as proc
+define symbol 0xc0030000 f_c0030000 as proc
+define symbol 0xc0030290 f_c0030290 as proc
 define symbol 0xc00303d8 loc_c00303d8
 define symbol 0xc003040c loc_c003040c
 define symbol 0xc0030414 f_c0030414 as proc
@@ -4839,27 +4838,27 @@ define symbol 0xc00322d4 f_c00322d4 as proc
 define symbol 0xc00322f8 loc_c00322f8
 define symbol 0xc0032320 loc_c0032320
 define symbol 0xc0032338 loc_c0032338
-define symbol 0xc0032344 lbl_c0032344
-define symbol 0xc003234c lbl_c003234c
-define symbol 0xc0032354 lbl_c0032354
-define symbol 0xc0032360 lbl_c0032360
-define symbol 0xc0032368 lbl_c0032368
-define symbol 0xc0032370 lbl_c0032370
-define symbol 0xc0032378 lbl_c0032378
-define symbol 0xc0032384 lbl_c0032384
-define symbol 0xc003238c lbl_c003238c
-define symbol 0xc0032394 lbl_c0032394
-define symbol 0xc00323a0 lbl_c00323a0
-define symbol 0xc00323a8 lbl_c00323a8
-define symbol 0xc00323b0 lbl_c00323b0
-define symbol 0xc00323b8 lbl_c00323b8
-define symbol 0xc00323c4 lbl_c00323c4
-define symbol 0xc00323cc lbl_c00323cc
-define symbol 0xc00323d4 lbl_c00323d4
-define symbol 0xc00323e8 lbl_c00323e8
-define symbol 0xc00323f0 lbl_c00323f0
-define symbol 0xc00323f8 lbl_c00323f8
-define symbol 0xc0032404 lbl_c0032404
+define symbol 0xc0032344 f_c0032344 as proc
+define symbol 0xc003234c f_c003234c as proc
+define symbol 0xc0032354 f_c0032354 as proc
+define symbol 0xc0032360 f_c0032360 as proc
+define symbol 0xc0032368 f_c0032368 as proc
+define symbol 0xc0032370 f_c0032370 as proc
+define symbol 0xc0032378 f_c0032378 as proc
+define symbol 0xc0032384 f_c0032384 as proc
+define symbol 0xc003238c f_c003238c as proc
+define symbol 0xc0032394 f_c0032394 as proc
+define symbol 0xc00323a0 f_c00323a0 as proc
+define symbol 0xc00323a8 f_c00323a8 as proc
+define symbol 0xc00323b0 f_c00323b0 as proc
+define symbol 0xc00323b8 f_c00323b8 as proc
+define symbol 0xc00323c4 f_c00323c4 as proc
+define symbol 0xc00323cc f_c00323cc as proc
+define symbol 0xc00323d4 f_c00323d4 as proc
+define symbol 0xc00323e8 f_c00323e8 as proc
+define symbol 0xc00323f0 f_c00323f0 as proc
+define symbol 0xc00323f8 f_c00323f8 as proc
+define symbol 0xc0032404 f_c0032404 as proc
 define symbol 0xc0032460 f_c0032460 as proc
 define symbol 0xc00325ac loc_c00325ac
 define symbol 0xc0032a80 f_c0032a80 as proc
@@ -4919,7 +4918,7 @@ define symbol 0xc00335ac loc_c00335ac
 define symbol 0xc00335cc loc_c00335cc
 define symbol 0xc00335d4 loc_c00335d4
 define symbol 0xc00335d8 loc_c00335d8
-define symbol 0xc00335ec lbl_c00335ec
+define symbol 0xc00335ec f_c00335ec as proc
 define symbol 0xc0033600 f_c0033600 as proc
 define symbol 0xc003362c f_c003362c as proc
 define symbol 0xc0033638 f_c0033638 as proc
@@ -4928,7 +4927,7 @@ define symbol 0xc0033680 f_c0033680 as proc
 define symbol 0xc0033740 loc_c0033740
 define symbol 0xc00339f4 loc_c00339f4
 define symbol 0xc0033a0c loc_c0033a0c
-define symbol 0xc0033c48 lbl_c0033c48
+define symbol 0xc0033c48 f_c0033c48 as proc
 define symbol 0xc0033c80 f_c0033c80 as proc
 define symbol 0xc0033d38 loc_c0033d38
 define symbol 0xc0033e38 loc_c0033e38
@@ -4980,7 +4979,7 @@ define symbol 0xc0035110 f_c0035110 as proc
 define symbol 0xc0035150 loc_c0035150
 define symbol 0xc0035190 loc_c0035190
 define symbol 0xc0035194 f_c0035194 as proc
-define symbol 0xc00351f0 lbl_c00351f0
+define symbol 0xc00351f0 f_c00351f0 as proc
 define symbol 0xc0035208 f_c0035208 as proc
 define symbol 0xc003522c f_c003522c as proc
 define symbol 0xc003526e loc_c003526e
@@ -5007,21 +5006,21 @@ define symbol 0xc0035840 f_c0035840 as proc
 define symbol 0xc0035890 f_c0035890 as proc
 define symbol 0xc00358c4 f_c00358c4 as proc
 define symbol 0xc00358e8 f_c00358e8 as proc
-define symbol 0xc0035980 lbl_c0035980
+define symbol 0xc0035980 f_c0035980 as proc
 define symbol 0xc00359a0 f_c00359a0 as proc
 define symbol 0xc00359cc loc_c00359cc
 define symbol 0xc00359ec loc_c00359ec
 define symbol 0xc00359f6 loc_c00359f6
 define symbol 0xc0035a04 loc_c0035a04
 define symbol 0xc0035a0c f_c0035a0c as proc
-define symbol 0xc0035a38 lbl_c0035a38
+define symbol 0xc0035a38 f_c0035a38 as proc
 define symbol 0xc0035a80 loc_c0035a80
-define symbol 0xc0035a82 lbl_c0035a82
+define symbol 0xc0035a82 f_c0035a82 as proc
 define symbol 0xc0035ac4 loc_c0035ac4
-define symbol 0xc0035ac8 lbl_c0035ac8
-define symbol 0xc0035ad0 lbl_c0035ad0
-define symbol 0xc0035ad6 lbl_c0035ad6
-define symbol 0xc0035ae8 lbl_c0035ae8
+define symbol 0xc0035ac8 f_c0035ac8 as proc
+define symbol 0xc0035ad0 f_c0035ad0 as proc
+define symbol 0xc0035ad6 f_c0035ad6 as proc
+define symbol 0xc0035ae8 f_c0035ae8 as proc
 define symbol 0xc0035af0 f_c0035af0 as proc
 define symbol 0xc0035b34 loc_c0035b34
 define symbol 0xc0035b38 f_c0035b38 as proc
@@ -5132,10 +5131,10 @@ define symbol 0xc003750c f_c003750c as proc
 define symbol 0xc0037530 f_c0037530 as proc
 define symbol 0xc0037620 f_c0037620 as proc
 define symbol 0xc0037700 loc_c0037700
-define symbol 0xc003786c lbl_c003786c
-define symbol 0xc0037898 lbl_c0037898
-define symbol 0xc00378d0 lbl_c00378d0
-define symbol 0xc0037900 lbl_c0037900
+define symbol 0xc003786c f_c003786c as proc
+define symbol 0xc0037898 f_c0037898 as proc
+define symbol 0xc00378d0 f_c00378d0 as proc
+define symbol 0xc0037900 f_c0037900 as proc
 define symbol 0xc0037920 loc_c0037920
 define symbol 0xc0037bc0 f_c0037bc0 as proc
 define symbol 0xc0037c40 loc_c0037c40
@@ -5162,7 +5161,7 @@ define symbol 0xc0038958 f_c0038958 as proc
 define symbol 0xc0038998 loc_c0038998
 define symbol 0xc00389d8 loc_c00389d8
 define symbol 0xc00389e0 f_c00389e0 as proc
-define symbol 0xc0038a38 lbl_c0038a38
+define symbol 0xc0038a38 f_c0038a38 as proc
 define symbol 0xc0038a50 f_c0038a50 as proc
 define symbol 0xc0038a74 f_c0038a74 as proc
 define symbol 0xc0038ae8 loc_c0038ae8
@@ -5188,7 +5187,7 @@ define symbol 0xc0038ea0 f_c0038ea0 as proc
 define symbol 0xc0038ec4 f_c0038ec4 as proc
 define symbol 0xc0038f04 loc_c0038f04
 define symbol 0xc0038f48 loc_c0038f48
-define symbol 0xc0038f4c lbl_c0038f4c
+define symbol 0xc0038f4c f_c0038f4c as proc
 define symbol 0xc0038f64 f_c0038f64 as proc
 define symbol 0xc0038f88 f_c0038f88 as proc
 define symbol 0xc0038fcc loc_c0038fcc
@@ -5196,7 +5195,7 @@ define symbol 0xc0039018 f_c0039018 as proc
 define symbol 0xc00390b0 f_c00390b0 as proc
 define symbol 0xc00390f4 loc_c00390f4
 define symbol 0xc0039134 f_c0039134 as proc
-define symbol 0xc00391a8 lbl_c00391a8
+define symbol 0xc00391a8 f_c00391a8 as proc
 define symbol 0xc00391c0 f_c00391c0 as proc
 define symbol 0xc0039200 f_c0039200 as proc
 define symbol 0xc0039224 f_c0039224 as proc
@@ -5272,11 +5271,11 @@ define symbol 0xc0039e10 f_c0039e10 as proc
 define symbol 0xc0039e38 loc_c0039e38
 define symbol 0xc0039e44 f_c0039e44 as proc
 define symbol 0xc0039e70 f_c0039e70 as proc
-define symbol 0xc0039eb8 lbl_c0039eb8
-define symbol 0xc0039ec2 lbl_c0039ec2
-define symbol 0xc0039ec6 lbl_c0039ec6
-define symbol 0xc0039eca lbl_c0039eca
-define symbol 0xc0039ece lbl_c0039ece
+define symbol 0xc0039eb8 f_c0039eb8 as proc
+define symbol 0xc0039ec2 f_c0039ec2 as proc
+define symbol 0xc0039ec6 f_c0039ec6 as proc
+define symbol 0xc0039eca f_c0039eca as proc
+define symbol 0xc0039ece f_c0039ece as proc
 define symbol 0xc0039ed0 loc_c0039ed0
 define symbol 0xc0039eec f_c0039eec as proc
 define symbol 0xc0039f08 loc_c0039f08
@@ -5287,7 +5286,7 @@ define symbol 0xc0039f94 loc_c0039f94
 define symbol 0xc0039f96 loc_c0039f96
 define symbol 0xc0039fcc loc_c0039fcc
 define symbol 0xc0039fd0 loc_c0039fd0
-define symbol 0xc0039fe6 lbl_c0039fe6
+define symbol 0xc0039fe6 f_c0039fe6 as proc
 define symbol 0xc0039ff0 f_c0039ff0 as proc
 define symbol 0xc003a028 loc_c003a028
 define symbol 0xc003a02c loc_c003a02c
@@ -5493,7 +5492,7 @@ define symbol 0xc003ba24 f_c003ba24 as proc
 define symbol 0xc003ba64 loc_c003ba64
 define symbol 0xc003baa4 loc_c003baa4
 define symbol 0xc003baa8 f_c003baa8 as proc
-define symbol 0xc003bb08 lbl_c003bb08
+define symbol 0xc003bb08 f_c003bb08 as proc
 define symbol 0xc003bb20 f_c003bb20 as proc
 define symbol 0xc003bb44 f_c003bb44 as proc
 define symbol 0xc003bb90 loc_c003bb90
@@ -5553,7 +5552,7 @@ define symbol 0xc003c184 loc_c003c184
 define symbol 0xc003c1a4 loc_c003c1a4
 define symbol 0xc003c1b4 loc_c003c1b4
 define symbol 0xc003c1b8 loc_c003c1b8
-define symbol 0xc003c1c1 lbl_c003c1c1
+define symbol 0xc003c1c1 f_c003c1c1 as proc
 define symbol 0xc003c1c4 f_c003c1c4 as proc
 define symbol 0xc003c1d8 loc_c003c1d8
 define symbol 0xc003c1f8 loc_c003c1f8
@@ -5810,7 +5809,7 @@ define symbol 0xc003fc68 loc_c003fc68
 define symbol 0xc003fda0 f_c003fda0 as proc
 define symbol 0xc003fe20 f_c003fe20 as proc
 define symbol 0xc003fe34 f_c003fe34 as proc
-define symbol 0xc003fe4c lbl_c003fe4c
+define symbol 0xc003fe4c f_c003fe4c as proc
 define symbol 0xc003fe60 f_c003fe60 as proc
 define symbol 0xc003fe98 loc_c003fe98
 define symbol 0xc003fec4 loc_c003fec4
@@ -5818,8 +5817,8 @@ define symbol 0xc003feec loc_c003feec
 define symbol 0xc003ff00 loc_c003ff00
 define symbol 0xc003ffa8 loc_c003ffa8
 define symbol 0xc003ffb8 loc_c003ffb8
-define symbol 0xc003ffff lbl_c003ffff
-define symbol 0xc0040000 lbl_c0040000
+define symbol 0xc003ffff f_c003ffff as proc
+define symbol 0xc0040000 f_c0040000 as proc
 define symbol 0xc0040080 loc_c0040080
 define symbol 0xc0040090 loc_c0040090
 define symbol 0xc00400c8 loc_c00400c8
@@ -5856,7 +5855,7 @@ define symbol 0xc0041318 f_c0041318 as proc
 define symbol 0xc0041358 loc_c0041358
 define symbol 0xc0041380 loc_c0041380
 define symbol 0xc0041384 f_c0041384 as proc
-define symbol 0xc00413e0 lbl_c00413e0
+define symbol 0xc00413e0 f_c00413e0 as proc
 define symbol 0xc00413f4 f_c00413f4 as proc
 define symbol 0xc0041418 f_c0041418 as proc
 define symbol 0xc004145a loc_c004145a
@@ -5901,13 +5900,13 @@ define symbol 0xc0042bec f_c0042bec as proc
 define symbol 0xc0042c3a loc_c0042c3a
 define symbol 0xc0042c5c loc_c0042c5c
 define symbol 0xc0042c78 loc_c0042c78
-define symbol 0xc0042cb2 lbl_c0042cb2
-define symbol 0xc0042cb8 lbl_c0042cb8
-define symbol 0xc0042cc2 lbl_c0042cc2
-define symbol 0xc0042cc8 lbl_c0042cc8
-define symbol 0xc0042cce lbl_c0042cce
+define symbol 0xc0042cb2 f_c0042cb2 as proc
+define symbol 0xc0042cb8 f_c0042cb8 as proc
+define symbol 0xc0042cc2 f_c0042cc2 as proc
+define symbol 0xc0042cc8 f_c0042cc8 as proc
+define symbol 0xc0042cce f_c0042cce as proc
 define symbol 0xc0042cd4 loc_c0042cd4
-define symbol 0xc0042cf0 lbl_c0042cf0
+define symbol 0xc0042cf0 f_c0042cf0 as proc
 define symbol 0xc0042d0c loc_c0042d0c
 define symbol 0xc0042d2a loc_c0042d2a
 define symbol 0xc0042d42 loc_c0042d42
@@ -5942,10 +5941,10 @@ define symbol 0xc0043144 loc_c0043144
 define symbol 0xc0043184 loc_c0043184
 define symbol 0xc0043188 f_c0043188 as proc
 define symbol 0xc00431c4 f_c00431c4 as proc
-define symbol 0xc0043228 lbl_c0043228
-define symbol 0xc0043268 lbl_c0043268
-define symbol 0xc00432a4 lbl_c00432a4
-define symbol 0xc00432e4 lbl_c00432e4
+define symbol 0xc0043228 f_c0043228 as proc
+define symbol 0xc0043268 f_c0043268 as proc
+define symbol 0xc00432a4 f_c00432a4 as proc
+define symbol 0xc00432e4 f_c00432e4 as proc
 define symbol 0xc0043312 loc_c0043312
 define symbol 0xc0043320 f_c0043320 as proc
 define symbol 0xc0043352 loc_c0043352
@@ -6066,11 +6065,11 @@ define symbol 0xc00448d0 loc_c00448d0
 define symbol 0xc00448d4 f_c00448d4 as proc
 define symbol 0xc00448f0 f_c00448f0 as proc
 define symbol 0xc0044988 f_c0044988 as proc
-define symbol 0xc0044a20 lbl_c0044a20
-define symbol 0xc0044a24 lbl_c0044a24
+define symbol 0xc0044a20 f_c0044a20 as proc
+define symbol 0xc0044a24 f_c0044a24 as proc
 define symbol 0xc0044a54 loc_c0044a54
 define symbol 0xc0044a68 loc_c0044a68
-define symbol 0xc0044a6c lbl_c0044a6c
+define symbol 0xc0044a6c f_c0044a6c as proc
 define symbol 0xc0044a70 f_c0044a70 as proc
 define symbol 0xc0044ae4 loc_c0044ae4
 define symbol 0xc0044ae8 loc_c0044ae8
@@ -6084,28 +6083,28 @@ define symbol 0xc0044b88 loc_c0044b88
 define symbol 0xc0044b96 loc_c0044b96
 define symbol 0xc0044bac loc_c0044bac
 define symbol 0xc0044bb4 f_c0044bb4 as proc
-define symbol 0xc0044bf4 lbl_c0044bf4
+define symbol 0xc0044bf4 f_c0044bf4 as proc
 define symbol 0xc0044c28 loc_c0044c28
 define symbol 0xc0044c2e loc_c0044c2e
-define symbol 0xc0044c3a lbl_c0044c3a
+define symbol 0xc0044c3a f_c0044c3a as proc
 define symbol 0xc0044c50 loc_c0044c50
 define symbol 0xc0044c56 loc_c0044c56
-define symbol 0xc0044c60 lbl_c0044c60
+define symbol 0xc0044c60 f_c0044c60 as proc
 define symbol 0xc0044c90 loc_c0044c90
 define symbol 0xc0044c96 loc_c0044c96
 define symbol 0xc0044ca0 loc_c0044ca0
-define symbol 0xc0044ca8 lbl_c0044ca8
+define symbol 0xc0044ca8 f_c0044ca8 as proc
 define symbol 0xc0044cb6 loc_c0044cb6
 define symbol 0xc0044ce0 loc_c0044ce0
 define symbol 0xc0044cec f_c0044cec as proc
-define symbol 0xc0044d1a lbl_c0044d1a
+define symbol 0xc0044d1a f_c0044d1a as proc
 define symbol 0xc0044d66 loc_c0044d66
 define symbol 0xc0044d70 loc_c0044d70
-define symbol 0xc0044d78 lbl_c0044d78
-define symbol 0xc0044d88 lbl_c0044d88
-define symbol 0xc0044d94 lbl_c0044d94
-define symbol 0xc0044dc0 lbl_c0044dc0
-define symbol 0xc0044dcc lbl_c0044dcc
+define symbol 0xc0044d78 f_c0044d78 as proc
+define symbol 0xc0044d88 f_c0044d88 as proc
+define symbol 0xc0044d94 f_c0044d94 as proc
+define symbol 0xc0044dc0 f_c0044dc0 as proc
+define symbol 0xc0044dcc f_c0044dcc as proc
 define symbol 0xc0044de0 loc_c0044de0
 define symbol 0xc0044e00 loc_c0044e00
 define symbol 0xc0044e0c loc_c0044e0c
@@ -6127,10 +6126,10 @@ define symbol 0xc0045410 loc_c0045410
 define symbol 0xc0045438 f_c0045438 as proc
 define symbol 0xc0045464 f_c0045464 as proc
 define symbol 0xc00454a0 f_c00454a0 as proc
-define symbol 0xc0045500 lbl_c0045500
-define symbol 0xc0045514 lbl_c0045514
-define symbol 0xc004552c lbl_c004552c
-define symbol 0xc0045544 lbl_c0045544
+define symbol 0xc0045500 f_c0045500 as proc
+define symbol 0xc0045514 f_c0045514 as proc
+define symbol 0xc004552c f_c004552c as proc
+define symbol 0xc0045544 f_c0045544 as proc
 define symbol 0xc0045554 loc_c0045554
 define symbol 0xc0045560 f_c0045560 as proc
 define symbol 0xc0045592 loc_c0045592
@@ -6307,7 +6306,7 @@ define symbol 0xc0047fe4 loc_c0047fe4
 define symbol 0xc0047fe8 f_c0047fe8 as proc
 define symbol 0xc0048020 loc_c0048020
 define symbol 0xc0048032 loc_c0048032
-define symbol 0xc0048038 lbl_c0048038
+define symbol 0xc0048038 f_c0048038 as proc
 define symbol 0xc0048050 f_c0048050 as proc
 define symbol 0xc0048074 f_c0048074 as proc
 define symbol 0xc0048090 f_c0048090 as proc
@@ -6496,26 +6495,26 @@ define symbol 0xc004a8cc loc_c004a8cc
 define symbol 0xc004a900 loc_c004a900
 define symbol 0xc004a904 loc_c004a904
 define symbol 0xc004a920 f_c004a920 as proc
-define symbol 0xc004a966 lbl_c004a966
+define symbol 0xc004a966 f_c004a966 as proc
 define symbol 0xc004a9b8 loc_c004a9b8
 define symbol 0xc004aa14 loc_c004aa14
-define symbol 0xc004aa20 lbl_c004aa20
-define symbol 0xc004aa54 lbl_c004aa54
-define symbol 0xc004aa84 lbl_c004aa84
-define symbol 0xc004aac0 lbl_c004aac0
-define symbol 0xc004aae8 lbl_c004aae8
-define symbol 0xc004ab14 lbl_c004ab14
+define symbol 0xc004aa20 f_c004aa20 as proc
+define symbol 0xc004aa54 f_c004aa54 as proc
+define symbol 0xc004aa84 f_c004aa84 as proc
+define symbol 0xc004aac0 f_c004aac0 as proc
+define symbol 0xc004aae8 f_c004aae8 as proc
+define symbol 0xc004ab14 f_c004ab14 as proc
 define symbol 0xc004ab34 loc_c004ab34
 define symbol 0xc004ab40 f_c004ab40 as proc
-define symbol 0xc004ab90 lbl_c004ab90
+define symbol 0xc004ab90 f_c004ab90 as proc
 define symbol 0xc004abcc loc_c004abcc
 define symbol 0xc004ac18 loc_c004ac18
-define symbol 0xc004ac20 lbl_c004ac20
-define symbol 0xc004ac40 lbl_c004ac40
-define symbol 0xc004ac5c lbl_c004ac5c
-define symbol 0xc004ac80 lbl_c004ac80
-define symbol 0xc004ac94 lbl_c004ac94
-define symbol 0xc004acac lbl_c004acac
+define symbol 0xc004ac20 f_c004ac20 as proc
+define symbol 0xc004ac40 f_c004ac40 as proc
+define symbol 0xc004ac5c f_c004ac5c as proc
+define symbol 0xc004ac80 f_c004ac80 as proc
+define symbol 0xc004ac94 f_c004ac94 as proc
+define symbol 0xc004acac f_c004acac as proc
 define symbol 0xc004acb8 loc_c004acb8
 define symbol 0xc004acc0 f_c004acc0 as proc
 define symbol 0xc004ace4 f_c004ace4 as proc
@@ -6587,7 +6586,7 @@ define symbol 0xc004c176 loc_c004c176
 define symbol 0xc004c18e loc_c004c18e
 define symbol 0xc004c192 loc_c004c192
 define symbol 0xc004c1c0 loc_c004c1c0
-define symbol 0xc004c1c1 lbl_c004c1c1
+define symbol 0xc004c1c1 f_c004c1c1 as proc
 define symbol 0xc004c1d4 loc_c004c1d4
 define symbol 0xc004c20c loc_c004c20c
 define symbol 0xc004c220 f_c004c220 as proc
@@ -6644,9 +6643,9 @@ define symbol 0xc004dc20 loc_c004dc20
 define symbol 0xc004dc54 loc_c004dc54
 define symbol 0xc004dc84 loc_c004dc84
 define symbol 0xc004dc94 loc_c004dc94
-define symbol 0xc004dc9a lbl_c004dc9a
+define symbol 0xc004dc9a f_c004dc9a as proc
 define symbol 0xc004dca6 f_c004dca6 as proc
-define symbol 0xc004dcb2 lbl_c004dcb2
+define symbol 0xc004dcb2 f_c004dcb2 as proc
 define symbol 0xc004dcc0 f_c004dcc0 as proc
 define symbol 0xc004ddd4 f_c004ddd4 as proc
 define symbol 0xc004de50 loc_c004de50
@@ -6768,7 +6767,7 @@ define symbol 0xc004fe38 f_c004fe38 as proc
 define symbol 0xc004fe98 f_c004fe98 as proc
 define symbol 0xc004ff20 f_c004ff20 as proc
 define symbol 0xc004ff84 f_c004ff84 as proc
-define symbol 0xc0050000 lbl_c0050000
+define symbol 0xc0050000 f_c0050000 as proc
 define symbol 0xc0050006 loc_c0050006
 define symbol 0xc005000c f_c005000c as proc
 define symbol 0xc005004c f_c005004c as proc
@@ -6944,7 +6943,7 @@ define symbol 0xc0052e90 loc_c0052e90
 define symbol 0xc0052e98 loc_c0052e98
 define symbol 0xc0052f1c loc_c0052f1c
 define symbol 0xc0052f7c loc_c0052f7c
-define symbol 0xc0052f82 lbl_c0052f82
+define symbol 0xc0052f82 f_c0052f82 as proc
 define symbol 0xc0052f9c loc_c0052f9c
 define symbol 0xc0053004 loc_c0053004
 define symbol 0xc0053020 f_c0053020 as proc
@@ -6978,13 +6977,13 @@ define symbol 0xc00534d8 f_c00534d8 as proc
 define symbol 0xc0053500 f_c0053500 as proc
 define symbol 0xc0053560 f_c0053560 as proc
 define symbol 0xc0053594 f_c0053594 as proc
-define symbol 0xc00535f4 lbl_c00535f4
-define symbol 0xc005360c lbl_c005360c
-define symbol 0xc0053624 lbl_c0053624
-define symbol 0xc0053638 lbl_c0053638
-define symbol 0xc0053650 lbl_c0053650
-define symbol 0xc0053668 lbl_c0053668
-define symbol 0xc0053680 lbl_c0053680
+define symbol 0xc00535f4 f_c00535f4 as proc
+define symbol 0xc005360c f_c005360c as proc
+define symbol 0xc0053624 f_c0053624 as proc
+define symbol 0xc0053638 f_c0053638 as proc
+define symbol 0xc0053650 f_c0053650 as proc
+define symbol 0xc0053668 f_c0053668 as proc
+define symbol 0xc0053680 f_c0053680 as proc
 define symbol 0xc0053690 loc_c0053690
 define symbol 0xc00536a0 f_c00536a0 as proc
 define symbol 0xc00536e0 loc_c00536e0
@@ -7179,8 +7178,8 @@ define symbol 0xc0055f84 loc_c0055f84
 define symbol 0xc0055fac loc_c0055fac
 define symbol 0xc0055fb4 f_c0055fb4 as proc
 define symbol 0xc005604c loc_c005604c
-define symbol 0xc0056060 lbl_c0056060
-define symbol 0xc0056064 lbl_c0056064
+define symbol 0xc0056060 f_c0056060 as proc
+define symbol 0xc0056064 f_c0056064 as proc
 define symbol 0xc0056068 f_c0056068 as proc
 define symbol 0xc00560b0 loc_c00560b0
 define symbol 0xc00560c8 loc_c00560c8
@@ -7191,7 +7190,7 @@ define symbol 0xc0056144 loc_c0056144
 define symbol 0xc0056168 loc_c0056168
 define symbol 0xc0056184 loc_c0056184
 define symbol 0xc0056196 loc_c0056196
-define symbol 0xc00561a4 lbl_c00561a4
+define symbol 0xc00561a4 f_c00561a4 as proc
 define symbol 0xc00561a8 f_c00561a8 as proc
 define symbol 0xc00561cc f_c00561cc as proc
 define symbol 0xc005622c loc_c005622c
@@ -7426,7 +7425,7 @@ define symbol 0xc0059470 loc_c0059470
 define symbol 0xc00594f4 loc_c00594f4
 define symbol 0xc0059558 loc_c0059558
 define symbol 0xc0059574 loc_c0059574
-define symbol 0xc005958c lbl_c005958c
+define symbol 0xc005958c f_c005958c as proc
 define symbol 0xc00595a0 f_c00595a0 as proc
 define symbol 0xc00595d8 loc_c00595d8
 define symbol 0xc00595e0 loc_c00595e0
@@ -7504,7 +7503,7 @@ define symbol 0xc0059f24 f_c0059f24 as proc
 define symbol 0xc0059f44 loc_c0059f44
 define symbol 0xc0059f48 loc_c0059f48
 define symbol 0xc0059f60 f_c0059f60 as proc
-define symbol 0xc005a060 lbl_c005a060
+define symbol 0xc005a060 f_c005a060 as proc
 define symbol 0xc005a140 f_c005a140 as proc
 define symbol 0xc005a230 loc_c005a230
 define symbol 0xc005a258 loc_c005a258
@@ -7649,7 +7648,7 @@ define symbol 0xc005c2e8 loc_c005c2e8
 define symbol 0xc005c380 f_c005c380 as proc
 define symbol 0xc005c488 loc_c005c488
 define symbol 0xc005c540 f_c005c540 as proc
-define symbol 0xc005c560 lbl_c005c560
+define symbol 0xc005c560 f_c005c560 as proc
 define symbol 0xc005c574 loc_c005c574
 define symbol 0xc005c6c0 f_c005c6c0 as proc
 define symbol 0xc005c6ce loc_c005c6ce
@@ -7661,7 +7660,7 @@ define symbol 0xc005c752 loc_c005c752
 define symbol 0xc005c76c loc_c005c76c
 define symbol 0xc005c7a8 loc_c005c7a8
 define symbol 0xc005c7c6 loc_c005c7c6
-define symbol 0xc005c7ca lbl_c005c7ca
+define symbol 0xc005c7ca f_c005c7ca as proc
 define symbol 0xc005c7d4 loc_c005c7d4
 define symbol 0xc005c810 loc_c005c810
 define symbol 0xc005c840 f_c005c840 as proc
@@ -7816,8 +7815,8 @@ define symbol 0xc005e5c4 loc_c005e5c4
 define symbol 0xc005e5c8 loc_c005e5c8
 define symbol 0xc005e602 loc_c005e602
 define symbol 0xc005e640 f_c005e640 as proc
-define symbol 0xc005e6ec lbl_c005e6ec
-define symbol 0xc005e74c lbl_c005e74c
+define symbol 0xc005e6ec f_c005e6ec as proc
+define symbol 0xc005e74c f_c005e74c as proc
 define symbol 0xc005e780 f_c005e780 as proc
 define symbol 0xc005e7d4 loc_c005e7d4
 define symbol 0xc005e7e6 loc_c005e7e6
@@ -7863,7 +7862,7 @@ define symbol 0xc005ece0 loc_c005ece0
 define symbol 0xc005ece8 loc_c005ece8
 define symbol 0xc005ecf4 loc_c005ecf4
 define symbol 0xc005ed00 loc_c005ed00
-define symbol 0xc005ed20 lbl_c005ed20
+define symbol 0xc005ed20 f_c005ed20 as proc
 define symbol 0xc005ed70 loc_c005ed70
 define symbol 0xc005ede8 loc_c005ede8
 define symbol 0xc005ee40 f_c005ee40 as proc
@@ -7908,7 +7907,7 @@ define symbol 0xc005f4c0 f_c005f4c0 as proc
 define symbol 0xc005f518 loc_c005f518
 define symbol 0xc005f520 loc_c005f520
 define symbol 0xc005f570 loc_c005f570
-define symbol 0xc005f5c0 lbl_c005f5c0
+define symbol 0xc005f5c0 f_c005f5c0 as proc
 define symbol 0xc005f604 loc_c005f604
 define symbol 0xc005f62c loc_c005f62c
 define symbol 0xc005f644 loc_c005f644
@@ -7967,7 +7966,7 @@ define symbol 0xc005ff64 loc_c005ff64
 define symbol 0xc005ff70 loc_c005ff70
 define symbol 0xc005ff80 loc_c005ff80
 define symbol 0xc005ffe0 f_c005ffe0 as proc
-define symbol 0xc0060000 lbl_c0060000
+define symbol 0xc0060000 f_c0060000 as proc
 define symbol 0xc0060048 loc_c0060048
 define symbol 0xc0060098 loc_c0060098
 define symbol 0xc00600a0 loc_c00600a0
@@ -8041,7 +8040,7 @@ define symbol 0xc0060ce8 loc_c0060ce8
 define symbol 0xc0060d60 loc_c0060d60
 define symbol 0xc0060d80 f_c0060d80 as proc
 define symbol 0xc0060e00 loc_c0060e00
-define symbol 0xc0060e40 lbl_c0060e40
+define symbol 0xc0060e40 f_c0060e40 as proc
 define symbol 0xc0060ec0 loc_c0060ec0
 define symbol 0xc0060ed0 loc_c0060ed0
 define symbol 0xc0060f00 f_c0060f00 as proc
@@ -8060,7 +8059,7 @@ define symbol 0xc0061198 loc_c0061198
 define symbol 0xc00611a0 loc_c00611a0
 define symbol 0xc00611a4 loc_c00611a4
 define symbol 0xc00611e4 loc_c00611e4
-define symbol 0xc0061200 lbl_c0061200
+define symbol 0xc0061200 f_c0061200 as proc
 define symbol 0xc0061280 loc_c0061280
 define symbol 0xc00612b4 loc_c00612b4
 define symbol 0xc00612c0 f_c00612c0 as proc
@@ -8086,10 +8085,10 @@ define symbol 0xc0061680 f_c0061680 as proc
 define symbol 0xc0061704 loc_c0061704
 define symbol 0xc006170c loc_c006170c
 define symbol 0xc0061724 loc_c0061724
-define symbol 0xc0061740 lbl_c0061740
+define symbol 0xc0061740 f_c0061740 as proc
 define symbol 0xc0061754 loc_c0061754
 define symbol 0xc0061788 loc_c0061788
-define symbol 0xc00617a8 lbl_c00617a8
+define symbol 0xc00617a8 f_c00617a8 as proc
 define symbol 0xc00617e0 f_c00617e0 as proc
 define symbol 0xc0061848 loc_c0061848
 define symbol 0xc006184c loc_c006184c
@@ -8184,7 +8183,7 @@ define symbol 0xc0062bd4 loc_c0062bd4
 define symbol 0xc0062be0 f_c0062be0 as proc
 define symbol 0xc0062c48 loc_c0062c48
 define symbol 0xc0062c4c loc_c0062c4c
-define symbol 0xc0062c60 lbl_c0062c60
+define symbol 0xc0062c60 f_c0062c60 as proc
 define symbol 0xc0062ce0 f_c0062ce0 as proc
 define symbol 0xc0062d38 loc_c0062d38
 define symbol 0xc0062d48 loc_c0062d48
@@ -8270,9 +8269,9 @@ define symbol 0xc00639c0 f_c00639c0 as proc
 define symbol 0xc0063a20 f_c0063a20 as proc
 define symbol 0xc0063a60 loc_c0063a60
 define symbol 0xc0063a6c loc_c0063a6c
-define symbol 0xc0063a80 lbl_c0063a80
+define symbol 0xc0063a80 f_c0063a80 as proc
 define symbol 0xc0063ad8 loc_c0063ad8
-define symbol 0xc0063ae0 lbl_c0063ae0
+define symbol 0xc0063ae0 f_c0063ae0 as proc
 define symbol 0xc0063b40 f_c0063b40 as proc
 define symbol 0xc0063b90 loc_c0063b90
 define symbol 0xc0063ba0 f_c0063ba0 as proc
@@ -8296,7 +8295,7 @@ define symbol 0xc0064020 f_c0064020 as proc
 define symbol 0xc0064080 f_c0064080 as proc
 define symbol 0xc00640d0 loc_c00640d0
 define symbol 0xc00640d8 loc_c00640d8
-define symbol 0xc00640e0 lbl_c00640e0
+define symbol 0xc00640e0 f_c00640e0 as proc
 define symbol 0xc0064114 loc_c0064114
 define symbol 0xc0064134 loc_c0064134
 define symbol 0xc0064140 f_c0064140 as proc
@@ -8312,9 +8311,9 @@ define symbol 0xc0064240 loc_c0064240
 define symbol 0xc0064280 loc_c0064280
 define symbol 0xc00642c0 f_c00642c0 as proc
 define symbol 0xc0064300 f_c0064300 as proc
-define symbol 0xc0064340 lbl_c0064340
+define symbol 0xc0064340 f_c0064340 as proc
 define symbol 0xc0064398 loc_c0064398
-define symbol 0xc00643c0 lbl_c00643c0
+define symbol 0xc00643c0 f_c00643c0 as proc
 define symbol 0xc0064400 loc_c0064400
 define symbol 0xc0064440 f_c0064440 as proc
 define symbol 0xc0064480 f_c0064480 as proc
@@ -8325,31 +8324,31 @@ define symbol 0xc0064500 f_c0064500 as proc
 define symbol 0xc0064540 f_c0064540 as proc
 define symbol 0xc0064580 f_c0064580 as proc
 define symbol 0xc00645a4 loc_c00645a4
-define symbol 0xc00645c0 lbl_c00645c0
+define symbol 0xc00645c0 f_c00645c0 as proc
 define symbol 0xc0064600 f_c0064600 as proc
 define symbol 0xc0064640 f_c0064640 as proc
 define symbol 0xc0064680 f_c0064680 as proc
-define symbol 0xc00646c0 lbl_c00646c0
-define symbol 0xc0064700 lbl_c0064700
+define symbol 0xc00646c0 f_c00646c0 as proc
+define symbol 0xc0064700 f_c0064700 as proc
 define symbol 0xc0064740 f_c0064740 as proc
-define symbol 0xc0064780 lbl_c0064780
+define symbol 0xc0064780 f_c0064780 as proc
 define symbol 0xc00647c0 f_c00647c0 as proc
 define symbol 0xc0064800 f_c0064800 as proc
 define symbol 0xc0064840 f_c0064840 as proc
 define symbol 0xc0064864 loc_c0064864
 define symbol 0xc006486c loc_c006486c
-define symbol 0xc0064880 lbl_c0064880
-define symbol 0xc00648c0 lbl_c00648c0
-define symbol 0xc0064900 lbl_c0064900
+define symbol 0xc0064880 f_c0064880 as proc
+define symbol 0xc00648c0 f_c00648c0 as proc
+define symbol 0xc0064900 f_c0064900 as proc
 define symbol 0xc0064940 f_c0064940 as proc
 define symbol 0xc0064980 f_c0064980 as proc
-define symbol 0xc00649c0 lbl_c00649c0
-define symbol 0xc0064a00 lbl_c0064a00
+define symbol 0xc00649c0 f_c00649c0 as proc
+define symbol 0xc0064a00 f_c0064a00 as proc
 define symbol 0xc0064a40 f_c0064a40 as proc
 define symbol 0xc0064a80 f_c0064a80 as proc
 define symbol 0xc0064ac0 f_c0064ac0 as proc
 define symbol 0xc0064b00 f_c0064b00 as proc
-define symbol 0xc0064b40 lbl_c0064b40
+define symbol 0xc0064b40 f_c0064b40 as proc
 define symbol 0xc0064b80 f_c0064b80 as proc
 define symbol 0xc0064bc0 f_c0064bc0 as proc
 define symbol 0xc0064c00 f_c0064c00 as proc
@@ -8364,10 +8363,10 @@ define symbol 0xc0064dc0 f_c0064dc0 as proc
 define symbol 0xc0064e00 f_c0064e00 as proc
 define symbol 0xc0064e20 f_c0064e20 as proc
 define symbol 0xc0064e22 loc_c0064e22
-define symbol 0xc0064e40 lbl_c0064e40
+define symbol 0xc0064e40 f_c0064e40 as proc
 define symbol 0xc0064e60 loc_c0064e60
-define symbol 0xc0064e80 lbl_c0064e80
-define symbol 0xc0064ea0 lbl_c0064ea0
+define symbol 0xc0064e80 f_c0064e80 as proc
+define symbol 0xc0064ea0 f_c0064ea0 as proc
 define symbol 0xc0064ec0 f_c0064ec0 as proc
 define symbol 0xc0064ee0 f_c0064ee0 as proc
 define symbol 0xc0064f00 loc_c0064f00
@@ -8377,26 +8376,26 @@ define symbol 0xc0064f60 f_c0064f60 as proc
 define symbol 0xc0064f64 loc_c0064f64
 define symbol 0xc0064f80 f_c0064f80 as proc
 define symbol 0xc0064f98 loc_c0064f98
-define symbol 0xc0064fa0 lbl_c0064fa0
+define symbol 0xc0064fa0 f_c0064fa0 as proc
 define symbol 0xc0064fc0 f_c0064fc0 as proc
 define symbol 0xc0064fe0 f_c0064fe0 as proc
 define symbol 0xc0065000 f_c0065000 as proc
 define symbol 0xc0065020 f_c0065020 as proc
 define symbol 0xc0065040 f_c0065040 as proc
-define symbol 0xc0065060 lbl_c0065060
-define symbol 0xc0065080 lbl_c0065080
-define symbol 0xc00650a0 lbl_c00650a0
-define symbol 0xc00650c0 lbl_c00650c0
-define symbol 0xc00650e0 lbl_c00650e0
-define symbol 0xc0065100 lbl_c0065100
-define symbol 0xc0065120 lbl_c0065120
-define symbol 0xc0065140 lbl_c0065140
+define symbol 0xc0065060 f_c0065060 as proc
+define symbol 0xc0065080 f_c0065080 as proc
+define symbol 0xc00650a0 f_c00650a0 as proc
+define symbol 0xc00650c0 f_c00650c0 as proc
+define symbol 0xc00650e0 f_c00650e0 as proc
+define symbol 0xc0065100 f_c0065100 as proc
+define symbol 0xc0065120 f_c0065120 as proc
+define symbol 0xc0065140 f_c0065140 as proc
 define symbol 0xc0065160 f_c0065160 as proc
 define symbol 0xc0065180 f_c0065180 as proc
 define symbol 0xc00651a0 f_c00651a0 as proc
-define symbol 0xc00651c0 lbl_c00651c0
+define symbol 0xc00651c0 f_c00651c0 as proc
 define symbol 0xc00651e0 f_c00651e0 as proc
-define symbol 0xc0065200 lbl_c0065200
+define symbol 0xc0065200 f_c0065200 as proc
 define symbol 0xc0065220 f_c0065220 as proc
 define symbol 0xc0065240 f_c0065240 as proc
 define symbol 0xc0065260 f_c0065260 as proc
@@ -8426,8 +8425,8 @@ define symbol 0xc0065520 f_c0065520 as proc
 define symbol 0xc0065540 f_c0065540 as proc
 define symbol 0xc0065560 f_c0065560 as proc
 define symbol 0xc0065580 f_c0065580 as proc
-define symbol 0xc00655a0 lbl_c00655a0
-define symbol 0xc0069788 lbl_c0069788
+define symbol 0xc00655a0 f_c00655a0 as proc
+define symbol 0xc0069788 f_c0069788 as proc
 define symbol 0xc0069789 str_c0069789
 define symbol 0xc00699a6 str_c00699a6
 define symbol 0xc00699ec str_c00699ec
@@ -8444,17 +8443,17 @@ define symbol 0xc0069cf4 str_c0069cf4
 define symbol 0xc0069d56 str_c0069d56
 define symbol 0xc0069d85 str_c0069d85
 define symbol 0xc0069dd7 str_c0069dd7
-define symbol 0xc006ae90 lbl_c006ae90
-define symbol 0xc006c348 lbl_c006c348
-define symbol 0xc006d800 lbl_c006d800
-define symbol 0xc006ebf4 lbl_c006ebf4
-define symbol 0xc006ee54 lbl_c006ee54
-define symbol 0xc006f0b4 lbl_c006f0b4
-define symbol 0xc006f314 lbl_c006f314
-define symbol 0xc006f574 lbl_c006f574
-define symbol 0xc006f7d4 lbl_c006f7d4
+define symbol 0xc006ae90 f_c006ae90 as proc
+define symbol 0xc006c348 f_c006c348 as proc
+define symbol 0xc006d800 f_c006d800 as proc
+define symbol 0xc006ebf4 f_c006ebf4 as proc
+define symbol 0xc006ee54 f_c006ee54 as proc
+define symbol 0xc006f0b4 f_c006f0b4 as proc
+define symbol 0xc006f314 f_c006f314 as proc
+define symbol 0xc006f574 f_c006f574 as proc
+define symbol 0xc006f7d4 f_c006f7d4 as proc
 define symbol 0xc006fa34 str_c006fa34
-define symbol 0xc006fa38 lbl_c006fa38
+define symbol 0xc006fa38 f_c006fa38 as proc
 define symbol 0xc0070758 lbl_c0070758
 define symbol 0xc0071478 lbl_c0071478
 define symbol 0xc0072018 lbl_c0072018
@@ -11083,7 +11082,6 @@ define symbol 0xc011e67a lbl_c011e67a
 define symbol 0xc0121d64 lbl_c0121d64
 define symbol 0xc012556a lbl_c012556a
 define symbol 0xc0126100 lbl_c0126100
-define symbol 0xc014526c lbl_c014526c
 define symbol 0xc019999a lbl_c019999a
 define symbol 0xc01c041a lbl_c01c041a
 define symbol 0xc01d0000 lbl_c01d0000
@@ -11349,11 +11347,11 @@ define symbol 0xc87d4000 lbl_c87d4000
 define symbol 0xc87d4004 lbl_c87d4004
 print region 0x1180bc00, 0x8400 as code
 print region 0x11814000, 0x3180 as code
-print region 0x11819ac8, 0x0818 as word
+print region 0x11819ac8, 0x0818 as mixed
 print region 0x1181a2e0, 0x0260 as code
 print region 0x1181a540, 0x019c as word
 print region 0x1181a6e0, 0x01e0 as code
 print region 0x1181a8c0, 0x0180 as code
 print region 0x1181aa40, 0x01c0 as code
 print region 0xc0000000, 0x655a0 as code
-print region 0xc00655a0, 0x00100000 as mixed
+print region 0xc00655a0, 0xc0b64 as mixed
