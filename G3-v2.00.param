@@ -213,7 +213,7 @@ define symbol 0x11812b68 loc_11812b68
 define symbol 0x11812ba0 f_11812ba0 as proc
 define symbol 0x11812bcc loc_11812bcc
 define symbol 0x11812c20 f_fx_reverb_11812c20 as proc
-define symbol 0x11812c56 f_11812c56 as proc
+define symbol 0x11812c60 f_11812c60 as proc
 define symbol 0x11812c74 loc_11812c74
 define symbol 0x11812c80 __intsp_stub as proc
 define symbol 0x11812ca0 stub_call_c0048c18 as proc

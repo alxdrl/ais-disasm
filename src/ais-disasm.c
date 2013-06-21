@@ -203,6 +203,16 @@ typedef struct {
 
 static tic6x_reg_t regs[2][32];
 
+#define XSTR(s) STR(s)
+#define STR(s) #s
+#define FMTNS(s) "%" XSTR(s##_MAX) "s"
+#define FMTNSPR(s) "%-" XSTR(s##_MAX) "s"
+#define DATA_MAX 8
+#define LABEL_MAX 40
+#define XREF_MAX 48
+#define INSN_MAX 48
+#define MIN(a,b) ((a)<(b)?(a):(b))
+
 static int
 gather_xref(char *s, char *xref)
 {
@@ -219,7 +229,7 @@ gather_xref(char *s, char *xref)
 		regs[idx][regnum].val = (regs[idx][regnum].val & 0x0000ffff) | (uint32_t)val;
 		char *symbol = tic6x_get_symbol_name(regs[idx][regnum].val);
 		if (symbol) {
-			sprintf(xref, "%s%d = %s [xref]", regfile, regnum, symbol);
+			snprintf(xref, XREF_MAX, "%s%d = %s [xref]", regfile, regnum, symbol);
 		} else {
 			float fval = *(float *)&(regs[idx][regnum].val);
 			if (fval > 1e-12)
@@ -248,15 +258,6 @@ gather_xref(char *s, char *xref)
 	return 0;
 }
 
-#define XSTR(s) STR(s)
-#define STR(s) #s
-#define FMTNS(s) "%" XSTR(s##_MAX) "s"
-#define FMTNSPR(s) "%-" XSTR(s##_MAX) "s"
-#define DATA_MAX 8
-#define LABEL_MAX 40
-#define XREF_MAX 48
-#define INSN_MAX 48
-#define MIN(a,b) ((a)<(b)?(a):(b))
 static void
 tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype tic6x_print_func)
 {
