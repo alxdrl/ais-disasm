@@ -213,7 +213,7 @@ define symbol 0x11812b68 loc_11812b68
 define symbol 0x11812ba0 f_11812ba0 as proc
 define symbol 0x11812bcc loc_11812bcc
 define symbol 0x11812c20 f_fx_reverb_11812c20 as proc
-define symbol 0x11812c56 f_11812c56 as proc
+define symbol 0x11812c60 f_11812c60 as proc
 define symbol 0x11812c74 loc_11812c74
 define symbol 0x11812c80 __intsp_stub as proc
 define symbol 0x11812ca0 stub_call_c0048c18 as proc
@@ -3895,7 +3895,7 @@ define symbol 0xc0023b78 loc_c0023b78
 define symbol 0xc0023b94 loc_c0023b94
 define symbol 0xc0023bb0 loc_c0023bb0
 define symbol 0xc0023bc0 f_c0023bc0 as proc
-define symbol 0xc0023bd0 f_c0023bd0 as proc
+define symbol 0xc0023bd0 f_usb_task as proc
 define symbol 0xc0023bd8 loc_c0023bd8
 define symbol 0xc0023bee loc_c0023bee
 define symbol 0xc0023c2c loc_c0023c2c
@@ -7062,7 +7062,7 @@ define symbol 0xc0051490 f_c0051490 as proc
 define symbol 0xc00514d8 loc_c00514d8
 define symbol 0xc005152c loc_c005152c
 define symbol 0xc0051554 f_c0051554 as proc
-define symbol 0xc00515e0 f_c00515e0 as proc
+define symbol 0xc00515e0 f_usb_c00515e0 as proc
 define symbol 0xc0051648 loc_c0051648
 define symbol 0xc0051670 loc_c0051670
 define symbol 0xc005168a loc_c005168a
@@ -9678,7 +9678,7 @@ define symbol 0xc0097ce0 lbl_c0097ce0
 define symbol 0xc0097ce4 lbl_c0097ce4
 define symbol 0xc0097ce8 lbl_c0097ce8
 define symbol 0xc0097cec lbl_c0097cec
-define symbol 0xc0097cf8 lbl_c0097cf8
+define symbol 0xc0097cf8 lbl_usb_device_descriptor
 define symbol 0xc0097d0a lbl_c0097d0a
 define symbol 0xc0097d1c lbl_c0097d1c
 define symbol 0xc0097d26 lbl_c0097d26
@@ -11262,7 +11262,7 @@ define symbol 0xc0340648 buffer_441000_5
 define symbol 0xc03ac0f0 looper_buffer_0
 define symbol 0xc0734740 looper_buffer_1
 print region 0x1180b000,  0xb060 as code
-print region 0x11816060,  0x32e0 as word
+print region 0x11816060,  0x32e0 as mixed
 print region 0x11819340,   0x780 as code
 print region 0x11f00000,  0x1000 as word
 print region 0xc0000000, 0x64e20 as code
