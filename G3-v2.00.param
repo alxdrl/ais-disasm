@@ -10811,8 +10811,8 @@ define symbol 0xc00c8648 lbl_c00c8648
 define symbol 0xc00c86d4 lbl_c00c86d4
 define symbol 0xc00c8760 lbl_c00c8760
 define symbol 0xc00c87e8 lbl_c00c87e8
-define symbol 0xc00c8870 L1DRAM_loc_table_6_8870
-define symbol 0xc00c8888 L1DRAM_loc_table_6_8888
+define symbol 0xc00c8870 L1DRAM_loc_table_6_w_210
+define symbol 0xc00c8888 L1DRAM_loc_table_6_w_168
 define symbol 0xc00c88a0 SDRAM_zone_table_6_88a0
 define symbol 0xc00c88e8 SDRAM_zone_table_1_88e8
 define symbol 0xc00c88f8 lbl_c00c88f8
