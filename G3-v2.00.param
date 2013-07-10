@@ -407,7 +407,7 @@ define symbol 0x11815008 loc_11815008
 define symbol 0x11815020 loc_11815020
 define symbol 0x118150ac loc_118150ac
 define symbol 0x118150c4 loc_118150c4
-define symbol 0x11815108 f_11815108 as proc
+define symbol 0x11815108 f_lcdc_write_byte as proc
 define symbol 0x11815130 loc_11815130
 define symbol 0x1181514a loc_1181514a
 define symbol 0x118151d8 loc_118151d8
@@ -507,7 +507,7 @@ define symbol 0x11815ee0 stub_call_c0063120 as proc
 define symbol 0x11815f00 stub_call_c004d8e0 as proc
 define symbol 0x11815f20 stub_call_c0018330 as proc
 define symbol 0x11815f40 f_draw_string_h7_stub as proc
-define symbol 0x11815f60 f_clear_screen_deep_stub as proc
+define symbol 0x11815f60 f_clear_scrbuf_deep_stub as proc
 define symbol 0x11815f80 __epilog_64740_stub_2 as proc
 define symbol 0x11815fa0 f_get_w_io_GP2P5_state_stub as proc
 define symbol 0x11815fc0 stub_call_c0059234 as proc
@@ -775,7 +775,7 @@ define symbol 0xc0000d40 loc_c0000d40
 define symbol 0xc0000d64 loc_c0000d64
 define symbol 0xc0000d76 loc_c0000d76
 define symbol 0xc0000d8c loc_c0000d8c
-define symbol 0xc0000dd4 f_clear_screen_deep as proc
+define symbol 0xc0000dd4 f_clear_scrbuf_deep as proc
 define symbol 0xc0000e00 loc_c0000e00
 define symbol 0xc0000e60 loc_c0000e60
 define symbol 0xc0000e82 loc_c0000e82
@@ -789,7 +789,7 @@ define symbol 0xc0000f74 loc_c0000f74
 define symbol 0xc0000f80 f_black_screen as proc
 define symbol 0xc0000fa0 loc_c0000fa0
 define symbol 0xc0000fd6 loc_c0000fd6
-define symbol 0xc0000ff4 f_clear_screen_b as proc
+define symbol 0xc0000ff4 f_clear_scrbuf_b as proc
 define symbol 0xc0001014 loc_c0001014
 define symbol 0xc0001052 loc_c0001052
 define symbol 0xc0001070 f_c0001070 as proc
@@ -3034,12 +3034,12 @@ define symbol 0xc0017f8c loc_c0017f8c
 define symbol 0xc0018024 loc_c0018024
 define symbol 0xc0018198 loc_c0018198
 define symbol 0xc00181ac f_lcdc_set_contrast as proc
-define symbol 0xc00181e8 f_c00181e8 as proc
+define symbol 0xc00181e8 f_lcd_clear as proc
 define symbol 0xc0018204 loc_c0018204
 define symbol 0xc0018244 loc_c0018244
 define symbol 0xc001826c loc_c001826c
 define symbol 0xc0018288 loc_c0018288
-define symbol 0xc0018290 f_clear_screen as proc
+define symbol 0xc0018290 f_clear_scrbuf as proc
 define symbol 0xc00182b0 loc_c00182b0
 define symbol 0xc0018310 loc_c0018310
 define symbol 0xc0018330 f_c0018330 as proc
@@ -3213,10 +3213,10 @@ define symbol 0xc001ac90 gt_103_c001ac90
 define symbol 0xc001ac96 loc_c001ac96
 define symbol 0xc001accc loc_c001accc
 define symbol 0xc001ad28 loc_c001ad28
-define symbol 0xc001ad30 f_c001ad30 as proc
+define symbol 0xc001ad30 f_get_w_104_size as proc
 define symbol 0xc001ad52 loc_c001ad52
 define symbol 0xc001ad54 loc_c001ad54
-define symbol 0xc001ad60 f_c001ad60 as proc
+define symbol 0xc001ad60 f_return_104 as proc
 define symbol 0xc001ad64 f_c001ad64 as proc
 define symbol 0xc001ae28 f_c001ae28 as proc
 define symbol 0xc001aeb8 loc_c001aeb8
@@ -3225,7 +3225,7 @@ define symbol 0xc001af70 loc_c001af70
 define symbol 0xc001b030 f_next_multiple as proc
 define symbol 0xc001b056 loc_c001b056
 define symbol 0xc001b058 loc_c001b058
-define symbol 0xc001b064 f_c001b064 as proc
+define symbol 0xc001b064 f_count_zero_words as proc
 define symbol 0xc001b084 loc_c001b084
 define symbol 0xc001b0a0 loc_c001b0a0
 define symbol 0xc001b0b0 loc_c001b0b0
@@ -5168,15 +5168,15 @@ define symbol 0xc0033cee loc_c0033cee
 define symbol 0xc0033cf4 f_fx_HD_Reverb_c0033cf4 as proc
 define symbol 0xc0033d10 f_fx_parm_HD_Reverb_Tone as proc
 define symbol 0xc0033d52 loc_c0033d52
-define symbol 0xc0033d98 f_c0033d98 as proc
+define symbol 0xc0033d98 f_fx_HD_Reverb_c0033d98 as proc
 define symbol 0xc0033e08 f_fx_parm_HD_Reverb_PreD as proc
 define symbol 0xc0033eb0 loc_c0033eb0
 define symbol 0xc0033f00 loc_c0033f00
 define symbol 0xc0033f04 f_fx_parm_HD_Reverb_Level as proc
-define symbol 0xc0033f28 f_c0033f28 as proc
+define symbol 0xc0033f28 f_fx_HD_Reverb_c0033f28 as proc
 define symbol 0xc0034040 loc_c0034040
 define symbol 0xc00340a0 loc_c00340a0
-define symbol 0xc00340a4 f_c00340a4 as proc
+define symbol 0xc00340a4 f_fx_HD_Reverb_c00340a4 as proc
 define symbol 0xc00340f8 f_fx_HD_Reverb_OnOff as proc
 define symbol 0xc0034130 loc_c0034130
 define symbol 0xc0034150 loc_c0034150
@@ -5187,11 +5187,11 @@ define symbol 0xc00341f4 f_fx_parm_HD_Reverb_HPF as proc
 define symbol 0xc0034236 loc_c0034236
 define symbol 0xc00342b8 f_fx_HD_Reverb_c00342b8 as proc
 define symbol 0xc0034334 f_fx_parm_HD_Reverb_Decay as proc
-define symbol 0xc0034360 f_c0034360 as proc
-define symbol 0xc0034378 f_c0034378 as proc
-define symbol 0xc00343a0 f_c00343a0 as proc
-define symbol 0xc00343d0 f_c00343d0 as proc
-define symbol 0xc00343e8 f_c00343e8 as proc
+define symbol 0xc0034360 f_arr_b_3_c00c944a_clear as proc
+define symbol 0xc0034378 f_arr_b_3_c00c944d_clear as proc
+define symbol 0xc00343a0 f_init_c00343a0 as proc
+define symbol 0xc00343d0 f_d7db1_1_d7db3_0 as proc
+define symbol 0xc00343e8 f_d7db1_1_d7db3_0_c944d_0 as proc
 define symbol 0xc003440c f_c003440c as proc
 define symbol 0xc0034438 loc_c0034438
 define symbol 0xc0034484 loc_c0034484
@@ -5199,7 +5199,7 @@ define symbol 0xc00344a0 loc_c00344a0
 define symbol 0xc0034530 loc_c0034530
 define symbol 0xc0034564 loc_c0034564
 define symbol 0xc003456c f_c003456c as proc
-define symbol 0xc00345b0 f_c00345b0 as proc
+define symbol 0xc00345b0 f_d7db1_0_d7db3_0_c944d_0 as proc
 define symbol 0xc00345d8 f_c00345d8 as proc
 define symbol 0xc00345f2 loc_c00345f2
 define symbol 0xc00345f6 loc_c00345f6
@@ -5305,7 +5305,7 @@ define symbol 0xc0035ccc f_c0035ccc as proc
 define symbol 0xc0035cd4 f_c0035cd4 as proc
 define symbol 0xc0035d28 loc_c0035d28
 define symbol 0xc0035d74 loc_c0035d74
-define symbol 0xc0035da0 f_c0035da0 as proc
+define symbol 0xc0035da0 f_SPI0_nvram_send_command as proc
 define symbol 0xc0035dd8 loc_c0035dd8
 define symbol 0xc0035df0 loc_c0035df0
 define symbol 0xc0035e0c loc_c0035e0c
@@ -5314,17 +5314,17 @@ define symbol 0xc0035e64 loc_c0035e64
 define symbol 0xc0035e78 loc_c0035e78
 define symbol 0xc0035e94 loc_c0035e94
 define symbol 0xc0035ed4 loc_c0035ed4
-define symbol 0xc0035ee4 f_c0035ee4 as proc
-define symbol 0xc0035f14 f_c0035f14 as proc
+define symbol 0xc0035ee4 f_SPI0_nvram_read_status_register as proc
+define symbol 0xc0035f14 f_SPI0_nvram_write_enable as proc
 define symbol 0xc0035f36 loc_c0035f36
 define symbol 0xc0035f42 loc_c0035f42
-define symbol 0xc0035f48 f_c0035f48 as proc
+define symbol 0xc0035f48 f_SPI0_nvram_erase_command as proc
 define symbol 0xc0035f9a loc_c0035f9a
 define symbol 0xc0035fa8 loc_c0035fa8
-define symbol 0xc0035fb0 f_c0035fb0 as proc
+define symbol 0xc0035fb0 f_SPI0_nvram_write_page as proc
 define symbol 0xc0036024 loc_c0036024
 define symbol 0xc0036030 loc_c0036030
-define symbol 0xc0036038 f_SPI0_c0036038 as proc
+define symbol 0xc0036038 f_SPI0_nvram_read as proc
 define symbol 0xc00360b4 loc_c00360b4
 define symbol 0xc00360cc loc_c00360cc
 define symbol 0xc00360e4 loc_c00360e4
@@ -5337,7 +5337,7 @@ define symbol 0xc0036190 loc_c0036190
 define symbol 0xc00361c0 loc_c00361c0
 define symbol 0xc00361d6 loc_c00361d6
 define symbol 0xc003620c loc_c003620c
-define symbol 0xc0036244 f_c0036244 as proc
+define symbol 0xc0036244 f_SPI0_nvram_clear as proc
 define symbol 0xc0036284 loc_c0036284
 define symbol 0xc003629a loc_c003629a
 define symbol 0xc00362b0 loc_c00362b0
@@ -5345,7 +5345,7 @@ define symbol 0xc00362e2 loc_c00362e2
 define symbol 0xc00362ee loc_c00362ee
 define symbol 0xc0036314 loc_c0036314
 define symbol 0xc0036328 loc_c0036328
-define symbol 0xc0036330 f_c0036330 as proc
+define symbol 0xc0036330 f_SPI0_nvram_write as proc
 define symbol 0xc003636c loc_c003636c
 define symbol 0xc0036384 loc_c0036384
 define symbol 0xc00363b6 loc_c00363b6
@@ -6697,20 +6697,20 @@ define symbol 0xc004bc28 loc_c004bc28
 define symbol 0xc004bc2c f_fx_Slicer_OnOff as proc
 define symbol 0xc004bc68 loc_c004bc68
 define symbol 0xc004bc88 loc_c004bc88
-define symbol 0xc004bc8c f_c004bc8c as proc
+define symbol 0xc004bc8c f_fx_Slicer_c004bc8c as proc
 define symbol 0xc004bca8 f_fx_parm_Slicer_Bal as proc
 define symbol 0xc004bd40 f_fx_parm_Slicer_THRSH as proc
 define symbol 0xc004bd94 f_fx_parm_Slicer_Level as proc
 define symbol 0xc004bdb8 f_fx_Slicer_c004bdb8 as proc
-define symbol 0xc004be40 f_c004be40 as proc
-define symbol 0xc004be64 f_c004be64 as proc
-define symbol 0xc004be88 f_c004be88 as proc
-define symbol 0xc004beac f_c004beac as proc
-define symbol 0xc004bed0 f_c004bed0 as proc
+define symbol 0xc004be40 f_fx_L1DRAM_0x06a8_adjut_to_1 as proc
+define symbol 0xc004be64 f_fx_L1DRAM_0x06a8_adjut_to_0 as proc
+define symbol 0xc004be88 f_fx_L1DRAM_0x06a4_adjut_to_1 as proc
+define symbol 0xc004beac f_fx_L1DRAM_0x06a4_adjut_to_0 as proc
+define symbol 0xc004bed0 f_w_c00d7e98_set as proc
 define symbol 0xc004bed8 f_c004bed8 as proc
 define symbol 0xc004bf20 loc_c004bf20
 define symbol 0xc004bf88 loc_c004bf88
-define symbol 0xc004bf8c f_c004bf8c as proc
+define symbol 0xc004bf8c f_w_c00d7e98_get as proc
 define symbol 0xc004bf94 f_c004bf94 as proc
 define symbol 0xc004bfd4 loc_c004bfd4
 define symbol 0xc004bfe4 loc_c004bfe4
@@ -7705,9 +7705,9 @@ define symbol 0xc0059bd0 f_fx_parm3_adjust_to_0 as proc
 define symbol 0xc0059c04 f_parm_adjust_level as proc
 define symbol 0xc0059c48 f_fx_parm0_adjust_to_1 as proc
 define symbol 0xc0059c70 f_fx_parm0_adjust_to_0 as proc
-define symbol 0xc0059ca4 f_c0059ca4 as proc
-define symbol 0xc0059cd0 f_c0059cd0 as proc
-define symbol 0xc0059d04 f_c0059d04 as proc
+define symbol 0xc0059ca4 f_fx_parm1_adjust_to_1 as proc
+define symbol 0xc0059cd0 f_fx_parm1_adjust_to_0 as proc
+define symbol 0xc0059d04 f_fx_parm0_parm1_adjust_to_0 as proc
 define symbol 0xc0059d38 db_to_amplitude as proc
 define symbol 0xc0059d60 f_b_flag_c00d7d60_set as proc
 define symbol 0xc0059d6c f_looper_set_maxima as proc
@@ -7888,7 +7888,7 @@ define symbol 0xc005c680 f_fx_parm_ZNR_Level as proc
 define symbol 0xc005c6a4 f_fx_ZNR_c005c6a4 as proc
 define symbol 0xc005c720 f_c005c720 as proc
 define symbol 0xc005c74e loc_c005c74e
-define symbol 0xc005c750 f_c005c750 as proc
+define symbol 0xc005c750 f_fx_set_THRU as proc
 define symbol 0xc005c768 f_c005c768 as proc
 define symbol 0xc005c780 f_init_c005c780 as proc
 define symbol 0xc005c7b6 loc_c005c7b6
@@ -8035,7 +8035,7 @@ define symbol 0xc005df38 f_c005df38 as proc
 define symbol 0xc005df54 loc_c005df54
 define symbol 0xc005df64 f_c005df64 as proc
 define symbol 0xc005df78 f_c005df78 as proc
-define symbol 0xc005df88 f_c005df88 as proc
+define symbol 0xc005df88 f_c00336b0_stub as proc
 define symbol 0xc005df94 f_c005df94 as proc
 define symbol 0xc005dfa4 f_c005dfa4 as proc
 define symbol 0xc005dfb4 f_c005dfb4 as proc
@@ -8050,7 +8050,7 @@ define symbol 0xc005e1a0 loc_c005e1a0
 define symbol 0xc005e1d8 loc_c005e1d8
 define symbol 0xc005e200 loc_c005e200
 define symbol 0xc005e204 loc_c005e204
-define symbol 0xc005e20c f_c005e20c as proc
+define symbol 0xc005e20c f_nvram_x91_read_slot as proc
 define symbol 0xc005e260 f_c005e260 as proc
 define symbol 0xc005e2c4 loc_c005e2c4
 define symbol 0xc005e340 loc_c005e340
@@ -8360,7 +8360,7 @@ define symbol 0xc0061e88 loc_c0061e88
 define symbol 0xc0061ea0 __sqrtf as proc
 define symbol 0xc0061f40 f_init_looper_pointers as proc
 define symbol 0xc0061fc0 f_c0061fc0 as proc
-define symbol 0xc0062010 f_c0062010 as proc
+define symbol 0xc0062010 f_x91_get_c0062010 as proc
 define symbol 0xc006202e above_59
 define symbol 0xc0062032 above_99
 define symbol 0xc0062034 ret
@@ -8636,7 +8636,7 @@ define symbol 0xc0064d00 ti_sysbios_knl_Task_schedule__I_stub as proc
 define symbol 0xc0064d20 f_pinmux_GP5[4]_stub as proc
 define symbol 0xc0064d40 f_pinmux_SPI0_SCS[0]_stub as proc
 define symbol 0xc0064d60 f_SPI_select_format_stub as proc
-define symbol 0xc0064d80 stub_call_11815108 as proc
+define symbol 0xc0064d80 f_lcdc_write_byte_stub as proc
 define symbol 0xc0064da0 f_lcdc_display_on_off_stub as proc
 define symbol 0xc0064dc0 f_lcdc_send_stub as proc
 define symbol 0xc0064de0 stub_call_11812c60 as proc
@@ -10428,11 +10428,11 @@ define symbol 0xc00bf28c arr_x12_unkn_c00bf288.w4
 define symbol 0xc00bf28d arr_x12_unkn_c00bf288.w4[1]
 define symbol 0xc00bf290 arr_x12_unkn_c00bf288.b8
 define symbol 0xc00bf291 arr_x12_unkn_c00bf288.b9
-define symbol 0xc00bf298 lbl_c00bf298
+define symbol 0xc00bf298 arr_w_3_c00bf298
 define symbol 0xc00bf2a8 arr_h_3_scflg_c00bf2a8
 define symbol 0xc00bf2b0 arr_h_3_scflg_c00bf2b0
-define symbol 0xc00bf2b8 lbl_c00bf2b8
-define symbol 0xc00bf2c8 lbl_c00bf2c8
+define symbol 0xc00bf2b8 arr_w_3_c00bf2b8
+define symbol 0xc00bf2c8 arr_w_3_c00bf2d8
 define symbol 0xc00bf2d8 arr_b_3_128_c00bf2d8
 define symbol 0xc00bf458 arr_b_3_128_c00bf458
 define symbol 0xc00bf5d8 arr_b_3_128_c00bf5d8
@@ -10579,8 +10579,8 @@ define symbol 0xc00c41fc page_desc_save
 define symbol 0xc00c4224 page_desc_usb
 define symbol 0xc00c424c page_desc_version
 define symbol 0xc00c4278 scr_desc_global
-define symbol 0xc00c42a0 lbl_c00c42a0
-define symbol 0xc00c42a8 lbl_c00c42a8
+define symbol 0xc00c42a0 w_boot_version
+define symbol 0xc00c42a8 w_preset_version
 define symbol 0xc00c42b0 lbl_c00c42b0
 define symbol 0xc00c42bc w_patch_index_c00c42bc
 define symbol 0xc00c42c0 lbl_c00c42c0
@@ -10734,9 +10734,9 @@ define symbol 0xc00c6f20 lbl_c00c6f20
 define symbol 0xc00c6f98 lbl_c00c6f98
 define symbol 0xc00c6fb0 lbl_c00c6fb0
 define symbol 0xc00c6fc8 lbl_c00c6fc8
-define symbol 0xc00c70e8 lbl_c00c70e8
-define symbol 0xc00c71f0 lbl_c00c71f0
-define symbol 0xc00c71f1 lbl_c00c71f1
+define symbol 0xc00c70e8 arr_b_264_nvram_cmnd_buffer
+define symbol 0xc00c71f0 arr_b_2_nvram_buf_RDSR
+define symbol 0xc00c71f1 arr_b_2_nvram_buf_RDSR+0x1
 define symbol 0xc00c71f8 lbl_c00c71f8
 define symbol 0xc00c72e8 lbl_c00c72e8
 define symbol 0xc00c7300 lbl_c00c7300
@@ -10863,7 +10863,7 @@ define symbol 0xc00c8d64 gadget_desc_c8d64
 define symbol 0xc00c8d6c gadget_desc_c8d6c
 define symbol 0xc00c8d74 gadget_desc_c8d74
 define symbol 0xc00c8d7c gadget_desc_c8d7c
-define symbol 0xc00c8d84 lbl_c00c8d84
+define symbol 0xc00c8d84 arr_x91_c00c8d84
 define symbol 0xc00c8de0 lbl_c00c8de0
 define symbol 0xc00c8e0c lbl_c00c8e0c
 define symbol 0xc00c8e10 lbl_c00c8e10
@@ -10952,10 +10952,10 @@ define symbol 0xc00c9438 lbl_c00c9438
 define symbol 0xc00c943c lbl_c00c943c
 define symbol 0xc00c9440 lbl_c00c9440
 define symbol 0xc00c9444 lbl_c00c9444
-define symbol 0xc00c9448 lbl_c00c9448
-define symbol 0xc00c9449 lbl_c00c9449
-define symbol 0xc00c944a lbl_c00c944a
-define symbol 0xc00c944d lbl_c00c944d
+define symbol 0xc00c9448 b_c00c9448
+define symbol 0xc00c9449 b_c00c9449
+define symbol 0xc00c944a arr_b_3_c00c944a
+define symbol 0xc00c944d arr_b_3_c00c944d
 define symbol 0xc00c9450 proc_addr_c00c9450
 define symbol 0xc00c9454 proc_addr_c00c9454
 define symbol 0xc00c9458 arr_b_8_c00c9458
@@ -11135,20 +11135,20 @@ define symbol 0xc00d7d88 lbl_c00d7d88
 define symbol 0xc00d7d8c lbl_c00d7d8c
 define symbol 0xc00d7d90 lbl_c00d7d90
 define symbol 0xc00d7d94 lbl_c00d7d94
-define symbol 0xc00d7d98 lbl_c00d7d98
+define symbol 0xc00d7d98 b_flag_c00d7d98
 define symbol 0xc00d7d99 b_flag_c00d7d99
 define symbol 0xc00d7d9a lbl_c00d7d9a
 define symbol 0xc00d7d9c lbl_c00d7d9c
 define symbol 0xc00d7d9d lbl_c00d7d9d
 define symbol 0xc00d7d9e lbl_c00d7d9e
 define symbol 0xc00d7da0 lbl_c00d7da0
-define symbol 0xc00d7da4 lbl_c00d7da4
-define symbol 0xc00d7da8 lbl_c00d7da8
-define symbol 0xc00d7dac lbl_c00d7dac
-define symbol 0xc00d7db0 lbl_c00d7db0
+define symbol 0xc00d7da4 w_rb_pattern_pointer
+define symbol 0xc00d7da8 b_rb_pattern_offset
+define symbol 0xc00d7dac w_c00d7dac
+define symbol 0xc00d7db0 b_flag_c00d7db0
 define symbol 0xc00d7db1 b_flag_c00d7db1
 define symbol 0xc00d7db2 b_flag_c00d7db2
-define symbol 0xc00d7db3 lbl_c00d7db3
+define symbol 0xc00d7db3 b_flag_c00d7db3
 define symbol 0xc00d7db4 lbl_c00d7db4
 define symbol 0xc00d7db8 lbl_c00d7db8
 define symbol 0xc00d7dbc lbl_c00d7dbc
@@ -11208,7 +11208,7 @@ define symbol 0xc00d7e8a lbl_c00d7e8a
 define symbol 0xc00d7e8c lbl_c00d7e8c
 define symbol 0xc00d7e90 lbl_c00d7e90
 define symbol 0xc00d7e94 lbl_c00d7e94
-define symbol 0xc00d7e98 lbl_c00d7e98
+define symbol 0xc00d7e98 w_c00d7e98
 define symbol 0xc00d7e9c lbl_c00d7e9c
 define symbol 0xc00d7ea0 lbl_c00d7ea0
 define symbol 0xc00d7ea4 lbl_c00d7ea4
