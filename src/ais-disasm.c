@@ -314,10 +314,11 @@ tic6x_print_region(ais_vma vma, size_t section_size, tic6x_print_region_ftype ti
 				printf("  ");
 		}
 		// print instruction
-		if (xref[0])
+		if (xref[0]) {
 			printf("                                       " FMTNSPR(INSN) "; %s", sfile.buffer, xref);
-		else
+		} else {
 			printf("                                       %s", sfile.buffer);
+		}
 		// eol
 		fputc('\n', stdout);
 		vma += bytes_used;
