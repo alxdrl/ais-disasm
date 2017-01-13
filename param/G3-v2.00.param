@@ -3936,7 +3936,7 @@ define symbol 0xc0023f78 loc_c0023f78
 define symbol 0xc0023f94 loc_c0023f94
 define symbol 0xc0023fd0 loc_c0023fd0
 define symbol 0xc0023fd2 loc_c0023fd2
-define symbol 0xc0023fd8 f_c0023fd8 as proc
+define symbol 0xc0023fd8 f_UsbTask_init as proc
 define symbol 0xc0024014 loc_c0024014
 define symbol 0xc0024048 loc_c0024048
 define symbol 0xc0024054 loc_c0024054
@@ -3965,7 +3965,7 @@ define symbol 0xc0024310 loc_c0024310
 define symbol 0xc0024314 loc_c0024314
 define symbol 0xc0024318 loc_c0024318
 define symbol 0xc0024324 f_c0054190_stub as proc
-define symbol 0xc0024330 f_c0024330 as proc
+define symbol 0xc0024330 f_UsbHwi_init as proc
 define symbol 0xc00243e4 loc_c00243e4
 define symbol 0xc00243f4 loc_c00243f4
 define symbol 0xc00243f8 loc_c00243f8
@@ -7451,7 +7451,7 @@ define symbol 0xc00568a0 f_fx_parm_WarpPhase_Level as proc
 define symbol 0xc00568c4 f_fx_WarpPhase_c00568c4 as proc
 define symbol 0xc0056940 f_c0023bc0_stub as proc
 define symbol 0xc005694c f_c0023b2c_stub as proc
-define symbol 0xc0056958 f_c0023fd8_stub as proc
+define symbol 0xc0056958 f_UsbTask_init_stub as proc
 define symbol 0xc0056968 f_c00240a8_call_6 as proc
 define symbol 0xc0056988 f_c0056988 as proc
 define symbol 0xc00569b0 loc_c00569b0
@@ -8370,7 +8370,7 @@ define symbol 0xc0062084 loc_c0062084
 define symbol 0xc00620c0 f_c00620c0 as proc
 define symbol 0xc00620d8 loc_c00620d8
 define symbol 0xc00620e0 f_c00620e0 as proc
-define symbol 0xc00620f4 f_UsbTestTask_c00620f4 as proc
+define symbol 0xc00620f4 f_UsbTestTask_init as proc
 define symbol 0xc0062108 loc_c0062108
 define symbol 0xc0062110 f_c0062110 as proc
 define symbol 0xc0062134 __nop_c0062134 as proc

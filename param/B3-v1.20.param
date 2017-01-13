@@ -89,6 +89,15 @@ define symbol 0x01e27a00 PSC1_MDCTL0
 define symbol 0x01e27a04 PSC1_MDCTL1
 define symbol 0x01e28000 I2C1
 define symbol 0xc0029114 f_spread_thousand_tenth as proc
+define symbol 0xc0029180 f_UsbTestAudioTask_init as proc
+define symbol 0xc0055138 f_UsbTestMidiTask_init as proc
+define symbol 0xc005fc40 __divi as proc
+define symbol 0xc005fee0 __fillmem_byte
+define symbol 0xc0060fc0 __remi as proc
+define symbol 0xc0062b54 f_UsbTestTask as proc
+define symbol 0xc0062b68 loc_c0062b68
+define symbol 0xc0064fa0 __c6xabi_push_rts as proc
+define symbol 0xc0064f80 __c6xabi_pop_rts as proc
 print region 0x1180bc00, 0x8400 as code
 print region 0x11814000, 0x3180 as code
 print region 0x11819ac8, 0x0818 as mixed
