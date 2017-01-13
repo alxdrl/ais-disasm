@@ -122,7 +122,7 @@ void aisread(void *buffer, size_t size, ais_opcode_callback_ftype callback)
 	fprintf(stderr, "// AIS magic ID\n");
 	while ((void *)p < buffer + size) {
 		int i;
-        int found = 0;
+	        int found = 0;
 		unsigned int opcode = *p++;
 		for (i = 0 ; i < 10 ; i++) {
 			if (ais_opcode_table[i].opcode == opcode) {
