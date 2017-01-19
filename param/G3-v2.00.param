@@ -5011,7 +5011,7 @@ define symbol 0xc0031b16 loc_c0031b16
 define symbol 0xc0031b2e loc_c0031b2e
 define symbol 0xc0031b6c f_storage_patch_slot_read as proc
 define symbol 0xc0031b88 loc_c0031b88
-define symbol 0xc0031b90 f_storage_slot_store_nofail
+define symbol 0xc0031b90 f_storage_slot_store_nofail as proc
 define symbol 0xc0031bac f_store_patch_settings as proc
 define symbol 0xc0031bd0 f_compact_patch_fx_settings as proc
 define symbol 0xc0031bf0 loc_c0031bf0
