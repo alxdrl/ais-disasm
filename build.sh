@@ -1,16 +1,11 @@
 #!/bin/sh
 set -ex
 
-BINUTILS_PREFIX=$HOME/binutils-tic6x
+BINUTILS_PREFIX=$HOME/opt/binutils-tic6x
 
 #
 # wget 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD'
-# tar xjvpf binutils-2.23.1.tar.bz2
-# mkdir binutils-build
-# cd binutils-build
-# ../binutils/configure --prefix=${BINUTILS_PREFIX} --enable-shared --target=tic6x-none-elf --enable-install-libbfd --enable-install-libiberty --with-target-subdir
-# make
-# make install
+#
 
 SRCDIR=./src
 INCDIR=./include
@@ -47,3 +42,5 @@ gcc -c ${SRCDIR}/ais-disasm.c ${CFLAGS}
 gcc -c ${SRCDIR}/ais-disasm-tui.c ${CFLAGS}
 gcc -o ais-disasm ais-disasm.o ais-load.o ais-print.o ais-helper.o hashtab.o ${LDFLAGS}
 gcc -o ais-disasm-tui ais-disasm-tui.o ${LDFLAGS_TUI}
+
+rm *.o

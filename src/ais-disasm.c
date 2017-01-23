@@ -470,12 +470,13 @@ do_dump()
 				}
 				addr = m;
 				symbol.func = NULL;
-				symbol.name = malloc(strlen(symbol_name) + 1);
+				symbol.name = malloc((strlen(symbol_name) + 1) * sizeof(char));
 				if (symbol.name == NULL) {
 					perror("unable to allocate memory for symbol name");
 					exit(EXIT_FAILURE);
 				}
-				strncpy(symbol.name, symbol_name, SYMBOL_MAX);
+				/*strncpy(symbol.name, symbol_name, SYMBOL_MAX);*/
+				strlcpy(symbol.name, symbol_name, SYMBOL_MAX);
 				if (n > 2 && strcmp("proc", token) == 0) {
 					symbol.func = (void *)-1;
 				}
