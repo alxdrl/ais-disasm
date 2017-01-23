@@ -1,0 +1,8 @@
+*~
+*.o
+*.gz
+*.bz2
+*.asm
+*.stripped
+ais-disasm-tui
+ais-disasm
