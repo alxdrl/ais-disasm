@@ -12,6 +12,7 @@
 #include "ais-symbol.h"
 #include "ais-print.h"
 #include "ais-helper.h"
+#include "ais-string.h"
 #include "hashtab.h"
 
 static struct config_t {
@@ -475,7 +476,6 @@ do_dump()
 					perror("unable to allocate memory for symbol name");
 					exit(EXIT_FAILURE);
 				}
-				/*strncpy(symbol.name, symbol_name, SYMBOL_MAX);*/
 				strlcpy(symbol.name, symbol_name, SYMBOL_MAX);
 				if (n > 2 && strcmp("proc", token) == 0) {
 					symbol.func = (void *)-1;
