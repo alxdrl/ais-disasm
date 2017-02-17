@@ -8782,7 +8782,7 @@ define symbol 0xc0077011 str_minus_2
 define symbol 0xc0077014 str_minus_1
 define symbol 0xc0077017 str_plus_1
 define symbol 0xc007701a str_plus_2
-define symbol 0xc007701d str_plus 3
+define symbol 0xc007701d str_plus_3
 define symbol 0xc0077020 str_plus_4
 define symbol 0xc0077023 str_plus_5
 define symbol 0xc0077026 str_plus_6
