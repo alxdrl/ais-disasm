@@ -3,7 +3,7 @@ ASMFILE=$1
 BASEDIR=$(cd $(dirname $0)/.. ; pwd)
 NBKEEP_HEAD=99
 NBKEEP_TAIL=82
-FILEBASE=$(basename $ASMFILE .asm)
+FILEBASE=$(echo $(basename $ASMFILE .asm) | sed --e 's/-[0-9]\{8\}-[0-9]\{4\}$//')
 PARAMFILE=$BASEDIR/param/${FILEBASE}.param
 head -n ${NBKEEP_HEAD} $PARAMFILE
 cat $ASMFILE | \
